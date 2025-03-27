@@ -11,6 +11,14 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+          <div className="mb-6 animate-fade-in">
+            <img 
+              src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
+              alt="TableOne Logo" 
+              className="w-48 md:w-64 lg:w-72 mx-auto"
+            />
+          </div>
+          
           <div className="rounded-full glass px-4 py-1.5 mb-8 animate-fade-in">
             <span className="text-xs font-medium text-white/90">Raising $1M to Redefine Restaurant Reservations</span>
           </div>

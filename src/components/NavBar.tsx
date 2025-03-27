@@ -23,8 +23,12 @@ const NavBar: React.FC = () => {
       scrolled ? 'glass backdrop-blur-lg bg-black/30' : 'bg-transparent'
     }`}>
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <span className="text-xl font-bold tracking-tight text-gradient">TableOne</span>
+        <div className="flex items-center space-x-2">
+          <img 
+            src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
+            alt="TableOne Logo" 
+            className="h-8 md:h-10"
+          />
         </div>
         <div className="hidden md:flex space-x-8">
           <a href="#metrics" className="text-sm text-white/80 hover:text-white transition-colors">Metrics</a>
