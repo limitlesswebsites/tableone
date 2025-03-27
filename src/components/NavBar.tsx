@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
           <img 
             src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
             alt="TableOne Logo" 
-            className="h-8 md:h-10"
+            className="h-6 md:h-7"
           />
         </div>
         <div className="hidden md:flex space-x-8">
