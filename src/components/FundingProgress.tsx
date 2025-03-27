@@ -3,8 +3,8 @@ import React from 'react';
 import CountUp from './CountUp';
 
 const FundingProgress: React.FC = () => {
-  const raisedAmount = 450000; // $450,000 raised so far
-  const targetAmount = 1000000; // $1,000,000 target
+  const raisedAmount = 45000; // $45,000 raised so far
+  const targetAmount = 100000; // $100,000 target
   const progressPercentage = (raisedAmount / targetAmount) * 100;
   
   return (
@@ -87,7 +87,7 @@ const FundingProgress: React.FC = () => {
               Invest Now
             </a>
             <p className="mt-4 text-white/60 text-sm">
-              Minimum investment: $10,000
+              Minimum investment: $1,000
             </p>
           </div>
         </div>

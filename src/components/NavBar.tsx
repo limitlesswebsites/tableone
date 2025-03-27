@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
           <img 
             src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
             alt="TableOne Logo" 
-            className="h-6 md:h-7"
+            className="h-5 md:h-6" 
           />
         </div>
         <div className="hidden md:flex space-x-8">
@@ -38,7 +38,7 @@ const NavBar: React.FC = () => {
         </div>
         <a 
           href="#invest" 
-          className="px-4 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
+          className="px-3 py-1.5 text-xs md:px-4 md:py-1.5 md:text-sm rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
         >
           Invest Now
         </a>

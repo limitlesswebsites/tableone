@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="rounded-full glass px-4 py-1.5 mb-8 animate-fade-in">
-            <span className="text-xs font-medium text-white/90">Raising $1M to Redefine Restaurant Reservations</span>
+            <span className="text-xs font-medium text-white/90">Raising $100K to Redefine Restaurant Reservations</span>
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in tracking-tight">
