@@ -19,8 +19,8 @@ const NavBar: React.FC = () => {
   }, [scrolled]);
   
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 px-4 py-3 transition-all duration-300 ${
-      scrolled ? 'glass backdrop-blur-lg bg-black/30' : 'bg-transparent'
+    <nav className={`fixed top-0 left-0 right-0 z-50 px-4 py-3 transition-all duration-500 ${
+      scrolled ? 'glass backdrop-blur-lg bg-black/30 border-b border-white/5' : 'bg-transparent'
     }`}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-2">
@@ -30,11 +30,23 @@ const NavBar: React.FC = () => {
             className="h-5 md:h-6" 
           />
         </div>
-        <div className="hidden md:flex space-x-8">
-          <a href="#metrics" className="text-sm text-white/80 hover:text-white transition-colors">Metrics</a>
-          <a href="#roadmap" className="text-sm text-white/80 hover:text-white transition-colors">Roadmap</a>
-          <a href="#forecast" className="text-sm text-white/80 hover:text-white transition-colors">Forecast</a>
-          <a href="#expansion" className="text-sm text-white/80 hover:text-white transition-colors">Expansion</a>
+        <div className="hidden md:flex space-x-10">
+          <a href="#metrics" className="text-sm text-white/80 hover:text-white transition-colors relative group">
+            Metrics
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#roadmap" className="text-sm text-white/80 hover:text-white transition-colors relative group">
+            Roadmap
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#forecast" className="text-sm text-white/80 hover:text-white transition-colors relative group">
+            Forecast
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#expansion" className="text-sm text-white/80 hover:text-white transition-colors relative group">
+            Expansion
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </div>
         <a 
           href="#invest" 
