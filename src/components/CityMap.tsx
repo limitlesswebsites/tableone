@@ -9,17 +9,17 @@ const CityMap: React.FC = () => {
   const [mapboxToken, setMapboxToken] = useState('');
   const [showTokenInput, setShowTokenInput] = useState(true);
   
-  // City coordinates - [longitude, latitude]
+  // City coordinates - [longitude, latitude] as [number, number] tuples
   const cities = [
-    { name: "New York", coordinates: [-74.0060, 40.7128], active: true },
-    { name: "Chicago", coordinates: [-87.6298, 41.8781], active: false },
-    { name: "Boston", coordinates: [-71.0589, 42.3601], active: false },
-    { name: "Washington DC", coordinates: [-77.0369, 38.9072], active: false },
-    { name: "Dallas", coordinates: [-96.7970, 32.7767], active: false },
-    { name: "Los Angeles", coordinates: [-118.2437, 34.0522], active: false },
-    { name: "San Francisco", coordinates: [-122.4194, 37.7749], active: false },
-    { name: "Philadelphia", coordinates: [-75.1652, 39.9526], active: false },
-    { name: "London", coordinates: [-0.1278, 51.5074], active: false },
+    { name: "New York", coordinates: [-74.0060, 40.7128] as [number, number], active: true },
+    { name: "Chicago", coordinates: [-87.6298, 41.8781] as [number, number], active: false },
+    { name: "Boston", coordinates: [-71.0589, 42.3601] as [number, number], active: false },
+    { name: "Washington DC", coordinates: [-77.0369, 38.9072] as [number, number], active: false },
+    { name: "Dallas", coordinates: [-96.7970, 32.7767] as [number, number], active: false },
+    { name: "Los Angeles", coordinates: [-118.2437, 34.0522] as [number, number], active: false },
+    { name: "San Francisco", coordinates: [-122.4194, 37.7749] as [number, number], active: false },
+    { name: "Philadelphia", coordinates: [-75.1652, 39.9526] as [number, number], active: false },
+    { name: "London", coordinates: [-0.1278, 51.5074] as [number, number], active: false },
   ];
   
   const [activeCities, setActiveCities] = useState<{[key: string]: boolean}>({
