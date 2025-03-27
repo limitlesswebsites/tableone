@@ -15,34 +15,34 @@ const Hero: React.FC = () => {
             <img 
               src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
               alt="TableOne Logo" 
-              className="w-48 md:w-64 lg:w-72 mx-auto"
+              className="w-40 md:w-48 mx-auto"
             />
           </div>
           
           <div className="rounded-full glass px-4 py-1.5 mb-8 animate-fade-in">
-            <span className="text-xs font-medium text-white/90">Raising $1M to Redefine Restaurant Reservations</span>
+            <span className="text-xs font-medium font-inter text-white/90">Raising $1M to Redefine Restaurant Reservations</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in tracking-tight">
+          <h1 className="font-syne text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in tracking-tight leading-tight">
             <span className="text-gradient-gold">Platinum Card Dining</span>
             <br />
             <span className="text-white">Without The Card</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl animate-fade-in animate-delay-100">
+          <p className="font-inter text-xl md:text-2xl text-white/80 mb-10 max-w-3xl animate-fade-in animate-delay-100 leading-relaxed">
             TableOne is revolutionizing how diners access premium reservations through a subscription model that delivers exceptional value.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in animate-delay-200">
             <a 
               href="#invest"
-              className="px-8 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
+              className="px-8 py-3 rounded-full font-medium font-inter bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
             >
               Invest Now
             </a>
             <a 
               href="#metrics"
-              className="px-8 py-3 rounded-full font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300"
+              className="px-8 py-3 rounded-full font-medium font-inter bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300"
             >
               See Our Metrics
             </a>

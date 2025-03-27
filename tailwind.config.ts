@@ -23,6 +23,10 @@ export default {
       }
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        syne: ['Syne', 'sans-serif'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
