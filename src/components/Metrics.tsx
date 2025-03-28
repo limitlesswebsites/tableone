@@ -37,7 +37,7 @@ const Metrics: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-200 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Annual Recurring Revenue</div>
             <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
@@ -65,6 +65,16 @@ const Metrics: React.FC = () => {
             </div>
             <div className="text-white/80 text-center">
               In just 18 months
+            </div>
+          </div>
+          
+          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-500 hover:translate-y-[-5px] transition-all duration-500">
+            <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Paid Members</div>
+            <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
+              <CountUp end={2000} suffix="+" />
+            </div>
+            <div className="text-white/80 text-center">
+              Active paying subscribers
             </div>
           </div>
         </div>
