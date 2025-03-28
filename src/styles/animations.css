@@ -45,17 +45,17 @@
 .platinum-text {
   background: linear-gradient(
     to right,
-    #8a8a8a 0%,
-    #e0e0e0 10%,
-    #ffffff 20%,
-    #e0e0e0 30%,
-    #c0c0c0 40%,
-    #d5d5d7 50%,
-    #c0c0c0 60%,
-    #e0e0e0 70%,
-    #ffffff 80%,
-    #e0e0e0 90%,
-    #8a8a8a 100%
+    #555555 0%,
+    #888888 10%,
+    #dddddd 20%,
+    #aaaaaa 30%,
+    #777777 40%,
+    #999999 50%,
+    #777777 60%,
+    #aaaaaa 70%,
+    #dddddd 80%,
+    #888888 90%,
+    #555555 100%
   );
   background-size: 200% auto;
   color: transparent;
