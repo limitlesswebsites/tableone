@@ -19,7 +19,7 @@ const RoadmapItem: React.FC<{
         <div className="font-medium text-xs uppercase tracking-wider text-white/60 mb-3">{quarter}</div>
         {logoImg ? (
           <div className="mb-3">
-            <img src={logoImg} alt="Supergood Logo" className="h-10 md:h-12 w-auto" />
+            <img src={logoImg} alt="Supergood Logo" className="h-14 md:h-16 w-auto" />
           </div>
         ) : (
           title && <h4 className="text-xl font-semibold mb-3">{title}</h4>
