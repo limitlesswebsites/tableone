@@ -3,7 +3,7 @@ import React from 'react';
 
 const RoadmapItem: React.FC<{
   quarter: string;
-  title?: string;
+  title?: string | React.ReactNode;
   description: string;
   isActive?: boolean;
   delay: number;
