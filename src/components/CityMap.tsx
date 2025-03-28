@@ -2,17 +2,15 @@
 import React, { useRef, useEffect, useState } from 'react';
 import CityBox from './CityBox';
 import { cities } from '../data/cityData';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis } from './ui/pagination';
 
 const CITIES_PER_PAGE = 9; // Show only 9 cities at a time
 
 const CityMap: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [currentPage, setCurrentPage] = useState(1);
   
   // Calculate displayed cities
   const displayedCities = cities.slice(0, CITIES_PER_PAGE);
-  const totalPages = Math.ceil(cities.length / CITIES_PER_PAGE);
+  const remainingCount = cities.length - CITIES_PER_PAGE;
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,25 +82,12 @@ const CityMap: React.FC = () => {
           ))}
         </div>
         
-        {/* Pagination to indicate more cities */}
-        <div className="mt-8 animate-fade-in animate-delay-200">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationLink isActive={true}>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink>2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink>{totalPages}</PaginationLink>
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
+        {/* Simple "+10 more" indicator */}
+        {remainingCount > 0 && (
+          <div className="mt-8 text-center animate-fade-in animate-delay-200">
+            <p className="text-lg text-white/70 font-medium">+{remainingCount} more</p>
+          </div>
+        )}
         
         <div className="mt-10 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
           <p>
