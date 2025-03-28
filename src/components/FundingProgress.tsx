@@ -1,12 +1,49 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import CountUp from './CountUp';
 import { Progress } from './ui/progress';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 const FundingProgress: React.FC = () => {
+  const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
+  const [investmentAmount, setInvestmentAmount] = useState('');
+  const [email, setEmail] = useState('');
+  const { toast } = useToast();
+
   const raisedAmount = 28000; // $28,000 raised so far
-  const targetAmount = 100000; // $100,000 target
-  const progressPercentage = (raisedAmount / targetAmount) * 100;
+  const interestedAmount = 72000; // $72,000 interest expressed
+  const targetAmount = 1000000; // $1,000,000 target
+  
+  const committedPercentage = (raisedAmount / targetAmount) * 100;
+  const interestedPercentage = (interestedAmount / targetAmount) * 100;
+  const totalPercentage = committedPercentage + interestedPercentage;
+  
+  const handleSubmitInterest = (e: React.FormEvent) => {
+    e.preventDefault();
+    const amount = Number(investmentAmount);
+    
+    if (amount < 1000) {
+      toast({
+        title: "Minimum investment required",
+        description: "Please enter a minimum investment of $1,000",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    toast({
+      title: "Interest registered",
+      description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
+      variant: "default"
+    });
+    
+    setIsInvestmentDialogOpen(false);
+    setInvestmentAmount('');
+    setEmail('');
+  };
   
   return (
     <section id="invest" className="py-16 relative">
@@ -37,17 +74,30 @@ const FundingProgress: React.FC = () => {
               </span>
             </div>
             
-            <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
-              <div 
-                className="h-full rounded-full transition-all duration-1000 ease-out shimmer"
-                style={{ width: `${progressPercentage}%`, backgroundColor: '#05d9a7' }}
-              ></div>
+            <div className="w-full h-4 bg-white/10 rounded-full overflow-hidden mb-2">
+              <div className="h-full flex">
+                {/* Committed amount (green) */}
+                <div 
+                  className="h-full transition-all duration-1000 ease-out shimmer"
+                  style={{ width: `${committedPercentage}%`, backgroundColor: '#05d9a7' }}
+                ></div>
+                {/* Interested amount (yellow/gold) */}
+                <div 
+                  className="h-full transition-all duration-1000 ease-out shimmer"
+                  style={{ width: `${interestedPercentage}%`, backgroundColor: '#fab100' }}
+                ></div>
+              </div>
             </div>
             
-            <div className="mt-2 text-right">
-              <span className="text-white/60 text-xs">
-                <CountUp end={progressPercentage} decimals={1} suffix="%" /> of goal
-              </span>
+            <div className="mt-2 flex justify-between items-center text-xs text-white/60">
+              <div className="flex items-center">
+                <span className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></span>
+                <span>Committed: $<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
+              </div>
+              <div className="flex items-center">
+                <span className="w-3 h-3 rounded-full bg-[#fab100] mr-2"></span>
+                <span>Interested: $<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
+              </div>
             </div>
           </div>
           
@@ -82,18 +132,77 @@ const FundingProgress: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <a 
-              href="#" 
+            <button 
+              onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
             >
               Invest Now
-            </a>
+            </button>
             <p className="mt-3 text-white/60 text-xs">
               Minimum investment: $1,000
             </p>
           </div>
         </div>
       </div>
+
+      {/* Investment Dialog */}
+      <Dialog open={isInvestmentDialogOpen} onOpenChange={setIsInvestmentDialogOpen}>
+        <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-center mb-2 gradient-heading">Express Your Interest</DialogTitle>
+            <DialogDescription className="text-white/70 text-center">
+              Let us know how much you're interested in investing in TableOne's future.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <form onSubmit={handleSubmitInterest} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <label htmlFor="investment-amount" className="text-sm font-medium text-white/80">
+                Investment Amount ($)
+              </label>
+              <Input
+                id="investment-amount"
+                type="number"
+                min="1000"
+                step="1000"
+                placeholder="Minimum $1,000"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                value={investmentAmount}
+                onChange={(e) => setInvestmentAmount(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium text-white/80">
+                Email Address
+              </label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="pt-4 flex justify-center">
+              <Button 
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
+              >
+                Register Interest
+              </Button>
+            </div>
+            
+            <p className="text-xs text-white/50 text-center">
+              This is a non-binding expression of interest. We'll contact you with more details.
+            </p>
+          </form>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
