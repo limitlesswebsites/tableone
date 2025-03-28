@@ -1,16 +1,25 @@
 
 import React from 'react';
 import CountUp from './CountUp';
-import { Chart } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const lifetimeValueData = [
-  { month: 'Jan', value: 68 },
-  { month: 'Feb', value: 74 },
-  { month: 'Mar', value: 82 },
-  { month: 'Apr', value: 91 },
-  { month: 'May', value: 103 },
-  { month: 'Jun', value: 118 },
+  { month: 'Oct \'24', value: 47.37 },
+  { month: 'Nov \'24', value: 44.44 },
+  { month: 'Dec \'24', value: 51.93 },
+  { month: 'Jan \'25', value: 57.69 },
+  { month: 'Feb \'25', value: 60.41 },
+  { month: 'Mar \'25', value: 71.02 },
+];
+
+const churnRateData = [
+  { month: 'Oct \'24', value: 13.2 },
+  { month: 'Nov \'24', value: 16.8 },
+  { month: 'Dec \'24', value: 14.0 },
+  { month: 'Jan \'25', value: 12.4 },
+  { month: 'Feb \'25', value: 12.1 },
+  { month: 'Mar \'25', value: 9.8 },
 ];
 
 const Metrics: React.FC = () => {
@@ -60,8 +69,9 @@ const Metrics: React.FC = () => {
           </div>
         </div>
         
-        {/* Line Graph for Subscriber Lifetime Value */}
+        {/* Line Graphs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* Subscriber Lifetime Value Graph */}
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-500">
             <h3 className="text-xl font-semibold mb-4 text-center">Subscriber Lifetime Value</h3>
             <div className="h-[250px]">
@@ -90,7 +100,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="LTV" 
-                    stroke="#8884d8" 
+                    stroke="#9b87f5" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
@@ -99,15 +109,49 @@ const Metrics: React.FC = () => {
               </ResponsiveContainer>
             </div>
             <div className="mt-3 text-center text-white/70">
-              <p>Average LTV increasing to $118 per subscriber</p>
+              <p>Average LTV increasing to $71.02 per subscriber</p>
             </div>
           </div>
           
-          {/* Placeholder for the second graph */}
+          {/* Subscriber Churn Rate Graph */}
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-600">
-            <h3 className="text-xl font-semibold mb-4 text-center">Placeholder for Second Graph</h3>
-            <div className="h-[250px] flex items-center justify-center">
-              <p className="text-white/60">Second graph will be displayed here</p>
+            <h3 className="text-xl font-semibold mb-4 text-center">Subscriber Churn Rate</h3>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={churnRateData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`${value}%`, 'Churn Rate']}
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '0.5rem',
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="Churn Rate" 
+                    stroke="#ea384c" 
+                    strokeWidth={3}
+                    activeDot={{ r: 8 }} 
+                    dot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-3 text-center text-white/70">
+              <p>Churn rate decreasing to 9.8% in March 2025</p>
             </div>
           </div>
         </div>
