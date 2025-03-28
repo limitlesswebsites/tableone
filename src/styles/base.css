@@ -49,7 +49,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-image: linear-gradient(to bottom right, #050505, #0a0f1a, #0a0c16);
+    background-color: #000000;
+    background-image: none;
     background-attachment: fixed;
   }
 
