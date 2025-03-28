@@ -55,7 +55,7 @@ const VideoStory: React.FC = () => {
               <video 
                 id="story-video"
                 className="w-full h-full object-cover"
-                poster="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png"
+                poster="/lovable-uploads/203f18c4-42ca-4e12-a996-92679d1bb61f.png"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 controls={isPlaying}
