@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
             <span className="platinum-text font-extrabold">Platinum Card Dining</span>
             <br />
-            <span className="text-white"><span className="gold-text font-extrabold">Without</span> The Card</span>
+            <span className="text-white"><span className="gold-text font-extrabold">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
           
           <p className="text-lg md:text-xl text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed" style={{ animationDelay: '0.8s' }}>
