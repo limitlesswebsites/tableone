@@ -18,8 +18,13 @@ const RoadmapItem: React.FC<{
       <div className="mt-10 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-xs mx-auto hover:translate-y-[-5px] transition-all duration-500 shadow-xl">
         <div className="font-medium text-xs uppercase tracking-wider text-white/60 mb-3">{quarter}</div>
         {logoImg ? (
-          <div className="mb-3 flex justify-center">
-            <img src={logoImg} alt="Supergood Logo" className="h-24 md:h-28 w-auto object-contain" />
+          <div className="mb-3 flex justify-center items-center">
+            <img 
+              src={logoImg} 
+              alt="Supergood Logo" 
+              className="w-full max-w-[200px] object-contain" 
+              style={{ height: 'auto', minHeight: '120px' }}
+            />
           </div>
         ) : (
           title && <h4 className="text-xl font-semibold mb-3">{title}</h4>
