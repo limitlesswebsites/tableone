@@ -1,10 +1,18 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import CityBox from './CityBox';
 import { cities } from '../data/cityData';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis } from './ui/pagination';
+
+const CITIES_PER_PAGE = 9; // Show only 9 cities at a time
 
 const CityMap: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  // Calculate displayed cities
+  const displayedCities = cities.slice(0, CITIES_PER_PAGE);
+  const totalPages = Math.ceil(cities.length / CITIES_PER_PAGE);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -66,7 +74,7 @@ const CityMap: React.FC = () => {
         </div>
         
         <div ref={containerRef} className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cities.map((city, index) => (
+          {displayedCities.map((city, index) => (
             <CityBox 
               key={city.name}
               name={city.name}
@@ -74,6 +82,26 @@ const CityMap: React.FC = () => {
               index={index}
             />
           ))}
+        </div>
+        
+        {/* Pagination to indicate more cities */}
+        <div className="mt-8 animate-fade-in animate-delay-200">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationLink isActive={true}>1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink>2</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink>{totalPages}</PaginationLink>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
         
         <div className="mt-10 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
