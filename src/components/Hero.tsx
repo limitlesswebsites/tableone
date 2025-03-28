@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <div className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
-            <span className="text-xs font-medium text-white/90 font-quicksand">Raising $100K from Our Community to Continue Redefining Restaurant Reservations</span>
+            <span className="text-xs font-medium text-white/90 font-quicksand">Raising $1M from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-quicksand" style={{ animationDelay: '0.6s' }}>
@@ -23,7 +22,6 @@ const Hero: React.FC = () => {
             <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
           
-          {/* App Image with Premium Cards */}
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
             <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/90 to-transparent z-10"></div>
             <img 
