@@ -31,7 +31,7 @@ const Metrics: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-24">
-          <h2 className="text-2xl md:text-4xl mb-5 animate-fade-in tracking-tight gradient-heading">
+          <h2 className="text-2xl md:text-4xl mb-5 animate-fade-in gradient-heading">
             We've Exceeded Expectations...Even Our Own
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
@@ -42,40 +42,40 @@ const Metrics: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-200 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Annual Recurring Revenue</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
+            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
               $<CountUp end={151286.88} decimals={2} />
             </div>
-            <div className="text-white/80 text-center">
+            <div className="text-white/80 text-center gradient-subheading">
               Growing steadily month over month
             </div>
           </div>
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-300 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Operating Expenses</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
+            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
               $<CountUp end={514} prefix="" suffix="/mo" />
             </div>
-            <div className="text-white/80 text-center">
+            <div className="text-white/80 text-center gradient-subheading">
               Lean operations with high margin
             </div>
           </div>
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-400 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">App Downloads</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
+            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
               <CountUp end={35000} suffix="+" />
             </div>
-            <div className="text-white/80 text-center">
+            <div className="text-white/80 text-center gradient-subheading">
               In just 18 months
             </div>
           </div>
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-500 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Paid Members</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 text-gradient">
+            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
               <CountUp end={2000} suffix="+" />
             </div>
-            <div className="text-white/80 text-center">
+            <div className="text-white/80 text-center gradient-subheading">
               Active paying subscribers
             </div>
           </div>
@@ -112,7 +112,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="LTV" 
-                    stroke="#05d9a7" 
+                    stroke="#a18cd1" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
@@ -120,7 +120,7 @@ const Metrics: React.FC = () => {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-3 text-center text-white/70">
+            <div className="mt-3 text-center gradient-subheading">
               <p>Average LTV increasing to $71.02 per subscriber</p>
             </div>
           </div>
@@ -154,7 +154,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="Churn Rate" 
-                    stroke="#05d9a7" 
+                    stroke="#ff9a9e" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
@@ -162,7 +162,7 @@ const Metrics: React.FC = () => {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-3 text-center text-white/70">
+            <div className="mt-3 text-center gradient-subheading">
               <p>Churn rate decreasing to 9.8% in March 2025</p>
             </div>
           </div>
@@ -170,7 +170,7 @@ const Metrics: React.FC = () => {
         
         <div className="text-center mt-16 mb-10">
           <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">Exceeding Industry Benchmarks</h3>
-          <p className="text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
+          <p className="gradient-subheading max-w-2xl mx-auto animate-fade-in animate-delay-100">
             TableOne dramatically outperforms metrics for exceptional paid consumer apps.
           </p>
         </div>
