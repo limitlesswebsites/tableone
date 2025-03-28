@@ -67,7 +67,7 @@ const CityMap: React.FC = () => {
             Where to Next?
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
-            Strategic city selection for maximum growth and market penetration.
+            Our expansion strategy targets high-density urban areas with established dining scenes and affluent customer bases who value premium dining experiences.
           </p>
         </div>
         
@@ -88,12 +88,6 @@ const CityMap: React.FC = () => {
             <p className="text-base text-white/70 font-medium">+{remainingCount} more</p>
           </div>
         )}
-        
-        <div className="mt-8 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
-          <p className="text-sm">
-            Our expansion strategy targets high-density urban areas with established dining scenes and affluent customer bases who value premium dining experiences.
-          </p>
-        </div>
       </div>
     </section>
   );
