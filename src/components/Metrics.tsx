@@ -25,7 +25,19 @@ const churnRateData = [
 const Metrics: React.FC = () => {
   return (
     <section id="metrics" className="py-20 relative">
+      {/* Background image */}
       <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute inset-0 z-0" 
+          style={{
+            backgroundImage: "url('/lovable-uploads/4d8c82f4-9545-4a55-a994-77325d811978.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.2,
+          }}
+        />
+        <div className="absolute inset-0 bg-black/60 z-0" />
         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
       </div>
       
