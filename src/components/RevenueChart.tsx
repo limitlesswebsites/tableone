@@ -108,7 +108,7 @@ const RevenueChart: React.FC = () => {
                     borderRadius: '0.5rem',
                   }}
                 />
-                <Legend />
+                <Legend wrapperStyle={{ display: 'none' }} />
                 <Line 
                   type="monotone" 
                   dataKey="forecast" 
