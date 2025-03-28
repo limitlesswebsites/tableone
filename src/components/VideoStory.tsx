@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play, Pause, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const VideoStory: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,7 +32,7 @@ const VideoStory: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-5 animate-fade-in tracking-tight">
-            The TableOne Story in 2 min
+            Our Story in 2 min
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             Watch how we're revolutionizing restaurant reservations
@@ -58,16 +59,14 @@ const VideoStory: React.FC = () => {
               </video>
             </AspectRatio>
           </div>
-          <div className="mt-4 text-center">
-            <a 
-              href="https://www.linkedin.com/feed/update/urn:li:activity:7311092973469896705/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
+          <div className="mt-6 text-center">
+            <Button 
+              onClick={openLinkedInVideo}
+              className="bg-gradient-to-r from-tableone-purple via-tableone-blue to-tableone-pink hover:opacity-90 transition-opacity"
             >
               <span>Watch on LinkedIn</span>
-              <ExternalLink size={16} className="ml-1" />
-            </a>
+              <ExternalLink size={16} />
+            </Button>
           </div>
         </div>
       </div>
