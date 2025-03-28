@@ -40,7 +40,7 @@ const Roadmap: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-24">
           <h2 className="text-3xl md:text-5xl font-bold mb-5 animate-fade-in tracking-tight">
-            Our Path to $100K in Revenue
+            Our Path to $1M in Revenue
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             A clear roadmap with strategic initiatives to scale our proven model.
@@ -76,20 +76,11 @@ const Roadmap: React.FC = () => {
               description="Launch in Chicago, Boston, and Washington DC to expand our geographic footprint."
               delay={400}
             />
-            
-            <div className="md:mt-32">
-              <RoadmapItem
-                quarter="Q1 2026"
-                title="Premium Tier Launch"
-                description="Introduce higher-priced tiers with exclusive benefits for power users."
-                delay={500}
-              />
-            </div>
           </div>
           
           <div className="mt-32 text-center">
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-10 inline-block animate-fade-in animate-delay-500 shadow-xl">
-              <h3 className="text-2xl font-bold mb-3 text-gradient-pink">$100,000</h3>
+              <h3 className="text-2xl font-bold mb-3 text-gradient-pink">$1,000,000</h3>
               <p className="text-white/80">Annual Recurring Revenue Target</p>
             </div>
           </div>
