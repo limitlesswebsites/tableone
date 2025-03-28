@@ -9,14 +9,12 @@ import Roadmap from '../components/Roadmap';
 import RevenueChart from '../components/RevenueChart';
 import CityMap from '../components/CityMap';
 import FundingProgress from '../components/FundingProgress';
-import UserTrust from '../components/UserTrust';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen">
       <NavBar />
       <Hero />
-      <UserTrust />
       <VideoStory />
       <Metrics />
       <Benchmarks />
