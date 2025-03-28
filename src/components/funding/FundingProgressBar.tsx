@@ -39,7 +39,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
           {/* Interested amount (purple) */}
           <div 
             className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${interestedPercentage}%`, backgroundColor: '#8b38e7' }}
+            style={{ width: `${interestedPercentage}%`, backgroundColor: '#6633ff' }}
           ></div>
         </div>
       </div>
@@ -47,11 +47,11 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
       <div className="mt-2 flex justify-between items-center text-xs text-white/60">
         <div className="flex items-center">
           <span className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></span>
-          <span>Committed: $<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
+          <span className="text-xs">Committed: $<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
         </div>
         <div className="flex items-center">
-          <span className="w-3 h-3 rounded-full bg-[#8b38e7] mr-2"></span>
-          <span>Interested: $<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
+          <span className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></span>
+          <span className="text-xs">Interested: $<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
         </div>
       </div>
     </div>
