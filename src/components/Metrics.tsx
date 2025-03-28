@@ -1,26 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import CountUp from './CountUp';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-
-const lifetimeValueData = [
-  { month: 'Oct \'24', value: 47.37 },
-  { month: 'Nov \'24', value: 44.44 },
-  { month: 'Dec \'24', value: 51.93 },
-  { month: 'Jan \'25', value: 57.69 },
-  { month: 'Feb \'25', value: 60.41 },
-  { month: 'Mar \'25', value: 71.02 },
-];
-
-const churnRateData = [
-  { month: 'Oct \'24', value: 13.2 },
-  { month: 'Nov \'24', value: 16.8 },
-  { month: 'Dec \'24', value: 14.0 },
-  { month: 'Jan \'25', value: 12.4 },
-  { month: 'Feb \'25', value: 12.1 },
-  { month: 'Mar \'25', value: 9.8 },
-];
+import MetricCard from './metrics/MetricCard';
+import ChartPanel from './metrics/ChartPanel';
+import { lifetimeValueData, churnRateData } from './metrics/chartData';
 
 const Metrics: React.FC = () => {
   // Log confirmation to check if component is rendering
@@ -71,132 +53,58 @@ const Metrics: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-200 hover:translate-y-[-5px] transition-all duration-500">
-            <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Annual Recurring Revenue</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
-              $<CountUp end={151286.88} decimals={2} />
-            </div>
-            <div className="text-white/80 text-center gradient-subheading">
-              Growing steadily month over month
-            </div>
-          </div>
+          <MetricCard 
+            title="Annual Recurring Revenue"
+            value={151286.88}
+            description="Growing steadily month over month"
+            prefix="$"
+            decimals={2}
+            delay={200}
+          />
           
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-300 hover:translate-y-[-5px] transition-all duration-500">
-            <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Operating Expenses</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
-              $<CountUp end={514} prefix="" suffix="/mo" />
-            </div>
-            <div className="text-white/80 text-center gradient-subheading">
-              Lean operations with high margin
-            </div>
-          </div>
+          <MetricCard 
+            title="Operating Expenses"
+            value={514}
+            description="Lean operations with high margin"
+            prefix="$"
+            suffix="/mo"
+            delay={300}
+          />
           
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-400 hover:translate-y-[-5px] transition-all duration-500">
-            <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">App Downloads</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
-              <CountUp end={35000} suffix="+" />
-            </div>
-            <div className="text-white/80 text-center gradient-subheading">
-              In just 18 months
-            </div>
-          </div>
+          <MetricCard 
+            title="App Downloads"
+            value={35000}
+            description="In just 18 months"
+            suffix="+"
+            delay={400}
+          />
           
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-500 hover:translate-y-[-5px] transition-all duration-500">
-            <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Paid Members</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
-              <CountUp end={2000} suffix="+" />
-            </div>
-            <div className="text-white/80 text-center gradient-subheading">
-              Active paying subscribers
-            </div>
-          </div>
+          <MetricCard 
+            title="Paid Members"
+            value={2000}
+            description="Active paying subscribers"
+            suffix="+"
+            delay={500}
+          />
         </div>
         
         {/* Line Graphs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {/* Subscriber Lifetime Value Graph */}
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-500">
-            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Lifetime Value</h3>
-            <div className="h-[250px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={lifetimeValueData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                  <XAxis 
-                    dataKey="month" 
-                    stroke="rgba(255,255,255,0.6)"
-                    tick={{ fontSize: 12 }}
-                  />
-                  <YAxis 
-                    stroke="rgba(255,255,255,0.6)"
-                    tick={{ fontSize: 12 }}
-                    tickFormatter={(value) => `$${value}`}
-                  />
-                  <Tooltip 
-                    formatter={(value) => [`$${value}`, 'LTV']}
-                    contentStyle={{
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '0.5rem',
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    name="LTV" 
-                    stroke="#05d9a7" 
-                    strokeWidth={3}
-                    activeDot={{ r: 8 }} 
-                    dot={{ r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-3 text-center gradient-subheading">
-              <p>Average LTV increasing to $71.02 per subscriber</p>
-            </div>
-          </div>
+          <ChartPanel 
+            title="Subscriber Lifetime Value"
+            description="Average LTV increasing to $71.02 per subscriber"
+            data={lifetimeValueData}
+            valuePrefix="$"
+            animationDelay={500}
+          />
           
-          {/* Subscriber Churn Rate Graph */}
-          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-600">
-            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Churn Rate</h3>
-            <div className="h-[250px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={churnRateData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                  <XAxis 
-                    dataKey="month" 
-                    stroke="rgba(255,255,255,0.6)"
-                    tick={{ fontSize: 12 }}
-                  />
-                  <YAxis 
-                    stroke="rgba(255,255,255,0.6)"
-                    tick={{ fontSize: 12 }}
-                    tickFormatter={(value) => `${value}%`}
-                  />
-                  <Tooltip 
-                    formatter={(value) => [`${value}%`, 'Churn Rate']}
-                    contentStyle={{
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '0.5rem',
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    name="Churn Rate" 
-                    stroke="#05d9a7" 
-                    strokeWidth={3}
-                    activeDot={{ r: 8 }} 
-                    dot={{ r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-3 text-center gradient-subheading">
-              <p>Churn rate decreasing to 9.8% in March 2025</p>
-            </div>
-          </div>
+          <ChartPanel 
+            title="Subscriber Churn Rate"
+            description="Churn rate decreasing to 9.8% in March 2025"
+            data={churnRateData}
+            valueSuffix="%"
+            animationDelay={600}
+          />
         </div>
         
         <div className="text-center mt-16 mb-10">
