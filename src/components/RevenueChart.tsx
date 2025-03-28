@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import CountUp from './CountUp';
 
 const RevenueChart: React.FC = () => {
@@ -82,7 +82,7 @@ const RevenueChart: React.FC = () => {
           
           <div className="h-[400px] mt-6">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
+              <LineChart
                 data={revenueData.slice(0, visibleMonths)}
                 margin={{ top: 20, right: 30, left: 30, bottom: 60 }}
               >
@@ -108,19 +108,26 @@ const RevenueChart: React.FC = () => {
                     borderRadius: '0.5rem',
                   }}
                 />
-                <Bar 
+                <Legend />
+                <Line 
+                  type="monotone" 
                   dataKey="forecast" 
                   name="Forecast" 
-                  fill="rgba(59, 130, 246, 0.8)" 
-                  radius={[4, 4, 0, 0]}
+                  stroke="rgba(59, 130, 246, 0.8)"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                  activeDot={{ r: 8 }}
                 />
-                <Bar 
+                <Line 
+                  type="monotone" 
                   dataKey="actual" 
                   name="Actual" 
-                  fill="rgba(139, 92, 246, 0.8)"
-                  radius={[4, 4, 0, 0]}
+                  stroke="rgba(139, 92, 246, 0.8)"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                  activeDot={{ r: 8 }}
                 />
-              </BarChart>
+              </LineChart>
             </ResponsiveContainer>
           </div>
           
