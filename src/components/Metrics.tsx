@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CountUp from './CountUp';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
@@ -26,21 +26,37 @@ const Metrics: React.FC = () => {
   // Log confirmation to check if component is rendering
   console.log("Metrics component rendering");
   
+  // State to track if image is loaded
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Pre-load the image to ensure it's available
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/lovable-uploads/4d8c82f4-9545-4a55-a994-77325d811978.png';
+    img.onload = () => {
+      console.log("Background image loaded successfully");
+      setImageLoaded(true);
+    };
+    img.onerror = (e) => {
+      console.error("Error loading background image:", e);
+    };
+  }, []);
+  
   return (
     <section id="metrics" className="py-20 relative">
-      {/* Background image */}
+      {/* Background image - using inline styles with important to override any conflicting styles */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute inset-0 z-0" 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" 
           style={{
             backgroundImage: "url('/lovable-uploads/4d8c82f4-9545-4a55-a994-77325d811978.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            opacity: 0.3, // Increased opacity slightly
+            opacity: 0.4, // Increased opacity for better visibility
           }}
         />
-        <div className="absolute inset-0 bg-black/70 z-0" /> {/* Adjusted overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/60 z-0" /> {/* Reduced overlay opacity for better image visibility */}
         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
       </div>
       
