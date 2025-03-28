@@ -100,7 +100,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="LTV" 
-                    stroke="#9b87f5" 
+                    stroke="#05d9a7" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
@@ -142,7 +142,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="Churn Rate" 
-                    stroke="#ea384c" 
+                    stroke="#05d9a7" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
