@@ -8,21 +8,21 @@ const RevenueChart: React.FC = () => {
   const currentMonth = new Date(2025, 2);
   
   const revenueData = [
-    { month: 'Oct 2024', forecast: 126000, actual: 130500 },
-    { month: 'Nov 2024', forecast: 135000, actual: 140200 },
-    { month: 'Dec 2024', forecast: 143000, actual: 151286 },
-    { month: 'Jan 2025', forecast: 155000, actual: 162400 },
-    { month: 'Feb 2025', forecast: 168000, actual: 175300 },
-    { month: 'Mar 2025', forecast: 182000, actual: 189500 },
-    { month: 'Apr 2025', forecast: 210000, actual: null },
-    { month: 'May 2025', forecast: 240000, actual: null },
-    { month: 'Jun 2025', forecast: 280000, actual: null },
-    { month: 'Jul 2025', forecast: 340000, actual: null },
-    { month: 'Aug 2025', forecast: 410000, actual: null },
-    { month: 'Sep 2025', forecast: 500000, actual: null },
-    { month: 'Oct 2025', forecast: 620000, actual: null },
-    { month: 'Nov 2025', forecast: 780000, actual: null },
-    { month: 'Dec 2025', forecast: 1000000, actual: null },
+    { month: 'Oct 2024', forecast: 35000, actual: 59000 },
+    { month: 'Nov 2024', forecast: 71000, actual: 81000 },
+    { month: 'Dec 2024', forecast: 107000, actual: 108000 },
+    { month: 'Jan 2025', forecast: 122000, actual: 124000 },
+    { month: 'Feb 2025', forecast: 141000, actual: 142000 },
+    { month: 'Mar 2025', forecast: 160000, actual: 152000 },
+    { month: 'Apr 2025', forecast: 191000, actual: null },
+    { month: 'May 2025', forecast: 214000, actual: null },
+    { month: 'Jun 2025', forecast: 263000, actual: null },
+    { month: 'Jul 2025', forecast: 299000, actual: null },
+    { month: 'Aug 2025', forecast: 331000, actual: null },
+    { month: 'Sep 2025', forecast: 380000, actual: null },
+    { month: 'Oct 2025', forecast: 424000, actual: null },
+    { month: 'Nov 2025', forecast: 478000, actual: null },
+    { month: 'Dec 2025', forecast: 514000, actual: null },
   ];
   
   const [visibleMonths, setVisibleMonths] = useState(8);
@@ -52,7 +52,7 @@ const RevenueChart: React.FC = () => {
             <div className="mb-4 md:mb-0">
               <h3 className="text-xl font-semibold mb-1">Current ARR</h3>
               <div className="text-3xl font-bold text-gradient-gold">
-                $<CountUp end={189500} />
+                $<CountUp end={152000} />
               </div>
             </div>
             
@@ -113,7 +113,7 @@ const RevenueChart: React.FC = () => {
                   type="monotone" 
                   dataKey="forecast" 
                   name="Forecast" 
-                  stroke="rgba(59, 130, 246, 0.8)"
+                  stroke="#05d9a7"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   activeDot={{ r: 8 }}
@@ -122,7 +122,7 @@ const RevenueChart: React.FC = () => {
                   type="monotone" 
                   dataKey="actual" 
                   name="Actual" 
-                  stroke="rgba(139, 92, 246, 0.8)"
+                  stroke="#05d9a7"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   activeDot={{ r: 8 }}
