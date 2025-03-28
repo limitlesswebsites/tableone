@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, ExternalLink } from 'lucide-react';
 
 const VideoStory: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -16,6 +16,10 @@ const VideoStory: React.FC = () => {
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const openLinkedInVideo = () => {
+    window.open('https://www.linkedin.com/feed/update/urn:li:activity:7311092973469896705/', '_blank');
   };
 
   return (
@@ -37,15 +41,16 @@ const VideoStory: React.FC = () => {
         <div className="max-w-4xl mx-auto animate-fade-in animate-delay-200">
           <div className="glass-card overflow-hidden relative">
             <AspectRatio ratio={16/9}>
-              <div
-                onClick={togglePlay}
-                className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer"
-              >
-                {!isPlaying && (
-                  <div className="bg-black/30 hover:bg-black/40 transition-all duration-300 w-20 h-20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <Play size={32} className="text-white ml-1" />
-                  </div>
-                )}
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                <div 
+                  onClick={openLinkedInVideo}
+                  className="bg-black/30 hover:bg-black/40 transition-all duration-300 w-20 h-20 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer mb-4"
+                >
+                  <ExternalLink size={32} className="text-white" />
+                </div>
+                <p className="text-white text-center px-4">
+                  This video is hosted on LinkedIn. Click to watch on LinkedIn.
+                </p>
               </div>
               <video 
                 id="story-video"
@@ -62,6 +67,17 @@ const VideoStory: React.FC = () => {
                 Your browser does not support the video tag.
               </video>
             </AspectRatio>
+          </div>
+          <div className="mt-4 text-center">
+            <a 
+              href="https://www.linkedin.com/feed/update/urn:li:activity:7311092973469896705/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              <span>Watch on LinkedIn</span>
+              <ExternalLink size={16} className="ml-1" />
+            </a>
           </div>
         </div>
       </div>
