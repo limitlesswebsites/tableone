@@ -13,14 +13,6 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <div className="mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.2s' }}>
-            <img 
-              src="/lovable-uploads/4329a76b-4372-4945-8827-e8e0265d3913.png" 
-              alt="TableOne Logo" 
-              className="w-32 md:w-44 lg:w-52 mx-auto transition-all duration-500 hover:scale-105"
-            />
-          </div>
-          
           <div className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
             <span className="text-xs font-medium text-white/90">Raising $100K to Redefine Restaurant Reservations</span>
           </div>
