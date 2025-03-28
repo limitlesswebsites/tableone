@@ -32,10 +32,22 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
     }
   };
 
+  const getGlowClass = () => {
+    switch (status) {
+      case 'Active':
+        return 'shadow-[0_0_20px_rgba(74,222,128,0.4)]';
+      case 'Coming Soon':
+        return 'shadow-[0_0_20px_rgba(59,130,246,0.4)]';
+      default:
+        return 'shadow-[0_0_15px_rgba(156,163,175,0.2)]';
+    }
+  };
+
   return (
     <div 
       className={`city-box opacity-0 p-6 rounded-2xl backdrop-blur-xl border transition-all duration-500 transform hover:scale-105 ${getBgClass()}`}
       style={{ transitionDelay: `${index * 100}ms` }}
+      data-glow-class={getGlowClass()}
     >
       <h3 className="text-xl font-semibold mb-2 text-white">
         {name}

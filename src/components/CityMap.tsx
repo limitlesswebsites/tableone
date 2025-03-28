@@ -11,9 +11,17 @@ const CityMap: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Add animation classes but ensure no opacity-0 remains
+            // Add animation classes and remove opacity-0
             entry.target.classList.add('animate-fade-in');
             entry.target.classList.remove('opacity-0');
+            
+            // Add the glow effect from the data attribute
+            const glowClass = entry.target.getAttribute('data-glow-class');
+            if (glowClass) {
+              setTimeout(() => {
+                entry.target.classList.add(glowClass);
+              }, 300); // Add glow after fade-in starts
+            }
           }
         });
       },
@@ -44,6 +52,7 @@ const CityMap: React.FC = () => {
     <section id="expansion" className="py-24 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]" />
+        <div className="absolute top-1/4 left-1/3 w-1/4 h-1/4 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
