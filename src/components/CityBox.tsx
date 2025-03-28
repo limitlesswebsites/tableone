@@ -11,6 +11,17 @@ interface CityBoxProps {
 
 const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
   const getBgClass = () => {
+    // Special case for New York to use #F2C498 color
+    if (name === 'New York') {
+      return 'bg-gradient-to-br from-[#F2C498]/30 to-[#F2C498]/20 border-[#F2C498]/30 hover:shadow-[0_0_15px_rgba(242,196,152,0.5)]';
+    }
+    
+    // Special case for Chicago, Boston, and Washington DC to use #6633ff color
+    if (name === 'Chicago' || name === 'Boston' || name === 'Washington DC') {
+      return 'bg-gradient-to-br from-[#6633ff]/30 to-[#6633ff]/20 border-[#6633ff]/30 hover:shadow-[0_0_15px_rgba(102,51,255,0.5)]';
+    }
+    
+    // Default colors based on status
     switch (status) {
       case 'Active':
         return 'bg-gradient-to-br from-green-900/30 to-green-600/30 border-green-500/30 hover:shadow-[0_0_15px_rgba(74,222,128,0.5)]';
@@ -22,6 +33,17 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
   };
 
   const getStatusClass = () => {
+    // Special cases for New York 
+    if (name === 'New York') {
+      return 'bg-[#F2C498]/20 text-[#F2C498]';
+    }
+    
+    // Special cases for Chicago, Boston, and Washington DC
+    if (name === 'Chicago' || name === 'Boston' || name === 'Washington DC') {
+      return 'bg-[#6633ff]/20 text-[#6633ff]';
+    }
+    
+    // Default status colors
     switch (status) {
       case 'Active':
         return 'bg-green-500/20 text-green-300';
@@ -33,6 +55,17 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
   };
 
   const getGlowClass = () => {
+    // Special cases for New York
+    if (name === 'New York') {
+      return 'shadow-[0_0_20px_rgba(242,196,152,0.4)]';
+    }
+    
+    // Special cases for Chicago, Boston, and Washington DC
+    if (name === 'Chicago' || name === 'Boston' || name === 'Washington DC') {
+      return 'shadow-[0_0_20px_rgba(102,51,255,0.4)]';
+    }
+    
+    // Default glow colors
     switch (status) {
       case 'Active':
         return 'shadow-[0_0_20px_rgba(74,222,128,0.4)]';
