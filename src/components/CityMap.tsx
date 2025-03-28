@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import CityBox from './CityBox';
 import { cities } from '../data/cityData';
@@ -55,7 +54,7 @@ const CityMap: React.FC = () => {
   }, []);
   
   return (
-    <section id="expansion" className="py-20 relative">
+    <section id="expansion" className="py-14 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]" />
         <div className="absolute top-1/4 left-1/3 w-1/4 h-1/4 bg-purple-500/10 rounded-full blur-[100px]" />

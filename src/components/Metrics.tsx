@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CountUp from './CountUp';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
@@ -24,7 +23,7 @@ const churnRateData = [
 
 const Metrics: React.FC = () => {
   return (
-    <section id="metrics" className="py-32 relative">
+    <section id="metrics" className="py-20 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
       </div>

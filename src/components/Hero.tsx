@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section className="min-h-screen w-full flex flex-col justify-center items-center relative pt-24 pb-32">
+    <section className="min-h-screen w-full flex flex-col justify-center items-center relative pt-16 pb-20">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />

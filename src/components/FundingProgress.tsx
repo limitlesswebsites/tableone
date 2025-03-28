@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CountUp from './CountUp';
 
@@ -8,7 +7,7 @@ const FundingProgress: React.FC = () => {
   const progressPercentage = (raisedAmount / targetAmount) * 100;
   
   return (
-    <section id="invest" className="py-24 relative">
+    <section id="invest" className="py-16 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/30"></div>
         <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />

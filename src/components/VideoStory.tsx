@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from 'lucide-react';
@@ -24,7 +23,7 @@ const VideoStory: React.FC = () => {
   };
 
   return (
-    <section className="py-24 relative">
+    <section className="py-16 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
       </div>

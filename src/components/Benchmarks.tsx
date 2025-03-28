@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CountUp from './CountUp';
 
@@ -58,7 +57,7 @@ const BenchmarkItem: React.FC<BenchmarkProps> = ({
 
 const Benchmarks: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 pb-20">
+    <div className="container mx-auto px-4 pb-12">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <BenchmarkItem
           title="Paid User Retention"

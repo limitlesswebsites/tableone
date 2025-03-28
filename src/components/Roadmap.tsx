@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const RoadmapItem: React.FC<{
@@ -32,7 +31,7 @@ const RoadmapItem: React.FC<{
 
 const Roadmap: React.FC = () => {
   return (
-    <section id="roadmap" className="py-24 relative">
+    <section id="roadmap" className="py-16 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
@@ -48,7 +47,6 @@ const Roadmap: React.FC = () => {
         </div>
         
         <div className="relative max-w-4xl mx-auto">
-          {/* Vertical line connecting roadmap items */}
           <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-16">

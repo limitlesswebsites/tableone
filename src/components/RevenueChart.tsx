@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import CountUp from './CountUp';
@@ -32,7 +31,7 @@ const RevenueChart: React.FC = () => {
   };
   
   return (
-    <section id="forecast" className="py-20 relative">
+    <section id="forecast" className="py-14 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/4 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
