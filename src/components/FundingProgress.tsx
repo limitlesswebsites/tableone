@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CountUp from './CountUp';
 import { Progress } from './ui/progress';
@@ -14,7 +13,7 @@ const FundingProgress: React.FC = () => {
   const { toast } = useToast();
 
   const raisedAmount = 28000; // $28,000 raised so far
-  const interestedAmount = 72000; // $72,000 interest expressed
+  const interestedAmount = 700000; // $700,000 interest expressed
   const targetAmount = 1000000; // $1,000,000 target
   
   const committedPercentage = (raisedAmount / targetAmount) * 100;
