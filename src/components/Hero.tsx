@@ -23,12 +23,13 @@ const Hero: React.FC = () => {
             <span className="text-white"><span className="gold-text font-extrabold">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
           
-          {/* Credit Card Image */}
-          <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.7s' }}>
+          {/* Credit Card Image with Fade Effect */}
+          <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
+            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background to-transparent z-10"></div>
             <img 
               src="/lovable-uploads/412a6876-8961-4818-8f3b-b65483899b27.png" 
               alt="Premium Credit Cards" 
-              className="w-full h-auto drop-shadow-2xl" 
+              className="w-full h-auto drop-shadow-2xl relative z-0" 
             />
           </div>
           
