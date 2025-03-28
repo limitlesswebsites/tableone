@@ -41,24 +41,14 @@ const VideoStory: React.FC = () => {
         <div className="max-w-4xl mx-auto animate-fade-in animate-delay-200">
           <div className="glass-card overflow-hidden relative">
             <AspectRatio ratio={16/9}>
-              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                <div 
-                  onClick={openLinkedInVideo}
-                  className="bg-black/30 hover:bg-black/40 transition-all duration-300 w-20 h-20 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer mb-4"
-                >
-                  <ExternalLink size={32} className="text-white" />
-                </div>
-                <p className="text-white text-center px-4">
-                  This video is hosted on LinkedIn. Click to watch on LinkedIn.
-                </p>
-              </div>
               <video 
                 id="story-video"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-pointer"
                 poster="/lovable-uploads/203f18c4-42ca-4e12-a996-92679d1bb61f.png"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 controls={isPlaying}
+                onClick={openLinkedInVideo}
               >
                 <source 
                   src="https://assets.mixkit.co/videos/preview/mixkit-restaurant-server-bringing-food-to-customers-table-14080-large.mp4" 
