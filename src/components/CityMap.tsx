@@ -11,15 +11,15 @@ const CityMap: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Add more prominent animation classes
-            entry.target.classList.add('animate-fade-in', 'animate-pulse-glow');
+            // Add animation classes but ensure no opacity-0 remains
+            entry.target.classList.add('animate-fade-in');
             entry.target.classList.remove('opacity-0');
           }
         });
       },
       { 
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
     
