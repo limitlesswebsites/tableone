@@ -1,6 +1,17 @@
 
 import React from 'react';
 import CountUp from './CountUp';
+import { Chart } from '@/components/ui/chart';
+import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+
+const lifetimeValueData = [
+  { month: 'Jan', value: 68 },
+  { month: 'Feb', value: 74 },
+  { month: 'Mar', value: 82 },
+  { month: 'Apr', value: 91 },
+  { month: 'May', value: 103 },
+  { month: 'Jun', value: 118 },
+];
 
 const Metrics: React.FC = () => {
   return (
@@ -45,6 +56,58 @@ const Metrics: React.FC = () => {
             </div>
             <div className="text-white/80 text-center">
               In just 18 months
+            </div>
+          </div>
+        </div>
+        
+        {/* Line Graph for Subscriber Lifetime Value */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-500">
+            <h3 className="text-xl font-semibold mb-4 text-center">Subscriber Lifetime Value</h3>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={lifetimeValueData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => `$${value}`}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`$${value}`, 'LTV']}
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '0.5rem',
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="LTV" 
+                    stroke="#8884d8" 
+                    strokeWidth={3}
+                    activeDot={{ r: 8 }} 
+                    dot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-3 text-center text-white/70">
+              <p>Average LTV increasing to $118 per subscriber</p>
+            </div>
+          </div>
+          
+          {/* Placeholder for the second graph */}
+          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-600">
+            <h3 className="text-xl font-semibold mb-4 text-center">Placeholder for Second Graph</h3>
+            <div className="h-[250px] flex items-center justify-center">
+              <p className="text-white/60">Second graph will be displayed here</p>
             </div>
           </div>
         </div>
