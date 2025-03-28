@@ -20,6 +20,12 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200;
   }
 
+  .text-gradient-platinum {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #8a8a8a, #e0e0e0, #ffffff, #e0e0e0, #8a8a8a);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+  }
+
   .gradient-border {
     position: relative;
     border-radius: 0.75rem;

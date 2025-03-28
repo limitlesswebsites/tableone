@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
-            <span className="bg-gradient-to-r from-[#e6e6e6] via-[#ffffff] to-[#d9d9d9] bg-clip-text text-transparent shimmer font-extrabold" style={{textShadow: "0 0 1px rgba(255,255,255,0.2)"}}>Platinum Card Dining</span>
+            <span className="platinum-text font-extrabold">Platinum Card Dining</span>
             <br />
             <span className="text-white">Without The Card</span>
           </h1>
