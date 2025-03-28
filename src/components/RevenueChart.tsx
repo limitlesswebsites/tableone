@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import CountUp from './CountUp';
@@ -38,10 +39,10 @@ const RevenueChart: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">
             Revenue Growth Trajectory
           </h2>
-          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             We've unlocked organic growth and are ready for scale.
           </p>
         </div>
@@ -49,8 +50,8 @@ const RevenueChart: React.FC = () => {
         <div className="glass-card p-5 md:p-6 animate-fade-in animate-delay-200">
           <div className="mb-5 flex flex-col md:flex-row justify-between items-start md:items-center">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-lg font-semibold mb-1">Current ARR</h3>
-              <div className="text-2xl font-bold text-gradient-gold">
+              <h3 className="text-lg font-semibold mb-1 font-quicksand">Current ARR</h3>
+              <div className="text-2xl font-bold gradient-heading">
                 $<CountUp end={152000} />
               </div>
             </div>

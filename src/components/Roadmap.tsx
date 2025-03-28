@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const RoadmapItem: React.FC<{
@@ -21,7 +22,7 @@ const RoadmapItem: React.FC<{
             <img src={logoImg} alt="Supergood Logo" className="w-full max-w-[180px]" style={{ height: 'auto', maxHeight: '100px' }} />
           </div>
         ) : (
-          title && <h4 className="text-lg font-semibold mb-2">{title}</h4>
+          title && <h4 className="text-lg font-semibold mb-2 font-quicksand">{title}</h4>
         )}
         <p className="text-xs text-white/70 leading-relaxed">{description}</p>
       </div>
@@ -38,10 +39,10 @@ const Roadmap: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 animate-fade-in tracking-tight">
+          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in tracking-tight gradient-heading">
             Our Path to $1M in Revenue
           </h2>
-          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             A clear roadmap with strategic initiatives to scale our proven model.
           </p>
         </div>
@@ -78,7 +79,7 @@ const Roadmap: React.FC = () => {
           
           <div className="mt-24 text-center">
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 inline-block animate-fade-in animate-delay-500 shadow-xl">
-              <h3 className="text-xl font-bold mb-2 text-gradient-pink">$1,000,000</h3>
+              <h3 className="text-xl font-bold mb-2 gradient-heading">$1,000,000</h3>
               <p className="text-sm text-white/80">Annual Recurring Revenue Target</p>
             </div>
           </div>

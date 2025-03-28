@@ -14,18 +14,18 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <div className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
-            <span className="text-xs font-medium text-white/90">Raising $100K to Redefine Restaurant Reservations</span>
+            <span className="text-xs font-medium text-white/90 font-quicksand">Raising $100K to Redefine Restaurant Reservations</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
-            <span className="platinum-text font-extrabold">Platinum Card Dining</span>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-quicksand" style={{ animationDelay: '0.6s' }}>
+            <span className="gradient-heading">Platinum Card Dining</span>
             <br />
-            <span className="text-white"><span className="gold-text font-extrabold">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
+            <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
           
           {/* Credit Card Image with Enhanced Fade Effect */}
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/90 to-transparent z-10"></div>
+            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/90 to-transparent z-10"></div>
             <img 
               src="/lovable-uploads/412a6876-8961-4818-8f3b-b65483899b27.png" 
               alt="Premium Credit Cards" 
@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
             />
           </div>
           
-          <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed" style={{ animationDelay: '0.8s' }}>
+          <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed gradient-subheading" style={{ animationDelay: '0.8s' }}>
             TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
           </p>
           

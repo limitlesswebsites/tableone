@@ -31,8 +31,10 @@ const Metrics: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-24">
-          <h2 className="text-2xl md:text-4xl font-bold mb-5 animate-fade-in tracking-tight">We've Exceeded Expectations...Even Our Own</h2>
-          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <h2 className="text-2xl md:text-4xl mb-5 animate-fade-in tracking-tight gradient-heading">
+            We've Exceeded Expectations...Even Our Own
+          </h2>
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             TableOne is not a traditional restaurant tech startup, boasting high margins, organic growth, and paid user adoption.
           </p>
         </div>
@@ -83,7 +85,7 @@ const Metrics: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {/* Subscriber Lifetime Value Graph */}
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-500">
-            <h3 className="text-xl font-semibold mb-4 text-center">Subscriber Lifetime Value</h3>
+            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Lifetime Value</h3>
             <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={lifetimeValueData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
@@ -125,7 +127,7 @@ const Metrics: React.FC = () => {
           
           {/* Subscriber Churn Rate Graph */}
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in animate-delay-600">
-            <h3 className="text-xl font-semibold mb-4 text-center">Subscriber Churn Rate</h3>
+            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Churn Rate</h3>
             <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={churnRateData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
@@ -167,8 +169,8 @@ const Metrics: React.FC = () => {
         </div>
         
         <div className="text-center mt-16 mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">Exceeding Industry Benchmarks</h3>
-          <p className="text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">Exceeding Industry Benchmarks</h3>
+          <p className="text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             TableOne dramatically outperforms metrics for exceptional paid consumer apps.
           </p>
         </div>

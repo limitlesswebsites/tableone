@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ExternalLink } from 'lucide-react';
@@ -30,10 +31,10 @@ const VideoStory: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 animate-fade-in tracking-tight">
+          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in tracking-tight gradient-heading">
             Our Story in 2 min
           </h2>
-          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             Watch how we're revolutionizing restaurant reservations
           </p>
         </div>

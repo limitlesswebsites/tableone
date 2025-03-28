@@ -1,3 +1,4 @@
+
 import React from 'react';
 import CountUp from './CountUp';
 
@@ -18,7 +19,7 @@ const BenchmarkItem: React.FC<BenchmarkProps> = ({
 }) => {
   return (
     <div className={`glass-card p-6 animate-fade-in animate-delay-${delay}`}>
-      <h4 className="text-lg font-semibold mb-5">{title}</h4>
+      <h4 className="text-lg font-semibold mb-5 font-quicksand">{title}</h4>
       
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">

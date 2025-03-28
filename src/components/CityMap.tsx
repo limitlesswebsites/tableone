@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import CityBox from './CityBox';
 import { cities } from '../data/cityData';
@@ -62,10 +63,10 @@ const CityMap: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">
             Where to Next?
           </h2>
-          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
             Strategic city selection for maximum growth and market penetration.
           </p>
         </div>
