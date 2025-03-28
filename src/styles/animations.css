@@ -72,21 +72,21 @@
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
-/* Gold text effect */
+/* Gold text effect - updated with darker gold tones */
 .gold-text {
   background: linear-gradient(
     to right,
-    #976e0e 0%,
-    #cda631 10%,
-    #f2d562 20%,
-    #e9be39 30%,
-    #cda631 40%,
-    #f5cf3a 50%,
-    #cda631 60%,
-    #e9be39 70%,
-    #f2d562 80%,
-    #cda631 90%,
-    #976e0e 100%
+    #704e08 0%,
+    #9a7215 10%,
+    #c9a53d 20%,
+    #b28a21 30%,
+    #9a7215 40%,
+    #c19323 50%,
+    #9a7215 60%,
+    #b28a21 70%,
+    #c9a53d 80%,
+    #9a7215 90%,
+    #704e08 100%
   );
   background-size: 200% auto;
   color: transparent;
