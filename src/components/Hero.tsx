@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -25,7 +26,7 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
-            <span className="text-gradient-gold">Platinum Card Dining</span>
+            <span className="bg-gradient-to-r from-gray-200 via-gray-400 to-gray-300 bg-clip-text text-transparent">Platinum Card Dining</span>
             <br />
             <span className="text-white">Without The Card</span>
           </h1>
