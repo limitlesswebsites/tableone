@@ -1,137 +1,54 @@
 
-import React, { useEffect, useState, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useRef, useEffect } from 'react';
 
 const CityMap: React.FC = () => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [showTokenInput, setShowTokenInput] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  // City coordinates - [longitude, latitude] as [number, number] tuples
+  // City data
   const cities = [
-    { name: "New York", coordinates: [-74.0060, 40.7128] as [number, number], active: true },
-    { name: "Chicago", coordinates: [-87.6298, 41.8781] as [number, number], active: false },
-    { name: "Boston", coordinates: [-71.0589, 42.3601] as [number, number], active: false },
-    { name: "Washington DC", coordinates: [-77.0369, 38.9072] as [number, number], active: false },
-    { name: "Dallas", coordinates: [-96.7970, 32.7767] as [number, number], active: false },
-    { name: "Los Angeles", coordinates: [-118.2437, 34.0522] as [number, number], active: false },
-    { name: "San Francisco", coordinates: [-122.4194, 37.7749] as [number, number], active: false },
-    { name: "Philadelphia", coordinates: [-75.1652, 39.9526] as [number, number], active: false },
-    { name: "London", coordinates: [-0.1278, 51.5074] as [number, number], active: false },
+    { name: "New York", status: "Active" },
+    { name: "Chicago", status: "Coming Soon" },
+    { name: "Boston", status: "Coming Soon" },
+    { name: "Washington DC", status: "Coming Soon" },
+    { name: "Dallas", status: "Planned" },
+    { name: "Los Angeles", status: "Planned" },
+    { name: "San Francisco", status: "Planned" },
+    { name: "Philadelphia", status: "Planned" },
+    { name: "London", status: "Planned" },
   ];
   
-  const [activeCities, setActiveCities] = useState<{[key: string]: boolean}>({
-    "New York": true,
-  });
-  
-  const initializeMap = () => {
-    if (!mapContainer.current || !mapboxToken) return;
-
-    // Initialize map
-    mapboxgl.accessToken = mapboxToken;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-95, 37], // Center on US
-      zoom: 2,
-      projection: 'globe',
-    });
-
-    // Add navigation controls
-    map.current.addControl(
-      new mapboxgl.NavigationControl({
-        visualizePitch: true,
-      }),
-      'bottom-right'
-    );
-
-    // Add markers for each city
-    map.current.on('load', () => {
-      // Add atmospheric styling
-      map.current?.setFog({
-        color: 'rgb(20, 20, 30)',
-        'high-color': 'rgb(20, 20, 40)',
-        'horizon-blend': 0.2,
-      });
-      
-      // Add markers for each city
-      cities.forEach(city => {
-        // Create a DOM element for the marker
-        const el = document.createElement('div');
-        el.className = 'city-marker';
-        el.style.width = '15px';
-        el.style.height = '15px';
-        el.style.borderRadius = '50%';
-        el.style.cursor = 'pointer';
-        
-        if (city.name === "New York") {
-          el.style.backgroundColor = '#10b981'; // Green for active city
-          el.style.boxShadow = '0 0 10px 2px rgba(16, 185, 129, 0.7)';
-        } else {
-          el.style.backgroundColor = activeCities[city.name] ? '#3b82f6' : 'rgba(255, 255, 255, 0.5)';
-          el.style.boxShadow = activeCities[city.name] ? '0 0 10px 2px rgba(59, 130, 246, 0.5)' : 'none';
-        }
-        
-        // Add popup
-        const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
-          .setHTML(`<div class="bg-black/80 px-2 py-1 rounded text-white text-xs">${city.name}${city.name === "New York" ? ' (Active)' : ''}</div>`);
-            
-        // Add marker to map
-        new mapboxgl.Marker(el)
-          .setLngLat(city.coordinates)
-          .setPopup(popup)
-          .addTo(map.current!);
-      });
-    });
-  };
-  
-  const toggleCity = (cityName: string) => {
-    setActiveCities(prev => ({
-      ...prev,
-      [cityName]: !prev[cityName]
-    }));
-    
-    // Update marker color when city is toggled
-    if (map.current) {
-      const markers = document.querySelectorAll('.city-marker');
-      const cityIndex = cities.findIndex(c => c.name === cityName);
-      
-      if (cityIndex >= 0 && cityIndex < markers.length) {
-        const marker = markers[cityIndex] as HTMLDivElement;
-        const isActive = !activeCities[cityName];
-        
-        if (cityName !== "New York") {
-          marker.style.backgroundColor = isActive ? '#3b82f6' : 'rgba(255, 255, 255, 0.5)';
-          marker.style.boxShadow = isActive ? '0 0 10px 2px rgba(59, 130, 246, 0.5)' : 'none';
-        }
-      }
-    }
-  };
-  
-  const handleTokenSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (mapboxToken) {
-      setShowTokenInput(false);
-      initializeMap();
-    }
-  };
-  
   useEffect(() => {
-    // Try to initialize map when component mounts
-    if (mapboxToken) {
-      initializeMap();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in', 'animate-pulse-glow');
+            entry.target.classList.remove('opacity-0');
+          }
+        });
+      },
+      { 
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    );
+    
+    if (containerRef.current) {
+      const boxes = containerRef.current.querySelectorAll('.city-box');
+      boxes.forEach((box) => {
+        observer.observe(box);
+      });
     }
     
-    // Cleanup
     return () => {
-      if (map.current) {
-        map.current.remove();
+      if (containerRef.current) {
+        const boxes = containerRef.current.querySelectorAll('.city-box');
+        boxes.forEach((box) => {
+          observer.unobserve(box);
+        });
       }
     };
-  }, [mapboxToken]);
+  }, []);
   
   return (
     <section id="expansion" className="py-24 relative">
@@ -142,61 +59,40 @@ const CityMap: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">
-            Expansion Strategy
+            Where to Next?
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             Strategic city selection for maximum growth and market penetration.
           </p>
         </div>
         
-        <div className="glass-card p-6 md:p-8 relative overflow-hidden animate-fade-in animate-delay-200">
-          {showTokenInput ? (
-            <div className="max-w-md mx-auto py-10">
-              <div className="mb-4 text-center">
-                <p className="text-white/80 mb-4">To view the interactive map, please enter your Mapbox public token:</p>
-                <p className="text-xs text-white/60 mb-6">You can get a free token by signing up at <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">mapbox.com</a></p>
-              </div>
-              <form onSubmit={handleTokenSubmit} className="flex flex-col space-y-4">
-                <input
-                  type="text"
-                  value={mapboxToken}
-                  onChange={(e) => setMapboxToken(e.target.value)}
-                  placeholder="Enter Mapbox public token"
-                  className="px-4 py-2 rounded-md bg-black/30 border border-white/20 text-white"
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 rounded-md bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium"
-                >
-                  Initialize Map
-                </button>
-              </form>
-            </div>
-          ) : (
-            <div className="relative h-[500px] w-full rounded-lg overflow-hidden">
-              <div ref={mapContainer} className="absolute inset-0" />
-            </div>
-          )}
-          
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {cities.map((city) => (
-              <button
-                key={city.name}
-                className={`px-4 py-2 rounded-md text-sm transition-all ${
-                  city.name === "New York"
-                    ? 'bg-gradient-to-r from-green-600/80 to-green-400/80 text-white cursor-default'
-                    : activeCities[city.name] 
-                      ? 'bg-gradient-to-r from-blue-600/80 to-blue-400/80 text-white' 
-                      : 'bg-white/5 hover:bg-white/10 text-white/70'
-                }`}
-                onClick={() => city.name !== "New York" && toggleCity(city.name)}
-                disabled={city.name === "New York"}
-              >
+        <div ref={containerRef} className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cities.map((city, index) => (
+            <div 
+              key={city.name}
+              className={`city-box opacity-0 p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 ${
+                city.status === 'Active' 
+                  ? 'bg-gradient-to-br from-green-900/30 to-green-600/30 border-green-500/30' 
+                  : city.status === 'Coming Soon'
+                    ? 'bg-gradient-to-br from-blue-900/30 to-blue-600/30 border-blue-500/30'
+                    : 'bg-gradient-to-br from-gray-900/30 to-gray-800/30 border-gray-500/30'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <h3 className="text-2xl font-semibold mb-2">
                 {city.name}
-                {city.name === "New York" && " (Active)"}
-              </button>
-            ))}
-          </div>
+              </h3>
+              <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                city.status === 'Active' 
+                  ? 'bg-green-500/20 text-green-300' 
+                  : city.status === 'Coming Soon'
+                    ? 'bg-blue-500/20 text-blue-300'
+                    : 'bg-gray-500/20 text-gray-300'
+              }`}>
+                {city.status}
+              </div>
+            </div>
+          ))}
         </div>
         
         <div className="mt-10 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
