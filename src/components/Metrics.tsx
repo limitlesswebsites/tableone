@@ -42,7 +42,7 @@ const Metrics: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-200 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Annual Recurring Revenue</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
+            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
               $<CountUp end={151286.88} decimals={2} />
             </div>
             <div className="text-white/80 text-center gradient-subheading">
@@ -112,7 +112,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="LTV" 
-                    stroke="#a18cd1" 
+                    stroke="#05d9a7" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
@@ -154,7 +154,7 @@ const Metrics: React.FC = () => {
                     type="monotone" 
                     dataKey="value" 
                     name="Churn Rate" 
-                    stroke="#ff9a9e" 
+                    stroke="#05d9a7" 
                     strokeWidth={3}
                     activeDot={{ r: 8 }} 
                     dot={{ r: 4 }}
