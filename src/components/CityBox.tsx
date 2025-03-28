@@ -45,14 +45,14 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
 
   return (
     <div 
-      className={`city-box opacity-0 p-6 rounded-2xl backdrop-blur-xl border transition-all duration-500 transform hover:scale-105 ${getBgClass()}`}
+      className={`city-box opacity-0 p-5 rounded-2xl backdrop-blur-xl border transition-all duration-500 transform hover:scale-105 ${getBgClass()}`}
       style={{ transitionDelay: `${index * 100}ms` }}
       data-glow-class={getGlowClass()}
     >
-      <h3 className="text-xl font-semibold mb-2 text-white">
+      <h3 className="text-lg font-semibold mb-2 text-white">
         {name}
       </h3>
-      <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusClass()}`}>
+      <div className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusClass()}`}>
         {status}
       </div>
     </div>

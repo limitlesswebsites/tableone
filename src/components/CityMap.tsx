@@ -55,23 +55,23 @@ const CityMap: React.FC = () => {
   }, []);
   
   return (
-    <section id="expansion" className="py-24 relative">
+    <section id="expansion" className="py-20 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]" />
         <div className="absolute top-1/4 left-1/3 w-1/4 h-1/4 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">
             Where to Next?
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             Strategic city selection for maximum growth and market penetration.
           </p>
         </div>
         
-        <div ref={containerRef} className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={containerRef} className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayedCities.map((city, index) => (
             <CityBox 
               key={city.name}
@@ -84,13 +84,13 @@ const CityMap: React.FC = () => {
         
         {/* Simple "+10 more" indicator */}
         {remainingCount > 0 && (
-          <div className="mt-8 text-center animate-fade-in animate-delay-200">
-            <p className="text-lg text-white/70 font-medium">+{remainingCount} more</p>
+          <div className="mt-6 text-center animate-fade-in animate-delay-200">
+            <p className="text-base text-white/70 font-medium">+{remainingCount} more</p>
           </div>
         )}
         
-        <div className="mt-10 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
-          <p>
+        <div className="mt-8 text-center text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-300">
+          <p className="text-sm">
             Our expansion strategy targets high-density urban areas with established dining scenes and affluent customer bases who value premium dining experiences.
           </p>
         </div>

@@ -32,42 +32,42 @@ const RevenueChart: React.FC = () => {
   };
   
   return (
-    <section id="forecast" className="py-24 relative">
+    <section id="forecast" className="py-20 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/4 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">
             Revenue Growth Trajectory
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             We've unlocked organic growth and are ready for scale.
           </p>
         </div>
         
-        <div className="glass-card p-6 md:p-8 animate-fade-in animate-delay-200">
-          <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div className="glass-card p-5 md:p-6 animate-fade-in animate-delay-200">
+          <div className="mb-5 flex flex-col md:flex-row justify-between items-start md:items-center">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-xl font-semibold mb-1">Current ARR</h3>
-              <div className="text-3xl font-bold text-gradient-gold">
+              <h3 className="text-lg font-semibold mb-1">Current ARR</h3>
+              <div className="text-2xl font-bold text-gradient-gold">
                 $<CountUp end={152000} />
               </div>
             </div>
             
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-5">
               <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></div>
-                <span className="text-sm text-white/80">Forecast</span>
+                <div className="w-2.5 h-2.5 rounded-full bg-[#6633ff] mr-2"></div>
+                <span className="text-xs text-white/80">Forecast</span>
               </div>
               <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></div>
-                <span className="text-sm text-white/80">Actual</span>
+                <div className="w-2.5 h-2.5 rounded-full bg-[#05d9a7] mr-2"></div>
+                <span className="text-xs text-white/80">Actual</span>
               </div>
               <div className="hidden md:block">
                 <select 
-                  className="bg-white/5 border border-white/10 rounded-md text-white py-1 px-3 text-sm"
+                  className="bg-white/5 border border-white/10 rounded-md text-white py-1 px-2 text-xs"
                   value={visibleMonths}
                   onChange={(e) => setVisibleMonths(Number(e.target.value))}
                 >
@@ -80,7 +80,7 @@ const RevenueChart: React.FC = () => {
             </div>
           </div>
           
-          <div className="h-[400px] mt-6">
+          <div className="h-[350px] mt-5">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={revenueData.slice(0, visibleMonths)}
@@ -92,13 +92,13 @@ const RevenueChart: React.FC = () => {
                   stroke="rgba(255,255,255,0.6)"
                   angle={-45}
                   textAnchor="end"
-                  tick={{fontSize: 12}}
+                  tick={{fontSize: 11}}
                   height={60}
                 />
                 <YAxis 
                   stroke="rgba(255,255,255,0.6)"
                   tickFormatter={formatCurrency}
-                  tick={{fontSize: 12}}
+                  tick={{fontSize: 11}}
                 />
                 <Tooltip 
                   formatter={(value) => [`${formatCurrency(value as number)}`, '']}
@@ -107,6 +107,7 @@ const RevenueChart: React.FC = () => {
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '0.5rem',
                   }}
+                  labelStyle={{fontSize: 12}}
                 />
                 <Legend wrapperStyle={{ display: 'none' }} />
                 <Line 
@@ -114,18 +115,18 @@ const RevenueChart: React.FC = () => {
                   dataKey="forecast" 
                   name="Forecast" 
                   stroke="#6633ff"
-                  strokeWidth={3}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 8 }}
+                  strokeWidth={2.5}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6 }}
                 />
                 <Line 
                   type="monotone" 
                   dataKey="actual" 
                   name="Actual" 
                   stroke="#05d9a7"
-                  strokeWidth={3}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 8 }}
+                  strokeWidth={2.5}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6 }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -133,7 +134,7 @@ const RevenueChart: React.FC = () => {
           
           <div className="block md:hidden mt-4">
             <select 
-              className="w-full bg-white/5 border border-white/10 rounded-md text-white py-2 px-3"
+              className="w-full bg-white/5 border border-white/10 rounded-md text-white py-1.5 px-3 text-xs"
               value={visibleMonths}
               onChange={(e) => setVisibleMonths(Number(e.target.value))}
             >

@@ -1,116 +1,41 @@
 
-@layer utilities {
-  .animate-delay-100 {
-    animation-delay: 100ms;
-  }
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
 
-  .animate-delay-300 {
-    animation-delay: 300ms;
-  }
+/* Animation delay utilities */
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
 
-  .animate-delay-400 {
-    animation-delay: 400ms;
-  }
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
 
-  .animate-delay-500 {
-    animation-delay: 500ms;
-  }
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
 
-  /* Arkitect-inspired animations */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
 
-  @keyframes slideInFromBottom {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.animate-delay-500 {
+  animation-delay: 500ms;
+}
 
-  @keyframes slideInFromLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+@keyframes bounceSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 
-  @keyframes slideInFromRight {
-    0% {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes pulseGlow {
-    0%, 100% {
-      box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 30px rgba(79, 70, 229, 0.5);
-    }
-  }
-
-  @keyframes cityGlow {
-    0% {
-      box-shadow: 0 0 5px rgba(156, 163, 175, 0.2);
-    }
-    50% {
-      box-shadow: 0 0 25px rgba(156, 163, 175, 0.6);
-    }
-    100% {
-      box-shadow: 0 0 5px rgba(156, 163, 175, 0.2);
-    }
-  }
-
-  .animate-fade-in {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-
-  .animate-slide-in-bottom {
-    opacity: 0;
-    animation: slideInFromBottom 0.8s ease-out forwards;
-  }
-
-  .animate-slide-in-left {
-    opacity: 0;
-    animation: slideInFromLeft 0.8s ease-out forwards;
-  }
-
-  .animate-slide-in-right {
-    opacity: 0;
-    animation: slideInFromRight 0.8s ease-out forwards;
-  }
-
-  .animate-pulse-glow {
-    animation: pulseGlow 2s infinite;
-  }
-
-  .animate-city-glow {
-    animation: cityGlow 3s infinite ease-in-out;
-  }
+.animate-bounce-subtle {
+  animation: bounceSubtle 3s ease-in-out infinite;
 }

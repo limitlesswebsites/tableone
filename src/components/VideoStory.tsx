@@ -24,17 +24,17 @@ const VideoStory: React.FC = () => {
   };
 
   return (
-    <section className="py-32 relative">
+    <section className="py-24 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-5 animate-fade-in tracking-tight">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 animate-fade-in tracking-tight">
             Our Story in 2 min
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
             Watch how we're revolutionizing restaurant reservations
           </p>
         </div>
@@ -59,13 +59,13 @@ const VideoStory: React.FC = () => {
               </video>
             </AspectRatio>
           </div>
-          <div className="mt-6 text-center">
+          <div className="mt-5 text-center">
             <Button 
               onClick={openLinkedInVideo}
-              className="px-5 py-2 text-xs md:text-sm rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+              className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
             >
               <span>Watch on LinkedIn</span>
-              <ExternalLink size={16} className="ml-1" />
+              <ExternalLink size={14} className="ml-1" />
             </Button>
           </div>
         </div>
