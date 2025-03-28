@@ -3,11 +3,12 @@ import React from 'react';
 
 const RoadmapItem: React.FC<{
   quarter: string;
-  title: string;
+  title?: string;
   description: string;
   isActive?: boolean;
   delay: number;
-}> = ({ quarter, title, description, isActive = false, delay }) => {
+  logoImg?: string;
+}> = ({ quarter, title, description, isActive = false, delay, logoImg }) => {
   return (
     <div className={`relative animate-fade-in animate-delay-${delay}`}>
       <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full ${
@@ -16,7 +17,13 @@ const RoadmapItem: React.FC<{
       
       <div className="mt-10 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-xs mx-auto hover:translate-y-[-5px] transition-all duration-500 shadow-xl">
         <div className="font-medium text-xs uppercase tracking-wider text-white/60 mb-3">{quarter}</div>
-        <h4 className="text-xl font-semibold mb-3">{title}</h4>
+        {logoImg ? (
+          <div className="mb-3">
+            <img src={logoImg} alt="Supergood Logo" className="h-10 md:h-12 w-auto" />
+          </div>
+        ) : (
+          title && <h4 className="text-xl font-semibold mb-3">{title}</h4>
+        )}
         <p className="text-sm text-white/70 leading-relaxed">{description}</p>
       </div>
     </div>
@@ -47,7 +54,7 @@ const Roadmap: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-20 gap-x-16">
             <RoadmapItem
               quarter="Q2 2025"
-              title="Supergood by TableOne"
+              logoImg="/lovable-uploads/1048f04c-b9df-4458-9887-118342b7971d.png"
               description="Launch aggregated feed for restaurant reviews to boost user engagement and retention."
               isActive={true}
               delay={200}
