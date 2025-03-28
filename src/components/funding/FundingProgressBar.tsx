@@ -36,10 +36,10 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
             className="h-full transition-all duration-1000 ease-out shimmer"
             style={{ width: `${committedPercentage}%`, backgroundColor: '#05d9a7' }}
           ></div>
-          {/* Interested amount (yellow/gold) */}
+          {/* Interested amount (purple) */}
           <div 
             className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${interestedPercentage}%`, backgroundColor: '#fab100' }}
+            style={{ width: `${interestedPercentage}%`, backgroundColor: '#8b38e7' }}
           ></div>
         </div>
       </div>
@@ -50,7 +50,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
           <span>Committed: $<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
         </div>
         <div className="flex items-center">
-          <span className="w-3 h-3 rounded-full bg-[#fab100] mr-2"></span>
+          <span className="w-3 h-3 rounded-full bg-[#8b38e7] mr-2"></span>
           <span>Interested: $<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
         </div>
       </div>
