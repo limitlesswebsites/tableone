@@ -10,6 +10,12 @@
   100% { background-position: 200% 0; }
 }
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
 /* Animation delay utilities */
 .animate-delay-100 {
   animation-delay: 100ms;
@@ -38,6 +44,10 @@
 
 .animate-bounce-subtle {
   animation: bounceSubtle 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Platinum text effect */
