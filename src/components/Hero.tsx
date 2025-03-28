@@ -17,11 +17,20 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-white/90">Raising $100K to Redefine Restaurant Reservations</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1]" style={{ animationDelay: '0.6s' }}>
             <span className="platinum-text font-extrabold">Platinum Card Dining</span>
             <br />
             <span className="text-white"><span className="gold-text font-extrabold">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
+          
+          {/* Credit Card Image */}
+          <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.7s' }}>
+            <img 
+              src="/lovable-uploads/412a6876-8961-4818-8f3b-b65483899b27.png" 
+              alt="Premium Credit Cards" 
+              className="w-full h-auto drop-shadow-2xl" 
+            />
+          </div>
           
           <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed" style={{ animationDelay: '0.8s' }}>
             TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
