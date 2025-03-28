@@ -23,6 +23,9 @@ const churnRateData = [
 ];
 
 const Metrics: React.FC = () => {
+  // Log confirmation to check if component is rendering
+  console.log("Metrics component rendering");
+  
   return (
     <section id="metrics" className="py-20 relative">
       {/* Background image */}
@@ -34,10 +37,10 @@ const Metrics: React.FC = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            opacity: 0.2,
+            opacity: 0.3, // Increased opacity slightly
           }}
         />
-        <div className="absolute inset-0 bg-black/60 z-0" />
+        <div className="absolute inset-0 bg-black/70 z-0" /> {/* Adjusted overlay for better contrast */}
         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
       </div>
       
