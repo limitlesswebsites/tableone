@@ -1,21 +1,10 @@
 
 import React, { useRef, useEffect } from 'react';
+import CityBox from './CityBox';
+import { cities } from '../data/cityData';
 
 const CityMap: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  // City data
-  const cities = [
-    { name: "New York", status: "Active" },
-    { name: "Chicago", status: "Coming Soon" },
-    { name: "Boston", status: "Coming Soon" },
-    { name: "Washington DC", status: "Coming Soon" },
-    { name: "Dallas", status: "Planned" },
-    { name: "Los Angeles", status: "Planned" },
-    { name: "San Francisco", status: "Planned" },
-    { name: "Philadelphia", status: "Planned" },
-    { name: "London", status: "Planned" },
-  ];
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,30 +57,12 @@ const CityMap: React.FC = () => {
         
         <div ref={containerRef} className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cities.map((city, index) => (
-            <div 
+            <CityBox 
               key={city.name}
-              className={`city-box opacity-0 p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 ${
-                city.status === 'Active' 
-                  ? 'bg-gradient-to-br from-green-900/30 to-green-600/30 border-green-500/30' 
-                  : city.status === 'Coming Soon'
-                    ? 'bg-gradient-to-br from-blue-900/30 to-blue-600/30 border-blue-500/30'
-                    : 'bg-gradient-to-br from-gray-900/30 to-gray-800/30 border-gray-500/30'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <h3 className="text-2xl font-semibold mb-2">
-                {city.name}
-              </h3>
-              <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                city.status === 'Active' 
-                  ? 'bg-green-500/20 text-green-300' 
-                  : city.status === 'Coming Soon'
-                    ? 'bg-blue-500/20 text-blue-300'
-                    : 'bg-gray-500/20 text-gray-300'
-              }`}>
-                {city.status}
-              </div>
-            </div>
+              name={city.name}
+              status={city.status}
+              index={index}
+            />
           ))}
         </div>
         
