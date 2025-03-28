@@ -1,8 +1,10 @@
+
 import React from 'react';
 import CountUp from './CountUp';
+import { Progress } from './ui/progress';
 
 const FundingProgress: React.FC = () => {
-  const raisedAmount = 45000; // $45,000 raised so far
+  const raisedAmount = 28000; // $28,000 raised so far
   const targetAmount = 100000; // $100,000 target
   const progressPercentage = (raisedAmount / targetAmount) * 100;
   
@@ -37,7 +39,7 @@ const FundingProgress: React.FC = () => {
             
             <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000 ease-out shimmer"
+                className="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full transition-all duration-1000 ease-out shimmer"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
