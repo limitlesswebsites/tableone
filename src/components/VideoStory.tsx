@@ -62,10 +62,10 @@ const VideoStory: React.FC = () => {
           <div className="mt-6 text-center">
             <Button 
               onClick={openLinkedInVideo}
-              className="bg-gradient-to-r from-tableone-purple via-tableone-blue to-tableone-pink hover:opacity-90 transition-opacity"
+              className="px-5 py-2 text-xs md:text-sm rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
             >
               <span>Watch on LinkedIn</span>
-              <ExternalLink size={16} />
+              <ExternalLink size={16} className="ml-1" />
             </Button>
           </div>
         </div>
