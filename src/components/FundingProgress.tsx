@@ -39,8 +39,8 @@ const FundingProgress: React.FC = () => {
             
             <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full transition-all duration-1000 ease-out shimmer"
-                style={{ width: `${progressPercentage}%` }}
+                className="h-full rounded-full transition-all duration-1000 ease-out shimmer"
+                style={{ width: `${progressPercentage}%`, backgroundColor: '#05d9a7' }}
               ></div>
             </div>
             
