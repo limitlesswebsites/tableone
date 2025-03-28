@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -49,13 +50,13 @@ const Hero: React.FC = () => {
               See Our Metrics
             </Link>
           </div>
+          
+          <div className="mt-12 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1.2s' }}>
+            <Link to="#metrics" className="w-10 h-10 flex justify-center items-center rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 hover:scale-110 animate-bounce-subtle">
+              <ArrowDown size={16} className="text-white/60" />
+            </Link>
+          </div>
         </div>
-      </div>
-      
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-subtle cursor-pointer">
-        <Link to="#metrics" className="w-10 h-10 flex justify-center items-center rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 hover:scale-110">
-          <ArrowDown size={16} className="text-white/60" />
-        </Link>
       </div>
     </section>
   );
