@@ -23,8 +23,8 @@ const Hero: React.FC = () => {
             <span className="text-white"><span className="gold-text font-extrabold">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
           
-          <p className="text-lg md:text-xl text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed" style={{ animationDelay: '0.8s' }}>
-            TableOne is revolutionizing how diners access premium reservations through a subscription model that delivers exceptional value.
+          <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed" style={{ animationDelay: '0.8s' }}>
+            TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
