@@ -1,3 +1,4 @@
+
 /* Animation utilities */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -71,21 +72,21 @@
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
-/* Gold text effect - updated with rose gold tones */
+/* Gold text effect - updated with darker gold tones */
 .gold-text {
   background: linear-gradient(
     to right,
-    #c99b78 0%,
-    #d9aa83 10%,
-    #f2c498 20%,
-    #eab98d 30%,
-    #d9aa83 40%,
-    #f0bc91 50%,
-    #d9aa83 60%,
-    #eab98d 70%,
-    #f2c498 80%,
-    #d9aa83 90%,
-    #c99b78 100%
+    #93703c 0%,
+    #aa8545 10%,
+    #c9a053 20%,
+    #b48d42 30%,
+    #aa8545 40%,
+    #c29a4c 50%,
+    #aa8545 60%,
+    #b48d42 70%,
+    #c9a053 80%,
+    #aa8545 90%,
+    #93703c 100%
   );
   background-size: 200% auto;
   color: transparent;
