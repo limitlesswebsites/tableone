@@ -17,7 +17,9 @@
   }
 
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #976e0e, #cda631, #f2d562, #cda631, #976e0e);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
   }
 
   .text-gradient-platinum {

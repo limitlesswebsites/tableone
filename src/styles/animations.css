@@ -72,6 +72,37 @@
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
+/* Gold text effect */
+.gold-text {
+  background: linear-gradient(
+    to right,
+    #976e0e 0%,
+    #cda631 10%,
+    #f2d562 20%,
+    #e9be39 30%,
+    #cda631 40%,
+    #f5cf3a 50%,
+    #cda631 60%,
+    #e9be39 70%,
+    #f2d562 80%,
+    #cda631 90%,
+    #976e0e 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+  text-shadow: 
+    0 0 1px rgba(255,255,255,0.4),
+    0 0 3px rgba(255,215,0,0.1),
+    0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
 @keyframes shine {
   from { background-position: -200% center; }
   to { background-position: 200% center; }
