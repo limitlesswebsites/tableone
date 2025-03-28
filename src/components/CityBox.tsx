@@ -13,11 +13,11 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
   const getBgClass = () => {
     switch (status) {
       case 'Active':
-        return 'bg-gradient-to-br from-green-900/30 to-green-600/30 border-green-500/30';
+        return 'bg-gradient-to-br from-green-900/30 to-green-600/30 border-green-500/30 hover:shadow-[0_0_15px_rgba(74,222,128,0.5)]';
       case 'Coming Soon':
-        return 'bg-gradient-to-br from-blue-900/30 to-blue-600/30 border-blue-500/30';
+        return 'bg-gradient-to-br from-blue-900/30 to-blue-600/30 border-blue-500/30 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]';
       default:
-        return 'bg-gradient-to-br from-gray-900/30 to-gray-800/30 border-gray-500/30';
+        return 'bg-gradient-to-br from-gray-900/30 to-gray-800/30 border-gray-500/30 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)]';
     }
   };
 
@@ -34,7 +34,7 @@ const CityBox: React.FC<CityBoxProps> = ({ name, status, index }) => {
 
   return (
     <div 
-      className={`city-box opacity-0 p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 ${getBgClass()}`}
+      className={`city-box opacity-0 p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 transform hover:scale-105 ${getBgClass()}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <h3 className="text-2xl font-semibold mb-2">

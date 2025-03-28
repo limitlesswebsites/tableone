@@ -11,6 +11,7 @@ const CityMap: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Add more prominent animation classes
             entry.target.classList.add('animate-fade-in', 'animate-pulse-glow');
             entry.target.classList.remove('opacity-0');
           }
