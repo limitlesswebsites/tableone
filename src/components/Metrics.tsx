@@ -83,7 +83,7 @@ const Metrics: React.FC = () => {
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-300 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Operating Expenses</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
+            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
               $<CountUp end={514} prefix="" suffix="/mo" />
             </div>
             <div className="text-white/80 text-center gradient-subheading">
@@ -93,7 +93,7 @@ const Metrics: React.FC = () => {
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-400 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">App Downloads</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
+            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
               <CountUp end={35000} suffix="+" />
             </div>
             <div className="text-white/80 text-center gradient-subheading">
@@ -103,7 +103,7 @@ const Metrics: React.FC = () => {
           
           <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in animate-delay-500 hover:translate-y-[-5px] transition-all duration-500">
             <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">Paid Members</div>
-            <div className="text-4xl md:text-5xl font-bold mb-3 gradient-heading">
+            <div className="text-4xl md:text-5xl font-bold mb-3" style={{ color: '#05d9a7' }}>
               <CountUp end={2000} suffix="+" />
             </div>
             <div className="text-white/80 text-center gradient-subheading">
