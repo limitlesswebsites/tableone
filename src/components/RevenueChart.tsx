@@ -58,11 +58,11 @@ const RevenueChart: React.FC = () => {
             
             <div className="flex items-center space-x-6">
               <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                <div className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></div>
                 <span className="text-sm text-white/80">Forecast</span>
               </div>
               <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                <div className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></div>
                 <span className="text-sm text-white/80">Actual</span>
               </div>
               <div className="hidden md:block">
@@ -113,7 +113,7 @@ const RevenueChart: React.FC = () => {
                   type="monotone" 
                   dataKey="forecast" 
                   name="Forecast" 
-                  stroke="#05d9a7"
+                  stroke="#6633ff"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   activeDot={{ r: 8 }}
