@@ -1,7 +1,12 @@
 
 import React, { useState } from 'react';
 import { TabsContent } from './ui/tabs';
-import { lifetimeValueData, churnRateData } from './metrics/chartData';
+import { 
+  lifetimeValueData, 
+  churnRateData, 
+  revenueData, 
+  forecastData 
+} from './metrics/chartData';
 import ARRChart from './charts/ARRChart';
 import SubscriberGrowthChart from './charts/SubscriberGrowthChart';
 import LifetimeValueChart from './charts/LifetimeValueChart';
@@ -11,36 +16,17 @@ import ChartTabs from './charts/ChartTabs';
 import RevenueHeader from './charts/RevenueHeader';
 
 const RevenueChart: React.FC = () => {
-  const currentARR = 151286.88;
+  const currentARR = 152000;
   const [selectedChart, setSelectedChart] = useState("arr");
   
-  const revenueData = [
-    { name: 'Jul', value: 11232 },
-    { name: 'Aug', value: 11980 },
-    { name: 'Sep', value: 12546 },
-    { name: 'Oct', value: 11890 },
-    { name: 'Nov', value: 12380 },
-    { name: 'Dec', value: 12607 },
-  ];
-
-  // Forecast data (showing higher growth trajectory)
-  const forecastData = [
-    { name: 'Jul', value: 11232 },
-    { name: 'Aug', value: 12100 },
-    { name: 'Sep', value: 13200 },
-    { name: 'Oct', value: 14500 },
-    { name: 'Nov', value: 15900 },
-    { name: 'Dec', value: 17500 },
-  ];
-
   // Subscriber Growth data
   const subscriberGrowthData = [
-    { name: 'Jul', value: 1350 },
-    { name: 'Aug', value: 1423 },
-    { name: 'Sep', value: 1512 },
-    { name: 'Oct', value: 1689 },
-    { name: 'Nov', value: 1834 },
-    { name: 'Dec', value: 2000 },
+    { name: 'Oct \'24', value: 1350 },
+    { name: 'Nov \'24', value: 1423 },
+    { name: 'Dec \'24', value: 1512 },
+    { name: 'Jan \'25', value: 1689 },
+    { name: 'Feb \'25', value: 1834 },
+    { name: 'Mar \'25', value: 2000 },
   ];
   
   return (

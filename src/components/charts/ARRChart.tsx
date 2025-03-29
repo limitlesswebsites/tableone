@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   LineChart, 
   Line, 
@@ -7,60 +7,125 @@ import {
   YAxis, 
   CartesianGrid, 
   Tooltip, 
-  ResponsiveContainer 
+  ResponsiveContainer,
+  ReferenceArea 
 } from 'recharts';
 
-interface MonthlyData {
+interface ChartData {
   name: string;
   value: number;
-  isForecast?: boolean;
+  type: 'actual' | 'forecast';
 }
 
 interface ARRChartProps {
-  revenueData: MonthlyData[];
-  forecastData: MonthlyData[];
+  revenueData: ChartData[];
+  forecastData: ChartData[];
 }
 
 const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
+  const [displayRange, setDisplayRange] = useState<'6m' | '1y' | 'all'>('6m');
+  
+  // Combine and sort the data
+  const combinedData = [...revenueData, ...forecastData].sort((a, b) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const [aMonth, aYear] = a.name.split(' ');
+    const [bMonth, bYear] = b.name.split(' ');
+    
+    if (aYear !== bYear) {
+      return aYear.localeCompare(bYear);
+    }
+    
+    return months.indexOf(aMonth) - months.indexOf(bMonth);
+  });
+  
+  // Filter data based on selected range
+  const filteredData = React.useMemo(() => {
+    if (displayRange === '6m') {
+      return combinedData.slice(0, 6);
+    } else if (displayRange === '1y') {
+      return combinedData.slice(0, 12);
+    }
+    return combinedData;
+  }, [combinedData, displayRange]);
+
+  // Find the last actual month for displaying the reference area
+  const lastActualIndex = filteredData.findIndex(
+    (item, index) => item.type === 'actual' && 
+    (index === filteredData.length - 1 || filteredData[index + 1].type === 'forecast')
+  );
+  
+  // Custom tooltip formatter
+  const tooltipFormatter = (value: number, name: string, props: any) => {
+    const label = props.payload.type === 'forecast' ? 'Forecasted Revenue' : 'Actual Revenue';
+    return [`$${value.toLocaleString()}`, label];
+  };
+
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-end">
+        <div className="inline-flex rounded-md bg-white/5 p-1">
+          <button 
+            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === '6m' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+            onClick={() => setDisplayRange('6m')}
+          >
+            6 Months
+          </button>
+          <button 
+            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === '1y' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+            onClick={() => setDisplayRange('1y')}
+          >
+            1 Year
+          </button>
+          <button 
+            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === 'all' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+            onClick={() => setDisplayRange('all')}
+          >
+            All Data
+          </button>
+        </div>
+      </div>
+      
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={[...revenueData, ...forecastData.map(item => ({ ...item, isForecast: true }))]
-              .sort((a, b) => {
-                const months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                return months.indexOf(a.name) - months.indexOf(b.name);
-              })}
+            data={filteredData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" />
+            <XAxis 
+              dataKey="name" 
+              stroke="rgba(255,255,255,0.6)"
+              tick={{fontSize: 12}}
+              allowDuplicatedCategory={false}
+            />
             <YAxis 
               stroke="rgba(255,255,255,0.6)"
               tickFormatter={(value) => `$${(value/1000).toFixed(0)}k`}
+              tick={{fontSize: 12}}
             />
+            
+            {lastActualIndex > 0 && (
+              <ReferenceArea
+                x1={filteredData[lastActualIndex].name}
+                x2={filteredData[filteredData.length - 1].name}
+                fill="rgba(155, 135, 245, 0.05)"
+                fillOpacity={0.3}
+              />
+            )}
+            
             <Tooltip
-              formatter={(value, name, props) => {
-                const label = props.payload.isForecast ? 'Forecasted Revenue' : 'Actual Revenue';
-                return [`$${(value as number).toLocaleString()}`, label];
-              }}
+              formatter={tooltipFormatter}
               contentStyle={{
                 backgroundColor: 'rgba(15, 23, 42, 0.9)',
                 border: '1px solid rgba(255,255,255,0.1)',
                 borderRadius: '0.5rem',
               }}
+              labelStyle={{
+                fontWeight: 'bold',
+                color: 'rgba(255, 255, 255, 0.8)'
+              }}
             />
-            <defs>
-              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#05d9a7" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#05d9a7" stopOpacity={0}/>
-              </linearGradient>
-              <linearGradient id="colorForecast" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#9b87f5" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#9b87f5" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
+            
             <Line 
               type="monotone"
               dataKey="value"
@@ -69,25 +134,25 @@ const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
               dot={{ fill: '#05d9a7', r: 4 }}
               activeDot={{ r: 6 }}
               name="Actual Revenue"
-              connectNulls
               data={revenueData}
             />
+            
             <Line 
               type="monotone"
               dataKey="value"
               stroke="#9b87f5"
-              strokeWidth={3}
+              strokeWidth={2.5}
               strokeDasharray="5 5"
-              dot={{ fill: '#9b87f5', r: 4 }}
-              activeDot={{ r: 6 }}
+              dot={{ fill: '#9b87f5', r: 3 }}
+              activeDot={{ r: 5 }}
               name="Forecasted Revenue"
-              connectNulls
               data={forecastData}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="flex justify-center gap-6 mt-4">
+      
+      <div className="flex justify-center gap-6 mt-2">
         <div className="flex items-center">
           <div className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></div>
           <span className="text-white/80 text-sm">Actual Revenue</span>
@@ -97,7 +162,7 @@ const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
           <span className="text-white/80 text-sm">Forecasted Revenue</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
