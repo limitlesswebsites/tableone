@@ -1,8 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
 import MetricCard from './metrics/MetricCard';
-import ChartPanel from './metrics/ChartPanel';
-import { lifetimeValueData, churnRateData } from './metrics/chartData';
 
 const Metrics: React.FC = () => {
   // Log confirmation to check if component is rendering
@@ -85,25 +83,6 @@ const Metrics: React.FC = () => {
             description="Active paying subscribers"
             suffix="+"
             delay={500}
-          />
-        </div>
-        
-        {/* Line Graphs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <ChartPanel 
-            title="Subscriber Lifetime Value"
-            description="Average LTV increasing to $71.02 per subscriber"
-            data={lifetimeValueData}
-            valuePrefix="$"
-            animationDelay={500}
-          />
-          
-          <ChartPanel 
-            title="Subscriber Churn Rate"
-            description="Churn rate decreasing to 9.8% in March 2025"
-            data={churnRateData}
-            valueSuffix="%"
-            animationDelay={600}
           />
         </div>
         

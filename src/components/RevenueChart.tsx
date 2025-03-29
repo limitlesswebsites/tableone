@@ -1,7 +1,8 @@
 
 import React from 'react';
 import CountUp from './CountUp';
-import { Area, AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Area, AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { lifetimeValueData, churnRateData } from './metrics/chartData';
 
 interface MonthlyData {
   name: string;
@@ -104,6 +105,90 @@ const RevenueChart: React.FC = () => {
               <div className="text-sm text-white/60 mb-1">Retention Rate</div>
               <div className="text-2xl font-bold" style={{ color: '#05d9a7' }}>90.2%</div>
               <div className="text-xs text-white/50">improving steadily</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-5xl mx-auto">
+          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in">
+            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Lifetime Value</h3>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={lifetimeValueData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => `$${value}`}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`$${value}`, "Subscriber Lifetime Value"]}
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '0.5rem',
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="Subscriber Lifetime Value" 
+                    stroke="#05d9a7" 
+                    strokeWidth={3}
+                    activeDot={{ r: 8 }} 
+                    dot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-3 text-center gradient-subheading">
+              <p>Average LTV increasing to $71.02 per subscriber</p>
+            </div>
+          </div>
+          
+          <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in">
+            <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">Subscriber Churn Rate</h3>
+            <div className="h-[250px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={churnRateData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="rgba(255,255,255,0.6)"
+                    tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`${value}%`, "Subscriber Churn Rate"]}
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '0.5rem',
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="Subscriber Churn Rate" 
+                    stroke="#05d9a7" 
+                    strokeWidth={3}
+                    activeDot={{ r: 8 }} 
+                    dot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-3 text-center gradient-subheading">
+              <p>Churn rate decreasing to 9.8% in March 2025</p>
             </div>
           </div>
         </div>
