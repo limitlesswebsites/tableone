@@ -11,7 +11,6 @@ import ARRChart from './charts/ARRChart';
 import SubscriberGrowthChart from './charts/SubscriberGrowthChart';
 import LifetimeValueChart from './charts/LifetimeValueChart';
 import ChurnRateChart from './charts/ChurnRateChart';
-import RevenueMetrics from './charts/RevenueMetrics';
 import ChartTabs from './charts/ChartTabs';
 import RevenueHeader from './charts/RevenueHeader';
 
@@ -70,8 +69,6 @@ const RevenueChart: React.FC = () => {
               </TabsContent>
             </ChartTabs>
           </div>
-
-          <RevenueMetrics />
         </div>
       </div>
     </section>
