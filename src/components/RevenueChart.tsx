@@ -1,148 +1,110 @@
 
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import React from 'react';
 import CountUp from './CountUp';
+import { Area, AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+interface MonthlyData {
+  name: string;
+  value: number;
+}
 
 const RevenueChart: React.FC = () => {
-  // Current month is March 2025
-  const currentMonth = new Date(2025, 2);
+  const currentARR = 151286.88;
   
-  const revenueData = [
-    { month: 'Oct 2024', forecast: 35000, actual: 59000 },
-    { month: 'Nov 2024', forecast: 71000, actual: 81000 },
-    { month: 'Dec 2024', forecast: 107000, actual: 108000 },
-    { month: 'Jan 2025', forecast: 122000, actual: 124000 },
-    { month: 'Feb 2025', forecast: 141000, actual: 142000 },
-    { month: 'Mar 2025', forecast: 160000, actual: 152000 },
-    { month: 'Apr 2025', forecast: 191000, actual: null },
-    { month: 'May 2025', forecast: 214000, actual: null },
-    { month: 'Jun 2025', forecast: 263000, actual: null },
-    { month: 'Jul 2025', forecast: 299000, actual: null },
-    { month: 'Aug 2025', forecast: 331000, actual: null },
-    { month: 'Sep 2025', forecast: 380000, actual: null },
-    { month: 'Oct 2025', forecast: 424000, actual: null },
-    { month: 'Nov 2025', forecast: 478000, actual: null },
-    { month: 'Dec 2025', forecast: 514000, actual: null },
+  const data: MonthlyData[] = [
+    { name: 'Jul', value: 11232 },
+    { name: 'Aug', value: 11980 },
+    { name: 'Sep', value: 12546 },
+    { name: 'Oct', value: 11890 },
+    { name: 'Nov', value: 12380 },
+    { name: 'Dec', value: 12607 },
   ];
   
-  const [visibleMonths, setVisibleMonths] = useState(8);
-  
-  const formatCurrency = (value: number) => {
-    return `$${value.toLocaleString('en-US')}`;
-  };
-  
   return (
-    <section id="forecast" className="py-14 relative">
+    <section id="revenue" className="py-8 relative">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/4 w-1/3 h-1/3 bg-purple-500/10 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">
-            Revenue Growth Trajectory
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-4xl mb-4 gradient-heading">
+            Our Revenue Growth Journey
           </h2>
-          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
-            We've unlocked organic growth and are ready for scale.
+          <p className="text-base max-w-2xl mx-auto gradient-subheading">
+            Consistent month-over-month growth as we expand our user base
           </p>
         </div>
-        
-        <div className="glass-card p-5 md:p-6 animate-fade-in animate-delay-200">
-          <div className="mb-5 flex flex-col md:flex-row justify-between items-start md:items-center">
+
+        <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 md:p-8 max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-lg font-semibold mb-1 font-quicksand">Current ARR</h3>
-              <div className="text-2xl font-bold gradient-heading">
-                $<CountUp end={152000} />
+              <h3 className="text-lg font-semibold text-white/80 mb-1">Current Annual Recurring Revenue</h3>
+              <div className="text-3xl md:text-4xl font-bold" style={{ color: '#05d9a7' }}>
+                <CountUp end={currentARR} prefix="$" decimals={2} />
               </div>
             </div>
-            
-            <div className="flex items-center space-x-5">
-              <div className="flex items-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#6633ff] mr-2"></div>
-                <span className="text-xs text-white/80">Forecast</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#05d9a7] mr-2"></div>
-                <span className="text-xs text-white/80">Actual</span>
-              </div>
-              <div className="hidden md:block">
-                <select 
-                  className="bg-white/5 border border-white/10 rounded-md text-white py-1 px-2 text-xs"
-                  value={visibleMonths}
-                  onChange={(e) => setVisibleMonths(Number(e.target.value))}
-                >
-                  <option value={6}>6 Months</option>
-                  <option value={8}>8 Months</option>
-                  <option value={12}>12 Months</option>
-                  <option value={15}>All Months</option>
-                </select>
+            <div>
+              <div className="flex items-center bg-white/5 px-4 py-2 rounded-full">
+                <div className="w-3 h-3 rounded-full bg-green-400 mr-2"></div>
+                <span className="text-white/80 text-sm">+8.76% from previous month</span>
               </div>
             </div>
           </div>
           
-          <div className="h-[350px] mt-5">
+          <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={revenueData.slice(0, visibleMonths)}
-                margin={{ top: 20, right: 30, left: 30, bottom: 60 }}
+              <AreaChart
+                data={data}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis 
-                  dataKey="month" 
-                  stroke="rgba(255,255,255,0.6)"
-                  angle={-45}
-                  textAnchor="end"
-                  tick={{fontSize: 11}}
-                  height={60}
-                />
+                <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" />
                 <YAxis 
                   stroke="rgba(255,255,255,0.6)"
-                  tickFormatter={formatCurrency}
-                  tick={{fontSize: 11}}
+                  tickFormatter={(value) => `$${value.toLocaleString()}`}
                 />
-                <Tooltip 
-                  formatter={(value) => [`${formatCurrency(value as number)}`, '']}
+                <Tooltip
+                  formatter={(value) => [`$${(value as number).toLocaleString()}`, 'Monthly Revenue']}
                   contentStyle={{
                     backgroundColor: 'rgba(15, 23, 42, 0.9)',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '0.5rem',
                   }}
-                  labelStyle={{fontSize: 12}}
                 />
-                <Legend wrapperStyle={{ display: 'none' }} />
-                <Line 
+                <defs>
+                  <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#05d9a7" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#05d9a7" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <Area 
                   type="monotone" 
-                  dataKey="forecast" 
-                  name="Forecast" 
-                  stroke="#6633ff"
-                  strokeWidth={2.5}
-                  dot={{ r: 3 }}
-                  activeDot={{ r: 6 }}
+                  dataKey="value" 
+                  stroke="#05d9a7" 
+                  fillOpacity={1} 
+                  fill="url(#colorRevenue)" 
                 />
-                <Line 
-                  type="monotone" 
-                  dataKey="actual" 
-                  name="Actual" 
-                  stroke="#05d9a7"
-                  strokeWidth={2.5}
-                  dot={{ r: 3 }}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           </div>
-          
-          <div className="block md:hidden mt-4">
-            <select 
-              className="w-full bg-white/5 border border-white/10 rounded-md text-white py-1.5 px-3 text-xs"
-              value={visibleMonths}
-              onChange={(e) => setVisibleMonths(Number(e.target.value))}
-            >
-              <option value={6}>6 Months</option>
-              <option value={8}>8 Months</option>
-              <option value={12}>12 Months</option>
-              <option value={15}>All Months</option>
-            </select>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            <div className="text-center p-4 bg-white/5 rounded-xl">
+              <div className="text-sm text-white/60 mb-1">New Subscribers</div>
+              <div className="text-2xl font-bold" style={{ color: '#05d9a7' }}>+312</div>
+              <div className="text-xs text-white/50">last month</div>
+            </div>
+            <div className="text-center p-4 bg-white/5 rounded-xl">
+              <div className="text-sm text-white/60 mb-1">Revenue Growth</div>
+              <div className="text-2xl font-bold" style={{ color: '#05d9a7' }}>+4.28%</div>
+              <div className="text-xs text-white/50">month over month</div>
+            </div>
+            <div className="text-center p-4 bg-white/5 rounded-xl">
+              <div className="text-sm text-white/60 mb-1">Retention Rate</div>
+              <div className="text-2xl font-bold" style={{ color: '#05d9a7' }}>90.2%</div>
+              <div className="text-xs text-white/50">improving steadily</div>
+            </div>
           </div>
         </div>
       </div>
