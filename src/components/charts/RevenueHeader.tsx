@@ -3,16 +3,74 @@ import React from 'react';
 import CountUp from '../CountUp';
 
 interface RevenueHeaderProps {
-  currentARR: number;
+  selectedChart: string;
+  metrics: {
+    arr: number;
+    subscribers: number;
+    ltv: number;
+    churn: number;
+  };
 }
 
-const RevenueHeader: React.FC<RevenueHeaderProps> = ({ currentARR }) => {
+const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics }) => {
+  const getMetricDisplay = () => {
+    switch (selectedChart) {
+      case "arr":
+        return {
+          title: "Current Annual Recurring Revenue",
+          value: metrics.arr,
+          prefix: "$",
+          suffix: "",
+          color: "#05d9a7"
+        };
+      case "growth":
+        return {
+          title: "Current Subscribers",
+          value: metrics.subscribers,
+          prefix: "",
+          suffix: " users",
+          color: "#9b87f5"
+        };
+      case "ltv":
+        return {
+          title: "Current Lifetime Value",
+          value: metrics.ltv,
+          prefix: "$",
+          suffix: "",
+          color: "#05d9a7"
+        };
+      case "churn":
+        return {
+          title: "Current Churn Rate",
+          value: metrics.churn,
+          prefix: "",
+          suffix: "%",
+          color: "#ea384c"
+        };
+      default:
+        return {
+          title: "Current Annual Recurring Revenue",
+          value: metrics.arr,
+          prefix: "$",
+          suffix: "",
+          color: "#05d9a7"
+        };
+    }
+  };
+
+  const metricInfo = getMetricDisplay();
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center mb-6">
       <div className="mb-4 md:mb-0">
-        <h3 className="text-lg font-semibold text-white/80 mb-1">Current Annual Recurring Revenue</h3>
-        <div className="text-3xl md:text-4xl font-bold" style={{ color: '#05d9a7' }}>
-          <CountUp end={currentARR} prefix="$" suffix="" decimals={0} />
+        <h3 className="text-lg font-semibold text-white/80 mb-1">{metricInfo.title}</h3>
+        <div className="text-3xl md:text-4xl font-bold" style={{ color: metricInfo.color }}>
+          <CountUp 
+            end={metricInfo.value} 
+            prefix={metricInfo.prefix} 
+            suffix={metricInfo.suffix} 
+            decimals={selectedChart === "ltv" || selectedChart === "churn" ? 2 : 0} 
+          />
         </div>
       </div>
       <div>

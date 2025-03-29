@@ -15,8 +15,15 @@ import ChartTabs from './charts/ChartTabs';
 import RevenueHeader from './charts/RevenueHeader';
 
 const RevenueChart: React.FC = () => {
-  const currentARR = 152000;
   const [selectedChart, setSelectedChart] = useState("arr");
+  
+  // Metrics for each chart type
+  const metrics = {
+    arr: 152000,
+    subscribers: 2000,
+    ltv: 71.02,
+    churn: 9.8
+  };
   
   // Subscriber Growth data
   const subscriberGrowthData = [
@@ -45,7 +52,10 @@ const RevenueChart: React.FC = () => {
         </div>
 
         <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 md:p-8 max-w-5xl mx-auto">
-          <RevenueHeader currentARR={currentARR} />
+          <RevenueHeader 
+            selectedChart={selectedChart} 
+            metrics={metrics} 
+          />
 
           <div className="mb-5">
             <ChartTabs 
