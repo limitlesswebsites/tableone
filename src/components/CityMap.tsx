@@ -55,14 +55,14 @@ const CityMap: React.FC = () => {
   }, []);
   
   return (
-    <section id="expansion" className="py-14 relative">
+    <section id="expansion" className="py-8 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]" />
         <div className="absolute top-1/4 left-1/3 w-1/4 h-1/4 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">
             Where to Next?
           </h2>
@@ -84,7 +84,7 @@ const CityMap: React.FC = () => {
         
         {/* Simple "+10 more" indicator */}
         {remainingCount > 0 && (
-          <div className="mt-6 text-center animate-fade-in animate-delay-200">
+          <div className="mt-4 text-center animate-fade-in animate-delay-200">
             <p className="text-base text-white/70 font-medium">+{remainingCount} more</p>
           </div>
         )}

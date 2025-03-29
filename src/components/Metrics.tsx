@@ -25,7 +25,7 @@ const Metrics: React.FC = () => {
   }, []);
   
   return (
-    <section id="metrics" className="py-20 relative">
+    <section id="metrics" className="py-10 relative">
       {/* Background image - using inline styles with important to override any conflicting styles */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -43,7 +43,7 @@ const Metrics: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-24">
+        <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl mb-5 animate-fade-in gradient-heading">
             We've Exceeded Expectations...Even Our Own
           </h2>
@@ -52,7 +52,7 @@ const Metrics: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <MetricCard 
             title="Annual Recurring Revenue"
             value={151286.88}
@@ -89,7 +89,7 @@ const Metrics: React.FC = () => {
         </div>
         
         {/* Line Graphs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <ChartPanel 
             title="Subscriber Lifetime Value"
             description="Average LTV increasing to $71.02 per subscriber"
@@ -107,7 +107,7 @@ const Metrics: React.FC = () => {
           />
         </div>
         
-        <div className="text-center mt-16 mb-10">
+        <div className="text-center mt-8 mb-6">
           <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">Exceeding Industry Benchmarks</h3>
           <p className="gradient-subheading max-w-2xl mx-auto animate-fade-in animate-delay-100">
             TableOne dramatically outperforms metrics for exceptional paid consumer apps.

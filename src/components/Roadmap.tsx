@@ -32,13 +32,13 @@ const RoadmapItem: React.FC<{
 
 const Roadmap: React.FC = () => {
   return (
-    <section id="roadmap" className="py-16 relative">
+    <section id="roadmap" className="py-8 relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in tracking-tight gradient-heading">
             Our Path to $1M in Revenue
           </h2>
@@ -50,7 +50,7 @@ const Roadmap: React.FC = () => {
         <div className="relative max-w-4xl mx-auto">
           <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent"></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-16">
             <RoadmapItem
               quarter="Q2 2025"
               logoImg="/lovable-uploads/1048f04c-b9df-4458-9887-118342b7971d.png"
@@ -77,7 +77,7 @@ const Roadmap: React.FC = () => {
             />
           </div>
           
-          <div className="mt-24 text-center">
+          <div className="mt-16 text-center">
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 inline-block animate-fade-in animate-delay-500 shadow-xl">
               <h3 className="text-xl font-bold mb-2 gradient-heading">$1,000,000</h3>
               <p className="text-sm text-white/80">Annual Recurring Revenue Target</p>
