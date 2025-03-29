@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   LineChart, 
   Line, 
@@ -23,8 +23,6 @@ interface ARRChartProps {
 }
 
 const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
-  const [displayRange, setDisplayRange] = useState<'6m' | '1y' | 'all'>('6m');
-  
   // Combine and sort the data
   const combinedData = [...revenueData, ...forecastData].sort((a, b) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -37,21 +35,11 @@ const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
     
     return months.indexOf(aMonth) - months.indexOf(bMonth);
   });
-  
-  // Filter data based on selected range
-  const filteredData = React.useMemo(() => {
-    if (displayRange === '6m') {
-      return combinedData.slice(0, 6);
-    } else if (displayRange === '1y') {
-      return combinedData.slice(0, 12);
-    }
-    return combinedData;
-  }, [combinedData, displayRange]);
 
   // Find the last actual month for displaying the reference area
-  const lastActualIndex = filteredData.findIndex(
+  const lastActualIndex = combinedData.findIndex(
     (item, index) => item.type === 'actual' && 
-    (index === filteredData.length - 1 || filteredData[index + 1].type === 'forecast')
+    (index === combinedData.length - 1 || combinedData[index + 1].type === 'forecast')
   );
   
   // Custom tooltip formatter
@@ -61,34 +49,11 @@ const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-end">
-        <div className="inline-flex rounded-md bg-white/5 p-1">
-          <button 
-            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === '6m' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
-            onClick={() => setDisplayRange('6m')}
-          >
-            6 Months
-          </button>
-          <button 
-            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === '1y' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
-            onClick={() => setDisplayRange('1y')}
-          >
-            1 Year
-          </button>
-          <button 
-            className={`px-3 py-1 text-sm rounded-md transition-all ${displayRange === 'all' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
-            onClick={() => setDisplayRange('all')}
-          >
-            All Data
-          </button>
-        </div>
-      </div>
-      
+    <div className="flex flex-col gap-4">      
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={filteredData}
+            data={combinedData}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -106,8 +71,8 @@ const ARRChart: React.FC<ARRChartProps> = ({ revenueData, forecastData }) => {
             
             {lastActualIndex > 0 && (
               <ReferenceArea
-                x1={filteredData[lastActualIndex].name}
-                x2={filteredData[filteredData.length - 1].name}
+                x1={combinedData[lastActualIndex].name}
+                x2={combinedData[combinedData.length - 1].name}
                 fill="rgba(155, 135, 245, 0.05)"
                 fillOpacity={0.3}
               />
