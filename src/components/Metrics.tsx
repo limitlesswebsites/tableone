@@ -25,7 +25,7 @@ const Metrics: React.FC = () => {
   }, []);
   
   return (
-    <section id="metrics" className="py-10 relative">
+    <section id="metrics" className="py-8 relative">
       {/* Background image - using inline styles with important to override any conflicting styles */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -43,8 +43,8 @@ const Metrics: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl mb-5 animate-fade-in gradient-heading">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in gradient-heading">
             We've Exceeded Expectations...Even Our Own
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
