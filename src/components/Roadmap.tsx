@@ -19,7 +19,7 @@ const RoadmapItem: React.FC<{
         <div className="font-medium text-xs uppercase tracking-wider text-white/60 mb-2">{quarter}</div>
         {logoImg ? (
           <div className="mb-3 flex justify-center">
-            <img src={logoImg} alt="Supergood Logo" className="w-full max-w-[180px]" style={{ height: 'auto', maxHeight: '100px' }} />
+            <img src={logoImg} alt={title ? title.toString() : "Logo"} className="w-full max-w-[180px]" style={{ height: 'auto', maxHeight: '100px' }} />
           </div>
         ) : (
           title && <h4 className="text-lg font-semibold mb-2 font-quicksand">{title}</h4>
@@ -52,29 +52,39 @@ const Roadmap: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-16">
             <RoadmapItem
-              quarter="Q2 2025"
-              logoImg="/lovable-uploads/1048f04c-b9df-4458-9887-118342b7971d.png"
-              description="Launch aggregated feed for restaurant reviews to boost user engagement and retention."
+              quarter="Q1 2025"
+              logoImg="/lovable-uploads/48881c7c-6298-44e7-8dca-56d3c5cfc460.png"
+              description="Strategic partnership with Hypercard to offer premium dining experiences for cardholders."
               isActive={true}
-              delay={200}
+              delay={100}
             />
             
             <div className="md:mt-24">
               <RoadmapItem
-                quarter="Q3 2025"
-                title={<>TableOne <span className="font-serif italic">Plus One</span> Events</>}
-                description="Exclusive dining events to build community and create additional revenue streams."
+                quarter="Q2 2025"
+                logoImg="/lovable-uploads/1048f04c-b9df-4458-9887-118342b7971d.png"
+                description="Launch aggregated feed for restaurant reviews to boost user engagement and retention."
                 isActive={true}
-                delay={300}
+                delay={200}
               />
             </div>
             
             <RoadmapItem
-              quarter="Q4 2025"
-              title="Multi-City Expansion"
-              description="Launch in Chicago, Boston, and Washington DC to expand our geographic footprint."
-              delay={400}
+              quarter="Q3 2025"
+              title={<>TableOne <span className="font-serif italic">Plus One</span> Events</>}
+              description="Exclusive dining events to build community and create additional revenue streams."
+              isActive={true}
+              delay={300}
             />
+            
+            <div className="md:mt-24">
+              <RoadmapItem
+                quarter="Q4 2025"
+                title="Multi-City Expansion"
+                description="Launch in Chicago, Boston, and Washington DC to expand our geographic footprint."
+                delay={400}
+              />
+            </div>
           </div>
           
           <div className="mt-16 text-center">
