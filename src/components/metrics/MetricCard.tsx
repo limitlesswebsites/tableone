@@ -24,7 +24,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   return (
     <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-10 flex flex-col items-center animate-fade-in hover:translate-y-[-5px] transition-all duration-500" style={{ animationDelay: `${delay}ms` }}>
       <div className="mb-2 text-white/60 text-sm font-medium uppercase tracking-wider">{title}</div>
-      <div className="text-3xl md:text-4xl font-bold mb-3 flex items-center text-gradient">
+      <div className="text-3xl md:text-4xl font-bold mb-3 flex items-center text-gradient-metallic">
         <span>{prefix}</span>
         <CountUp end={value} decimals={decimals} suffix={suffix} />
       </div>
