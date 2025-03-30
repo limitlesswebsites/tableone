@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,7 +25,7 @@ export default {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
         cern: ['Cern', 'sans-serif'],
-        qurova: ['Qurova', 'serif'],
+        playfair: ['Playfair Display', 'serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {
@@ -127,4 +126,3 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
