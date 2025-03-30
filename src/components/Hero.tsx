@@ -17,10 +17,10 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-white/90 font-inter">Raising $1M from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.3] font-reemkufi uppercase" style={{ animationDelay: '0.6s', letterSpacing: '8px' }}>
-            <span className="gradient-heading">PLATINUM CARD DINING,</span>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-inter" style={{ animationDelay: '0.6s', letterSpacing: '-0.02em' }}>
+            <span className="gradient-heading">Platinum Card Dining,</span>
             <br />
-            <span className="text-white"><span className="gradient-heading">WITHOUT</span> <span className="platinum-text font-extrabold font-reemkufi">THE CARD</span></span>
+            <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold font-inter">The Card</span></span>
           </h1>
           
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
