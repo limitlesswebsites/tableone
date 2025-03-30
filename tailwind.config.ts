@@ -29,6 +29,7 @@ export default {
         space: ['Space Grotesk', 'sans-serif'],
         inter: ['Inter', 'system-ui', 'sans-serif'],
         albayan: ['Al Bayan', 'Noto Serif', 'Georgia', 'serif'],
+        reemkufi: ['Reem Kufi', 'sans-serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {

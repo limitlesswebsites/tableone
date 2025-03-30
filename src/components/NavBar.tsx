@@ -32,28 +32,28 @@ const NavBar: React.FC = () => {
           />
         </div>
         <div className="hidden md:flex space-x-12">
-          <Link to="#metrics" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1">
-            Metrics
+          <Link to="#metrics" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1 font-reemkufi uppercase" style={{ letterSpacing: '4px' }}>
+            METRICS
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="#roadmap" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1">
-            Roadmap
+          <Link to="#roadmap" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1 font-reemkufi uppercase" style={{ letterSpacing: '4px' }}>
+            ROADMAP
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="#forecast" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1">
-            Forecast
+          <Link to="#forecast" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1 font-reemkufi uppercase" style={{ letterSpacing: '4px' }}>
+            FORECAST
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="#expansion" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1">
-            Expansion
+          <Link to="#expansion" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1 font-reemkufi uppercase" style={{ letterSpacing: '4px' }}>
+            EXPANSION
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
         </div>
         <Link 
           to="#invest" 
-          className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+          className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-reemkufi uppercase" style={{ letterSpacing: '2px' }}
         >
-          Invest Now
+          INVEST NOW
         </Link>
       </div>
     </nav>

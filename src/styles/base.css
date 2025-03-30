@@ -9,6 +9,9 @@
 /* Import Noto Serif as a fallback for Al Bayan */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;500;600;700&display=swap');
 
+/* Import Reem Kufi font */
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,18 +66,18 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight font-inter;
-    letter-spacing: -0.02em;
+    @apply font-medium font-reemkufi uppercase;
+    letter-spacing: 8px;
   }
   
   /* New gradient text classes */
   .gradient-heading {
-    @apply font-inter font-bold;
+    @apply font-reemkufi font-bold uppercase;
     background: linear-gradient(to right, #ff9a9e, #a18cd1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.02em;
+    letter-spacing: 8px;
   }
   
   .gradient-subheading {
