@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cern:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Qurova:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -57,12 +58,12 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight font-cern;
+    @apply font-medium tracking-tight font-qurova;
   }
   
   /* New gradient text classes */
   .gradient-heading {
-    @apply font-cern font-bold;
+    @apply font-qurova font-bold;
     background: linear-gradient(to right, #ff9a9e, #a18cd1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -70,7 +71,8 @@
   }
   
   .gradient-subheading {
-    @apply font-cern;
+    @apply font-qurova;
     color: rgba(255, 255, 255, 0.7);
   }
 }
+
