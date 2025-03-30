@@ -4,7 +4,7 @@ import CountUp from '../CountUp';
 
 interface RevenueHeaderProps {
   selectedChart: string;
-  metrics: {
+  metrics?: {
     arr: number;
     subscribers: number;
     ltv: number;
