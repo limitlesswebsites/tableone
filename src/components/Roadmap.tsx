@@ -62,7 +62,7 @@ const Roadmap: React.FC = () => {
             <div className="md:mt-24">
               <RoadmapItem
                 quarter="Q2 2025"
-                logoImg="/lovable-uploads/48f19d50-2cd0-4cdd-875e-3a74e7144780.png"
+                logoImg="/lovable-uploads/600475cc-c862-4b80-bfd2-cdcf2293de89.png"
                 description="Launch aggregated feed for restaurant reviews to boost user engagement and retention."
                 isActive={true}
                 delay={200}
