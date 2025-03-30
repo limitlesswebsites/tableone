@@ -17,9 +17,9 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-white/90 font-sfpro tracking-wide">RESTAURANTS</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-[#D1D1D6]" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
-            The Perfect Table<br />
-            At Your Command
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
+            Platinum Card Dining,<br />
+            Without The Card
           </h1>
           
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
           </div>
           
           <p className="text-base md:text-lg text-[#8E8E93] mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed font-sfpro" style={{ animationDelay: '0.8s' }}>
-            Access partners directly with restaurants to hold tables exclusively for members, ensuring an easy and comfortable booking experience.
+            TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>

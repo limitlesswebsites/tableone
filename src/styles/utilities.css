@@ -9,7 +9,8 @@
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #05d9a7, #9b87f5);
   }
 
   .text-gradient-pink {

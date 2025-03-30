@@ -36,10 +36,10 @@ const RevenueChart: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-4xl mb-4 gradient-heading">
+          <h2 className="text-2xl md:text-4xl mb-4 text-gradient font-sfpro font-medium" style={{ letterSpacing: '-0.5px' }}>
             Our Revenue Growth Journey
           </h2>
-          <p className="text-base max-w-2xl mx-auto gradient-subheading">
+          <p className="text-base max-w-2xl mx-auto text-[#8E8E93] font-sfpro">
             Consistent month-over-month growth as we expand our user base
           </p>
         </div>

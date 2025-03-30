@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
@@ -33,7 +32,7 @@ const ChartPanel: React.FC<ChartPanelProps> = ({
       className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 animate-fade-in" 
       style={{ animationDelay: `${animationDelay}ms` }}
     >
-      <h3 className="text-xl font-semibold mb-4 text-center gradient-heading">{title}</h3>
+      <h3 className="text-xl font-semibold mb-4 text-center text-gradient font-sfpro">{title}</h3>
       <div className="h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
@@ -68,7 +67,7 @@ const ChartPanel: React.FC<ChartPanelProps> = ({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-3 text-center gradient-subheading">
+      <div className="mt-3 text-center text-[#8E8E93] font-sfpro">
         <p>{description}</p>
       </div>
     </div>
