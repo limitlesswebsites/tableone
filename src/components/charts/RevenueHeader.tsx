@@ -13,6 +13,9 @@ interface RevenueHeaderProps {
 }
 
 const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics }) => {
+  console.log("Selected chart:", selectedChart);
+  console.log("Metrics in header:", metrics);
+
   const getMetricDisplay = () => {
     switch (selectedChart) {
       case "arr":

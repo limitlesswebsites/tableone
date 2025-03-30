@@ -22,14 +22,6 @@ const RevenueChart: React.FC = () => {
     return dataArray[dataArray.length - 1][valueKey];
   };
   
-  // Metrics for each chart type - using the most recent values from the data
-  const metrics = {
-    arr: getMostRecentValue(revenueData),
-    subscribers: 2000, // From subscriberGrowthData last element
-    ltv: getMostRecentValue(lifetimeValueData),
-    churn: getMostRecentValue(churnRateData)
-  };
-  
   // Subscriber Growth data
   const subscriberGrowthData = [
     { name: 'Oct \'24', value: 1350 },
@@ -39,6 +31,16 @@ const RevenueChart: React.FC = () => {
     { name: 'Feb \'25', value: 1834 },
     { name: 'Mar \'25', value: 2000 },
   ];
+  
+  // Metrics for each chart type - using the most recent values from the data
+  const metrics = {
+    arr: getMostRecentValue(revenueData),
+    subscribers: getMostRecentValue(subscriberGrowthData),
+    ltv: getMostRecentValue(lifetimeValueData),
+    churn: getMostRecentValue(churnRateData)
+  };
+  
+  console.log("Current metrics:", metrics); // Debug log to confirm values
   
   return (
     <section id="revenue" className="py-8 relative">
