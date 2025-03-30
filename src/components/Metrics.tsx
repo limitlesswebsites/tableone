@@ -42,10 +42,10 @@ const Metrics: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in gradient-heading">
+          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in font-sfpro text-[#D1D1D6] font-medium" style={{ letterSpacing: '-0.5px' }}>
             We've Exceeded Expectations...Even Our Own
           </h2>
-          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             TableOne is not a traditional restaurant tech startup, boasting high margins, organic growth, and paid user adoption.
           </p>
         </div>
@@ -87,8 +87,8 @@ const Metrics: React.FC = () => {
         </div>
         
         <div className="text-center mt-8 mb-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">Exceeding Industry Benchmarks</h3>
-          <p className="gradient-subheading max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <h3 className="text-2xl md:text-3xl font-medium mb-3 animate-fade-in text-[#D1D1D6] font-sfpro" style={{ letterSpacing: '-0.5px' }}>Exceeding Industry Benchmarks</h3>
+          <p className="text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
             TableOne dramatically outperforms metrics for exceptional paid consumer apps.
           </p>
         </div>
