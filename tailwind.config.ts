@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,7 +25,7 @@ export default {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
         cern: ['Cern', 'sans-serif'],
-        antic: ['Antic Didone', 'serif'],
+        oswald: ['Oswald', 'sans-serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {
