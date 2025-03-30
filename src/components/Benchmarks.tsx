@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import CountUp from './CountUp';
 
 interface BenchmarkProps {
@@ -17,15 +17,48 @@ const BenchmarkItem: React.FC<BenchmarkProps> = ({
   description,
   delay 
 }) => {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          
+          if (itemRef.current) {
+            itemRef.current.classList.add('animate-fade-in');
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (itemRef.current) {
+      observer.observe(itemRef.current);
+    }
+    
+    return () => {
+      if (itemRef.current) {
+        observer.unobserve(itemRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className={`glass-card p-6 animate-fade-in animate-delay-${delay}`}>
+    <div 
+      ref={itemRef}
+      className="glass-card p-6" 
+      style={{ animationDelay: `${delay}ms` }}
+    >
       <h4 className="text-lg font-semibold mb-5 font-quicksand">{title}</h4>
       
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-white/70 text-xs">TableOne</span>
           <span className="text-white text-xs font-medium">
-            <CountUp end={tableOneValue} suffix="%" delay={delay * 100} />
+            <CountUp end={tableOneValue} suffix="%" delay={0} />
           </span>
         </div>
         <div className="w-full bg-white/10 rounded-full h-2">
@@ -40,7 +73,7 @@ const BenchmarkItem: React.FC<BenchmarkProps> = ({
         <div className="flex justify-between items-center mb-2">
           <span className="text-white/70 text-xs">Industry Benchmark</span>
           <span className="text-white/70 text-xs">
-            <CountUp end={benchmarkValue} suffix="%" delay={delay * 100 + 500} />
+            <CountUp end={benchmarkValue} suffix="%" delay={0} />
           </span>
         </div>
         <div className="w-full bg-white/10 rounded-full h-2">

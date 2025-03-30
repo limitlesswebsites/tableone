@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-quicksand" style={{ animationDelay: '0.6s' }}>
-            <span className="gradient-heading">Platinum Card Dining</span>
+            <span className="gradient-heading">Platinum Card Dining,</span>
             <br />
             <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold">The Card</span></span>
           </h1>
