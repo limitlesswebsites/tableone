@@ -17,14 +17,15 @@ import RevenueHeader from './charts/RevenueHeader';
 const RevenueChart: React.FC = () => {
   const [selectedChart, setSelectedChart] = useState("arr");
   
-  // Subscriber Growth data
+  // Updated Subscriber Growth data with the new values
   const subscriberGrowthData = [
-    { name: 'Oct \'24', value: 1350 },
-    { name: 'Nov \'24', value: 1423 },
-    { name: 'Dec \'24', value: 1512 },
-    { name: 'Jan \'25', value: 1689 },
-    { name: 'Feb \'25', value: 1834 },
-    { name: 'Mar \'25', value: 2000 },
+    { name: 'Sep \'24', value: 375 },
+    { name: 'Oct \'24', value: 745 },
+    { name: 'Nov \'24', value: 1072 },
+    { name: 'Dec \'24', value: 1275 },
+    { name: 'Jan \'25', value: 1486 },
+    { name: 'Feb \'25', value: 1677 },
+    { name: 'Mar \'25', value: 2031 },
   ];
   
   return (
