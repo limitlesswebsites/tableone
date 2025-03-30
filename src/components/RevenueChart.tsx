@@ -27,22 +27,6 @@ const RevenueChart: React.FC = () => {
     { name: 'Mar \'25', value: 2000 },
   ];
   
-  // Get the most recent values from each dataset
-  const getLastValue = (data: any[]): number => {
-    if (!data || data.length === 0) return 0;
-    return data[data.length - 1].value;
-  };
-  
-  // Calculate metrics directly from source data arrays
-  const metrics = {
-    arr: getLastValue(revenueData),
-    subscribers: getLastValue(subscriberGrowthData),
-    ltv: getLastValue(lifetimeValueData),
-    churn: getLastValue(churnRateData)
-  };
-  
-  console.log("Current metrics:", metrics); // Debug log to confirm values
-  
   return (
     <section id="revenue" className="py-8 relative">
       <div className="absolute inset-0 overflow-hidden">
@@ -62,7 +46,6 @@ const RevenueChart: React.FC = () => {
         <div className="glass-card backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6 md:p-8 max-w-5xl mx-auto">
           <RevenueHeader 
             selectedChart={selectedChart} 
-            metrics={metrics} 
           />
 
           <div className="mb-5">

@@ -12,16 +12,15 @@ interface RevenueHeaderProps {
   };
 }
 
-const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics }) => {
+const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
   console.log("Selected chart:", selectedChart);
-  console.log("Metrics in header:", metrics);
 
   const getMetricDisplay = () => {
     switch (selectedChart) {
       case "arr":
         return {
           title: "Current Annual Recurring Revenue",
-          value: metrics.arr,
+          value: 152000,
           prefix: "$",
           suffix: "",
           decimals: 0,
@@ -30,7 +29,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
       case "growth":
         return {
           title: "Current Subscribers",
-          value: metrics.subscribers,
+          value: 2031,
           prefix: "",
           suffix: " users",
           decimals: 0,
@@ -39,7 +38,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
       case "ltv":
         return {
           title: "Current Lifetime Value",
-          value: metrics.ltv,
+          value: 74.89,
           prefix: "$",
           suffix: "",
           decimals: 2,
@@ -48,7 +47,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
       case "churn":
         return {
           title: "Current Churn Rate",
-          value: metrics.churn,
+          value: 9.3,
           prefix: "",
           suffix: "%",
           decimals: 1,
@@ -57,7 +56,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
       default:
         return {
           title: "Current Annual Recurring Revenue",
-          value: metrics.arr,
+          value: 152000,
           prefix: "$",
           suffix: "",
           decimals: 0,
