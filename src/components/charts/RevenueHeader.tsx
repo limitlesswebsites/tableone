@@ -24,6 +24,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
           value: metrics.arr,
           prefix: "$",
           suffix: "",
+          decimals: 0,
           color: "#05d9a7"
         };
       case "growth":
@@ -32,6 +33,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
           value: metrics.subscribers,
           prefix: "",
           suffix: " users",
+          decimals: 0,
           color: "#9b87f5"
         };
       case "ltv":
@@ -40,6 +42,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
           value: metrics.ltv,
           prefix: "$",
           suffix: "",
+          decimals: 2,
           color: "#05d9a7"
         };
       case "churn":
@@ -48,6 +51,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
           value: metrics.churn,
           prefix: "",
           suffix: "%",
+          decimals: 1,
           color: "#ea384c"
         };
       default:
@@ -56,6 +60,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
           value: metrics.arr,
           prefix: "$",
           suffix: "",
+          decimals: 0,
           color: "#05d9a7"
         };
     }
@@ -72,7 +77,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
             end={metricInfo.value} 
             prefix={metricInfo.prefix} 
             suffix={metricInfo.suffix} 
-            decimals={selectedChart === "ltv" || selectedChart === "churn" ? 2 : 0} 
+            decimals={metricInfo.decimals} 
           />
         </div>
       </div>
