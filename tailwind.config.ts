@@ -25,7 +25,7 @@ export default {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
         cern: ['Cern', 'sans-serif'],
-        oswald: ['Oswald', 'sans-serif'],
+        space: ['Space Grotesk', 'sans-serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {
