@@ -4,12 +4,6 @@ import CountUp from '../CountUp';
 
 interface RevenueHeaderProps {
   selectedChart: string;
-  metrics?: {
-    arr: number;
-    subscribers: number;
-    ltv: number;
-    churn: number;
-  };
 }
 
 const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
