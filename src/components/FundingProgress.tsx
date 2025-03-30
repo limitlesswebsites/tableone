@@ -51,10 +51,10 @@ const FundingProgress: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 animate-fade-in tracking-tight">
+          <h2 className="text-2xl md:text-4xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight" style={{ letterSpacing: '-0.5px' }}>
             Invest in our Journey
           </h2>
-          <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto animate-fade-in animate-delay-100">
+          <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
             Help us transform the dining reservation experience and be part of our success.
           </p>
         </div>

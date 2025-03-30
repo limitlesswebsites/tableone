@@ -63,10 +63,10 @@ const CityMap: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in gradient-heading">
+          <h2 className="text-2xl md:text-3xl font-medium mb-3 animate-fade-in text-gradient-metallic" style={{ letterSpacing: '-0.5px' }}>
             Where to Next?
           </h2>
-          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             Our expansion strategy targets high-density urban areas with established dining scenes and affluent customer bases who value premium dining experiences.
           </p>
         </div>
