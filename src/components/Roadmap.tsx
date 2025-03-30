@@ -74,7 +74,7 @@ const Roadmap: React.FC = () => {
             
             <RoadmapItem
               quarter="Q3 2025"
-              title={<>TableOne <span className="font-serif italic">Plus One</span> Events</>}
+              title={<>TableOne <span className="font-serif italic" style={{ color: '#F2C498' }}>Plus One</span> Events</>}
               description="Exclusive dining events to build community and create additional revenue streams."
               isActive={true}
               delay={300}
