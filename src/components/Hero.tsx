@@ -14,13 +14,13 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <div className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
-            <span className="text-xs font-medium text-white/90 font-quicksand">Raising $1M from Our Community to Continue Redefining Restaurant Reservations</span>
+            <span className="text-xs font-medium text-white/90 font-inter">Raising $1M from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-quicksand" style={{ animationDelay: '0.6s' }}>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] tracking-tight leading-[1.1] font-inter" style={{ animationDelay: '0.6s', letterSpacing: '-0.02em' }}>
             <span className="gradient-heading">Platinum Card Dining,</span>
             <br />
-            <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold font-cern">The Card</span></span>
+            <span className="text-white"><span className="gradient-heading">Without</span> <span className="platinum-text font-extrabold font-inter">The Card</span></span>
           </h1>
           
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
@@ -32,20 +32,20 @@ const Hero: React.FC = () => {
             />
           </div>
           
-          <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed gradient-subheading" style={{ animationDelay: '0.8s' }}>
+          <p className="text-base md:text-lg text-white/80 mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed gradient-subheading font-inter" style={{ animationDelay: '0.8s' }}>
             TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
             <Link 
               to="#invest"
-              className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm"
+              className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-inter"
             >
               Invest Now
             </Link>
             <Link 
               to="#metrics"
-              className="px-7 py-3 rounded-full font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm"
+              className="px-7 py-3 rounded-full font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm font-inter"
             >
               See Our Metrics
             </Link>

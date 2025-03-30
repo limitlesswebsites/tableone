@@ -27,6 +27,7 @@ export default {
         quicksand: ['Quicksand', 'sans-serif'],
         cern: ['Cern', 'sans-serif'],
         space: ['Space Grotesk', 'sans-serif'],
+        inter: ['Inter', 'system-ui', 'sans-serif'],
         albayan: ['Al Bayan', 'Noto Serif', 'Georgia', 'serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
