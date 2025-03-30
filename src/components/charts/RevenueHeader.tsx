@@ -64,8 +64,8 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center mb-6">
       <div className="mb-4 md:mb-0">
-        <h3 className="text-lg font-semibold text-white/80 mb-1 font-poppins">{metricInfo.title}</h3>
-        <div className="text-3xl md:text-4xl font-bold font-poppins" style={{ color: metricInfo.color }}>
+        <h3 className="text-lg font-semibold text-white/80 mb-1">{metricInfo.title}</h3>
+        <div className="text-3xl md:text-4xl font-bold" style={{ color: metricInfo.color }}>
           <CountUp 
             end={metricInfo.value} 
             prefix={metricInfo.prefix} 
@@ -77,7 +77,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
       <div>
         <div className="flex items-center bg-white/5 px-4 py-2 rounded-full">
           <div className="w-3 h-3 rounded-full bg-green-400 mr-2"></div>
-          <span className="text-white/80 text-sm font-poppins">+7.04% from previous month</span>
+          <span className="text-white/80 text-sm">+7.04% from previous month</span>
         </div>
       </div>
     </div>

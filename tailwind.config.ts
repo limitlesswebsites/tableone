@@ -25,7 +25,6 @@ export default {
     extend: {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {
