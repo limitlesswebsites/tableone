@@ -77,7 +77,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart, metrics })
             end={metricInfo.value} 
             prefix={metricInfo.prefix} 
             suffix={metricInfo.suffix} 
-            decimals={metricInfo.decimals} 
+            decimals={metricInfo.decimals}
           />
         </div>
       </div>

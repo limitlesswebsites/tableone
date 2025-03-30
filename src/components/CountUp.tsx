@@ -25,6 +25,9 @@ const CountUp: React.FC<CountUpProps> = ({
   const hasAnimated = useRef(false);
   const countingStarted = useRef(false);
 
+  // Ensure end is a valid number to prevent NaN issues
+  const validEnd = typeof end === 'number' && !isNaN(end) ? end : 0;
+
   useEffect(() => {
     if (countingStarted.current) return;
     
@@ -35,7 +38,7 @@ const CountUp: React.FC<CountUpProps> = ({
           setTimeout(() => {
             countingStarted.current = true;
             const startTime = Date.now();
-            const countTo = end;
+            const countTo = validEnd;
             
             const timer = setInterval(() => {
               const elapsedTime = Date.now() - startTime;
@@ -64,9 +67,10 @@ const CountUp: React.FC<CountUpProps> = ({
         observer.unobserve(countRef.current);
       }
     };
-  }, [end, duration, delay]);
+  }, [validEnd, duration, delay]);
   
   const formatNumber = (num: number): string => {
+    // Handle different decimal precisions based on the provided decimals prop
     return num.toLocaleString('en-US', {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,

@@ -17,11 +17,6 @@ import RevenueHeader from './charts/RevenueHeader';
 const RevenueChart: React.FC = () => {
   const [selectedChart, setSelectedChart] = useState("arr");
   
-  // Get the most recent values from each dataset
-  const getMostRecentValue = (dataArray: any[], valueKey: string = 'value') => {
-    return dataArray[dataArray.length - 1][valueKey];
-  };
-  
   // Subscriber Growth data
   const subscriberGrowthData = [
     { name: 'Oct \'24', value: 1350 },
@@ -32,12 +27,18 @@ const RevenueChart: React.FC = () => {
     { name: 'Mar \'25', value: 2000 },
   ];
   
-  // Metrics for each chart type - using the most recent values from the data
+  // Get the most recent values from each dataset
+  const getLastValue = (data: any[]): number => {
+    if (!data || data.length === 0) return 0;
+    return data[data.length - 1].value;
+  };
+  
+  // Calculate metrics directly from source data arrays
   const metrics = {
-    arr: getMostRecentValue(revenueData),
-    subscribers: getMostRecentValue(subscriberGrowthData),
-    ltv: getMostRecentValue(lifetimeValueData),
-    churn: getMostRecentValue(churnRateData)
+    arr: getLastValue(revenueData),
+    subscribers: getLastValue(subscriberGrowthData),
+    ltv: getLastValue(lifetimeValueData),
+    churn: getLastValue(churnRateData)
   };
   
   console.log("Current metrics:", metrics); // Debug log to confirm values
