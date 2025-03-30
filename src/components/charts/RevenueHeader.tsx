@@ -32,7 +32,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
       case "ltv":
         return {
           title: "Current Lifetime Value",
-          value: 74.89,
+          value: 74.49,
           prefix: "$",
           suffix: "",
           decimals: 2,
@@ -41,7 +41,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
       case "churn":
         return {
           title: "Current Churn Rate",
-          value: 9.3,
+          value: 9.4,
           prefix: "",
           suffix: "%",
           decimals: 1,

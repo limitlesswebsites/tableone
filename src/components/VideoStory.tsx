@@ -35,7 +35,7 @@ const VideoStory: React.FC = () => {
             Our Story in 2 min
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 gradient-subheading">
-            Featured as one of Rho's favorite startups, here's a sparknotes of our journey so far.
+            Featured as one of Rho's favorite startups, here's a quick video of our journey so far.
           </p>
         </div>
         
