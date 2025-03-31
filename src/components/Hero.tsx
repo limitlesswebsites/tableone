@@ -30,7 +30,14 @@ const Hero: React.FC = () => {
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
             Platinum Card Dining,<br />
             <span className="font-sfpro">
-              <span className="font-sacramento" style={{ fontWeight: '400' }}>Without</span>&nbsp; The Card
+              <span 
+                className="permanent-marker-regular" 
+                style={{ 
+                  fontWeight: '400', 
+                  // color: '#F2C498' 
+                }}
+              >
+                Without</span>&nbsp; The Card
             </span>
           </h1>
 
