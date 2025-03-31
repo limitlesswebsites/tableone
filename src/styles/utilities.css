@@ -31,7 +31,7 @@
   
   .text-gradient-metallic {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #888888, #aaadb0, #f1f1f1, #aaadb0, #888888);
+    background-image: linear-gradient(to right, #05d9a7, #888888, #f1f1f1, #888888, #05d9a7);
     filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
   }
 
