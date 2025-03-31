@@ -55,7 +55,7 @@ const LifetimeValueChart: React.FC<LifetimeValueChartProps> = ({ data }) => {
         </ResponsiveContainer>
       </div>
       <div className="mt-4 text-center gradient-subheading">
-        <p>Average LTV increasing to $71.02 per subscriber</p>
+        <p>Average LTV increasing to $74.49 per subscriber</p>
       </div>
     </>
   );

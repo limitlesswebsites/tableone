@@ -58,7 +58,7 @@ const ChurnRateChart: React.FC<ChurnRateChartProps> = ({ data }) => {
         </ResponsiveContainer>
       </div>
       <div className="mt-4 text-center gradient-subheading">
-        <p>Subscriber growth from 375 to 2,031 active users</p>
+        <p>Churn rate decreasing to 9.4% in March 2025</p>
       </div>
     </>
   );
