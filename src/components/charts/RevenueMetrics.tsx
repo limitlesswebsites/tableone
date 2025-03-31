@@ -11,7 +11,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle }) => {
   return (
     <div className="text-center p-4 bg-white/5 rounded-xl">
       <div className="text-sm text-white/60 mb-1">{title}</div>
-      <div className="text-2xl font-bold" style={{ color: '#05d9a7' }}>{value}</div>
+      <div className="text-2xl font-medium text-gradient-metallic font-sfpro" style={{ letterSpacing: '-0.5px' }}>{value}</div>
       <div className="text-xs text-white/50">{subtitle}</div>
     </div>
   );

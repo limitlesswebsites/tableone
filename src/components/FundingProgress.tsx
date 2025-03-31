@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
@@ -11,9 +10,9 @@ const FundingProgress: React.FC = () => {
   const [email, setEmail] = useState('');
   const { toast } = useToast();
 
-  const raisedAmount = 28000; // $28,000 raised so far
-  const interestedAmount = 700000; // $700,000 interest expressed
-  const targetAmount = 1000000; // $1,000,000 target
+  const raisedAmount = 20000; // $20,000 raised so far
+  const interestedAmount = 18000; // $18,000 interest expressed
+  const targetAmount = 100000; // $100,000 target
   
   const committedPercentage = (raisedAmount / targetAmount) * 100;
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
