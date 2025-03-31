@@ -1,13 +1,16 @@
+
 import React, { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
 import FundingUseCards from './funding/FundingUseCards';
 import InvestmentDialog from './funding/InvestmentDialog';
+import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
   const [investmentAmount, setInvestmentAmount] = useState('');
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const raisedAmount = 20000; // $20,000 raised so far
@@ -17,7 +20,7 @@ const FundingProgress: React.FC = () => {
   const committedPercentage = (raisedAmount / targetAmount) * 100;
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
-  const handleSubmitInterest = (e: React.FormEvent) => {
+  const handleSubmitInterest = async (e: React.FormEvent) => {
     e.preventDefault();
     const amount = Number(investmentAmount);
     
@@ -30,15 +33,41 @@ const FundingProgress: React.FC = () => {
       return;
     }
 
-    toast({
-      title: "Interest registered",
-      description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
-      variant: "default"
-    });
-    
-    setIsInvestmentDialogOpen(false);
-    setInvestmentAmount('');
-    setEmail('');
+    setIsSubmitting(true);
+
+    try {
+      // Save to Supabase
+      const { error } = await supabase
+        .from('investment_interests')
+        .insert({
+          email: email,
+          investment_amount: amount
+        });
+
+      if (error) {
+        console.error('Error saving investment interest:', error);
+        throw error;
+      }
+
+      toast({
+        title: "Interest registered",
+        description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
+        variant: "default"
+      });
+      
+      setIsInvestmentDialogOpen(false);
+      setInvestmentAmount('');
+      setEmail('');
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: "We couldn't save your interest. Please try again later.",
+        variant: "destructive"
+      });
+      console.error('Error in submit handler:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -73,8 +102,9 @@ const FundingProgress: React.FC = () => {
             <button 
               onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
+              disabled={isSubmitting}
             >
-              Invest Now
+              {isSubmitting ? 'Processing...' : 'Invest Now'}
             </button>
             <p className="mt-3 text-white/60 text-xs">
               Minimum investment: $1,000

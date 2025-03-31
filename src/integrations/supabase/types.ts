@@ -74,6 +74,27 @@ export type Database = {
         }
         Relationships: []
       }
+      investment_interests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          investment_amount: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          investment_amount: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          investment_amount?: number
+        }
+        Relationships: []
+      }
       nomination_comments: {
         Row: {
           created_at: string

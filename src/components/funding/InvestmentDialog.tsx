@@ -9,7 +9,6 @@ import {
 } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useToast } from '@/hooks/use-toast';
 
 interface InvestmentDialogProps {
   isOpen: boolean;
