@@ -62,10 +62,10 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
   const metricInfo = getMetricDisplay();
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-      <div className="mb-4 md:mb-0">
-        <h3 className="text-lg font-normal text-[#8E8E93] mb-1 font-sfpro">{metricInfo.title}</h3>
-        <div className="text-3xl md:text-4xl font-medium font-sfpro text-gradient-metallic" style={{ letterSpacing: '-0.5px' }}>
+    <div className="flex flex-col md:flex-row justify-between items-start mb-6">
+      <div className="mb-4 md:mb-0 text-left">
+        <h3 className="text-lg font-normal text-[#8E8E93] mb-1 font-sfpro text-left">{metricInfo.title}</h3>
+        <div className="text-3xl md:text-4xl font-medium font-sfpro text-gradient-metallic text-left" style={{ letterSpacing: '-0.5px' }}>
           <CountUp 
             end={metricInfo.value} 
             prefix={metricInfo.prefix} 
