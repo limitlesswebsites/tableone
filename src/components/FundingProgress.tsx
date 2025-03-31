@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
 import FundingUseCards from './funding/FundingUseCards';
@@ -10,14 +11,49 @@ const FundingProgress: React.FC = () => {
   const [investmentAmount, setInvestmentAmount] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  const raisedAmount = 20000; // $20,000 raised so far
-  const interestedAmount = 18000; // $18,000 interest expressed
+  // Investment data states
+  const [raisedAmount, setRaisedAmount] = useState(20000); // Fixed committed amount ($20,000)
+  const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
   const targetAmount = 100000; // $100,000 target
   
+  // Calculate percentages
   const committedPercentage = (raisedAmount / targetAmount) * 100;
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
+  
+  // Fetch investment interest data from Supabase
+  useEffect(() => {
+    const fetchInvestmentInterests = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('investment_interests')
+          .select('investment_amount')
+          
+        if (error) {
+          console.error('Error fetching investment interests:', error);
+          throw error;
+        }
+        
+        // Calculate total interested amount
+        const total = data?.reduce((sum, item) => sum + Number(item.investment_amount), 0) || 0;
+        setInterestedAmount(total);
+      } catch (error) {
+        console.error('Error in useEffect:', error);
+        toast({
+          title: "Failed to load investment data",
+          description: "There was an issue retrieving the current investment interests.",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchInvestmentInterests();
+  }, [toast]);
   
   const handleSubmitInterest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +82,9 @@ const FundingProgress: React.FC = () => {
         console.error('Error saving investment interest:', error);
         throw error;
       }
+
+      // Update the local state to include the new investment amount
+      setInterestedAmount(prevAmount => prevAmount + amount);
 
       toast({
         title: "Interest registered",
@@ -86,13 +125,20 @@ const FundingProgress: React.FC = () => {
         </div>
         
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-3xl mx-auto animate-fade-in animate-delay-200 shadow-xl">
-          <FundingProgressBar 
-            raisedAmount={raisedAmount}
-            interestedAmount={interestedAmount}
-            targetAmount={targetAmount}
-            committedPercentage={committedPercentage}
-            interestedPercentage={interestedPercentage}
-          />
+          {isLoading ? (
+            <div className="text-center py-8">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+              <p className="mt-3 text-white/60">Loading investment data...</p>
+            </div>
+          ) : (
+            <FundingProgressBar 
+              raisedAmount={raisedAmount}
+              interestedAmount={interestedAmount}
+              targetAmount={targetAmount}
+              committedPercentage={committedPercentage}
+              interestedPercentage={interestedPercentage}
+            />
+          )}
           
           <FundingUseCards />
           
