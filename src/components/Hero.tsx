@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
-            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/90 to-transparent z-10"></div>
+            <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/7c1bebd2-b8d9-4083-befc-a934acd41656.png"
               alt="TableOne App with Premium Cards"
