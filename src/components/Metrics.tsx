@@ -87,7 +87,7 @@ const Metrics: React.FC = () => {
         </div>
         
         <div className="text-center mt-8 mb-6">
-          <h3 className="text-2xl md:text-3xl font-medium mb-3 animate-fade-in text-gradient-metallic font-sfpro" style={{ letterSpacing: '-0.5px' }}>Exceeding Industry Benchmarks</h3>
+          <h3 className="text-2xl md:text-3xl font-medium mb-3 animate-fade-in text-gradient-metallic font-sfpro" style={{ letterSpacing: '-0.5px' }}>Defying Industry Benchmarks</h3>
           <p className="text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
             TableOne dramatically outperforms metrics for exceptional paid consumer apps.
           </p>
