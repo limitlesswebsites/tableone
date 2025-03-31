@@ -17,6 +17,13 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
   committedPercentage,
   interestedPercentage
 }) => {
+  // Calculate what percentage to visually display (capped at 100% total)
+  const displayCommittedPercentage = committedPercentage;
+  const displayInterestedPercentage = Math.min(interestedPercentage, 100 - committedPercentage);
+  
+  // Calculate actual percentages for display text (can exceed 100%)
+  const actualInterestedPercentage = (interestedAmount / targetAmount) * 100;
+  
   return (
     <div className="text-center mb-10">
       <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Funding Progress</div>
@@ -34,12 +41,12 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
           {/* Committed amount (green) */}
           <div 
             className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${committedPercentage}%`, backgroundColor: '#05d9a7' }}
+            style={{ width: `${displayCommittedPercentage}%`, backgroundColor: '#05d9a7' }}
           ></div>
-          {/* Interested amount (purple) */}
+          {/* Interested amount (purple) - capped to ensure bar doesn't exceed 100% */}
           <div 
             className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${interestedPercentage}%`, backgroundColor: '#6633ff' }}
+            style={{ width: `${displayInterestedPercentage}%`, backgroundColor: '#6633ff' }}
           ></div>
         </div>
       </div>
@@ -51,7 +58,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
         </div>
         <div className="flex items-center">
           <span className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></span>
-          <span className="text-xs">Interested: $<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
+          <span className="text-xs">Interested: $<CountUp end={interestedAmount} /> (<CountUp end={actualInterestedPercentage} decimals={1} suffix="%" />)</span>
         </div>
       </div>
     </div>
