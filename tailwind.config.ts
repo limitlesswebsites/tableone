@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -31,6 +30,7 @@ export default {
         sfpro: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
         albayan: ['Al Bayan', 'Noto Serif', 'Georgia', 'serif'],
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        sacramento: ['Sacramento', 'cursive'],
       },
       colors: {
         border: 'hsl(var(--border))',

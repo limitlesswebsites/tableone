@@ -19,7 +19,9 @@ const Hero: React.FC = () => {
           
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
             Platinum Card Dining,<br />
-            Without The Card
+            <span className="font-sfpro">
+              <span className="font-sacramento" style={{ fontWeight: '400' }}>Without</span> The Card
+            </span>
           </h1>
           
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
