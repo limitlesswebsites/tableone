@@ -1,5 +1,6 @@
 
-import React from 'react';
+import React, {useState} from 'react';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Dialog, 
   DialogContent, 
@@ -10,27 +11,81 @@ import {
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
+import { supabase } from '@/integrations/supabase/client';
+
 interface InvestmentDialogProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  investmentAmount: string;
-  setInvestmentAmount: (value: string) => void;
-  email: string;
-  setEmail: (value: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  setIsOpen: (open: boolean) => void;
 }
 
 const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   isOpen,
   onOpenChange,
-  investmentAmount,
-  setInvestmentAmount,
-  email,
-  setEmail,
-  onSubmit
+  setIsOpen,
 }) => {
+  const [investmentAmount, setInvestmentAmount] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  // Investment data states
+  const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
+  
+  const handleSubmitInterest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const amount = Number(investmentAmount);
+    
+    if (amount < 1000) {
+      toast({
+        title: "Minimum investment required",
+        description: "Please enter a minimum investment of $1,000",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('investment_interests')
+        .insert({
+          email: email,
+          investment_amount: amount
+        });
+
+      if (error) {
+        console.error('Error saving investment interest:', error);
+        throw error;
+      }
+
+      // Update the local state to include the new investment amount
+      setInterestedAmount(prevAmount => prevAmount + amount);
+
+      toast({
+        title: "Interest registered",
+        description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
+        variant: "default"
+      });
+      
+      setIsOpen(false);
+      setInvestmentAmount('');
+      setEmail('');
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: "We couldn't save your interest. Please try again later.",
+        variant: "destructive"
+      });
+      console.error('Error in submit handler:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={setIsSubmitting}>
       <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
         <DialogHeader>
           <DialogTitle className="text-xl text-center mb-2 gradient-heading">Express Your Interest</DialogTitle>
@@ -39,7 +94,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
           </DialogDescription>
         </DialogHeader>
         
-        <form onSubmit={onSubmit} className="space-y-4 py-4">
+        <form onSubmit={handleSubmitInterest} className="space-y-4 py-4">
           <div className="space-y-2">
             <label htmlFor="investment-amount" className="text-sm font-medium text-white/80">
               Investment Amount ($)

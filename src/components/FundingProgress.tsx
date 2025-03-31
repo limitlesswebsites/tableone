@@ -8,9 +8,6 @@ import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
-  const [investmentAmount, setInvestmentAmount] = useState('');
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
@@ -55,58 +52,6 @@ const FundingProgress: React.FC = () => {
     fetchInvestmentInterests();
   }, [toast]);
   
-  const handleSubmitInterest = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const amount = Number(investmentAmount);
-    
-    if (amount < 1000) {
-      toast({
-        title: "Minimum investment required",
-        description: "Please enter a minimum investment of $1,000",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from('investment_interests')
-        .insert({
-          email: email,
-          investment_amount: amount
-        });
-
-      if (error) {
-        console.error('Error saving investment interest:', error);
-        throw error;
-      }
-
-      // Update the local state to include the new investment amount
-      setInterestedAmount(prevAmount => prevAmount + amount);
-
-      toast({
-        title: "Interest registered",
-        description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
-        variant: "default"
-      });
-      
-      setIsInvestmentDialogOpen(false);
-      setInvestmentAmount('');
-      setEmail('');
-    } catch (error) {
-      toast({
-        title: "Something went wrong",
-        description: "We couldn't save your interest. Please try again later.",
-        variant: "destructive"
-      });
-      console.error('Error in submit handler:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-  
   return (
     <section id="invest" className="py-8 relative">
       <div className="absolute inset-0 overflow-hidden">
@@ -146,9 +91,9 @@ const FundingProgress: React.FC = () => {
             <button 
               onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
-              disabled={isSubmitting}
+              // disabled={isSubmitting}
             >
-              {isSubmitting ? 'Processing...' : 'Invest Now'}
+              Invest Now
             </button>
             <p className="mt-3 text-white/60 text-xs">
               Minimum investment: $1,000
@@ -160,11 +105,7 @@ const FundingProgress: React.FC = () => {
       <InvestmentDialog 
         isOpen={isInvestmentDialogOpen}
         onOpenChange={setIsInvestmentDialogOpen}
-        investmentAmount={investmentAmount}
-        setInvestmentAmount={setInvestmentAmount}
-        email={email}
-        setEmail={setEmail}
-        onSubmit={handleSubmitInterest}
+        setIsOpen={setIsInvestmentDialogOpen}
       />
     </section>
   );
