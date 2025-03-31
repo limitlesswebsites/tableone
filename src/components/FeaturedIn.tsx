@@ -1,12 +1,20 @@
 
 import React from 'react';
 import { Newspaper, Tv, Video } from 'lucide-react';
+import forbes from '../assets/forbes.png'
+import gothamist from '../assets/gothamist.png'
+import newyorker from '../assets/newyorker-stack.png'
+
 
 const FeaturedIn: React.FC = () => {
+  function toArticle(url: string) {
+    window.open(url, '_blank');
+  }
+
   return (
-    <section className="py-12 relative">
+    <section className="py-12 relative" style={{background: 'transparent'}}>
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute bottom-0 left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-1/2 h-1/2  rounded-full blur-[120px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -15,23 +23,18 @@ const FeaturedIn: React.FC = () => {
           
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {/* Forbes-style logo */}
-            <div className="group flex flex-col items-center transition-all">
-              <Newspaper size={28} className="text-white mb-2 group-hover:text-purple-400 transition-colors" />
-              <p className="text-white font-bold tracking-tight text-xl group-hover:text-purple-400 transition-colors">FORBES</p>
+            <div className="group flex flex-col items-center transition-all" style={{maxWidth: '9rem'}} onClick={()=>(toArticle("https://gothamist.com/arts-entertainment/dinner-reservations-at-tatiana-are-impossible-to-get-so-i-spent-a-month-trying"))}>
+              <img src={gothamist} />
             </div>
             
             {/* CNN-style logo */}
-            <div className="group flex flex-col items-center transition-all">
-              <Tv size={28} className="text-white mb-2 group-hover:text-purple-400 transition-colors" />
-              <p className="text-white font-bold tracking-tight text-xl group-hover:text-purple-400 transition-colors">
-                <span className="bg-red-600 px-2 py-1">CNN</span>
-              </p>
+            <div className="group flex flex-col items-center transition-all" style={{maxWidth: '9rem'}} onClick={()=>(toArticle("https://www.forbes.com/sites/lauriewerner/2024/04/27/mothers-day-gift-guide-2024-top-new-york-restaurant-gift-certificates"))}>
+              <img src={forbes} />
             </div>
             
             {/* Bloomberg-style logo */}
-            <div className="group flex flex-col items-center transition-all">
-              <Video size={28} className="text-white mb-2 group-hover:text-purple-400 transition-colors" />
-              <p className="text-white font-bold text-xl group-hover:text-purple-400 transition-colors">Bloomberg</p>
+            <div className="group flex flex-col items-center transition-all" style={{maxWidth: '9rem'}} onClick={()=>(toArticle("https://www.newyorker.com/news/our-local-correspondents/why-you-cant-get-a-restaurant-reservation"))}>
+              <img src={newyorker} />
             </div>
           </div>
         </div>
