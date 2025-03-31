@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import InvestmentDialog from './funding/InvestmentDialog';
 
 const Hero: React.FC = () => {
@@ -53,18 +54,19 @@ const Hero: React.FC = () => {
             >
               Invest Now
             </button>
-            <Link
+            <HashLink
               to="#metrics"
+              smooth
               className="px-7 py-3 rounded-full font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm font-sfpro"
             >
               See Our Metrics
-            </Link>
+            </HashLink>
           </div>
 
           <div className="mt-12 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1.2s' }}>
-            <Link to="#metrics" className="w-10 h-10 flex justify-center items-center rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 hover:scale-110 animate-bounce-subtle">
+            <HashLink smooth to="#videoStory" className="w-10 h-10 flex justify-center items-center rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 hover:scale-110 animate-bounce-subtle">
               <ArrowDown size={16} className="text-white/60" />
-            </Link>
+            </HashLink>
           </div>
         </div>
       </div>
