@@ -40,7 +40,7 @@ const RevenueChart: React.FC = () => {
             Our Revenue Growth Journey
           </h2>
           <p className="text-base max-w-2xl mx-auto text-[#8E8E93] font-sfpro">
-            Consistent month-over-month growth as we expand our user base
+            Consistent month-over-month growth as we expand our subscriber base.
           </p>
         </div>
 

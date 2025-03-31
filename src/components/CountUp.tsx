@@ -67,7 +67,7 @@ const CountUp: React.FC<CountUpProps> = ({
         observer.unobserve(countRef.current);
       }
     };
-  }, [validEnd, duration, delay]);
+  }, [end, duration, delay]);
   
   const formatNumber = (num: number): string => {
     // Handle different decimal precisions based on the provided decimals prop
