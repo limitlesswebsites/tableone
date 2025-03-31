@@ -85,7 +85,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsSubmitting}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
         <DialogHeader>
           <DialogTitle className="text-xl text-center mb-2 text-gradient-metallic">Express Your Interest</DialogTitle>
