@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
@@ -36,9 +35,8 @@ const FundingProgress: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Using type assertion to fix the TypeScript error
       const { error } = await supabase
-        .from('investment_interests' as any)
+        .from('investment_interests')
         .insert({
           email: email,
           investment_amount: amount
