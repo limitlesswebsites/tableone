@@ -58,7 +58,7 @@ const SubscriberGrowthChart: React.FC<SubscriberGrowthChartProps> = ({ data }) =
         </ResponsiveContainer>
       </div>
       <div className="mt-4 text-center gradient-subheading">
-        <p>Subscriber growth from 375 to 2,031 active users</p>
+        <p>Subscriber growth to 2,031 active subscribers in 6 months</p>
       </div>
     </>
   );
