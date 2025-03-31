@@ -26,7 +26,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
 					title: "Current Subscribers",
 					value: "2,031",
 					prefix: "",
-					suffix: " users",
+					suffix: "",
 					decimals: 0,
 					color: "#9b87f5",
 					change: "+21.1%"
