@@ -88,7 +88,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={setIsSubmitting}>
       <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
         <DialogHeader>
-          <DialogTitle className="text-xl text-center mb-2 gradient-heading">Express Your Interest</DialogTitle>
+          <DialogTitle className="text-xl text-center mb-2 text-gradient-metallic">Express Your Interest</DialogTitle>
           <DialogDescription className="text-white/70 text-center">
             Let us know how much you're interested in investing in TableOne's future.
           </DialogDescription>
