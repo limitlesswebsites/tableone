@@ -36,9 +36,9 @@ const FundingProgress: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Save to Supabase
+      // Using type assertion to fix the TypeScript error
       const { error } = await supabase
-        .from('investment_interests')
+        .from('investment_interests' as any)
         .insert({
           email: email,
           investment_amount: amount
