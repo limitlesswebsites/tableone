@@ -41,7 +41,7 @@ const RevenueHeader: React.FC<RevenueHeaderProps> = ({ selectedChart }) => {
       case "churn":
         return {
           title: "Current Churn Rate",
-          value: 9.4,
+          value: 9.3,
           prefix: "",
           suffix: "%",
           decimals: 1,
