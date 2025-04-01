@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import InvestmentDialog from './funding/InvestmentDialog';
 
+import appAndCards from '../assets/app-and-cards.png'
+
 const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
 
@@ -44,7 +46,7 @@ const Hero: React.FC = () => {
           <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
             <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
             <img
-              src="/lovable-uploads/7c1bebd2-b8d9-4083-befc-a934acd41656.png"
+              src={appAndCards}
               alt="TableOne App with Premium Cards"
               className="w-full h-auto drop-shadow-2xl relative z-0"
             />
