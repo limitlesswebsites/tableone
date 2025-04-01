@@ -25,17 +25,17 @@ const FeaturedIn: React.FC = () => {
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {/* Forbes-style logo */}
             <div className="group flex flex-col items-center transition-all" style={{ maxWidth: '9rem' }} onClick={() => (toArticle("https://gothamist.com/arts-entertainment/dinner-reservations-at-tatiana-are-impossible-to-get-so-i-spent-a-month-trying"))}>
-              <img src={gothamist} />
+              <img src={gothamist} className='cursor-pointer'/>
             </div>
 
             {/* CNN-style logo */}
             <div className="group flex flex-col items-center transition-all" style={{ maxWidth: '9rem' }} onClick={() => (toArticle("https://www.forbes.com/sites/lauriewerner/2024/04/27/mothers-day-gift-guide-2024-top-new-york-restaurant-gift-certificates"))}>
-              <img src={forbes} />
+              <img src={forbes} className='cursor-pointer'/>
             </div>
 
             {/* Bloomberg-style logo */}
             <div className="group flex flex-col items-center transition-all" style={{ maxWidth: '9rem' }} onClick={() => (toArticle("https://www.newyorker.com/news/our-local-correspondents/why-you-cant-get-a-restaurant-reservation"))}>
-              <img src={newyorker} />
+              <img src={newyorker} className='cursor-pointer'/>
             </div>
           </div>
         </div>
