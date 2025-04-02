@@ -89,7 +89,7 @@ const FundingProgress: React.FC = () => {
           <FundingUseCards />
           
           {/* Add the investment calculator component here */}
-          <InvestmentCalculator />
+          {/* <InvestmentCalculator /> */}
           
           <div className="text-center mt-8">
             <button 
