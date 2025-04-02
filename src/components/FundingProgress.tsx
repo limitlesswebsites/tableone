@@ -13,9 +13,9 @@ const FundingProgress: React.FC = () => {
   const { toast } = useToast();
 
   // Investment data states
-  const [raisedAmount, setRaisedAmount] = useState(20000); // Fixed committed amount ($20,000)
+  const [raisedAmount, setRaisedAmount] = useState(55500); // Fixed committed amount ($20,000)
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
-  const targetAmount = 100000; // $100,000 target
+  const targetAmount = 350000; // $100,000 target
   
   // Calculate percentages
   const committedPercentage = (raisedAmount / targetAmount) * 100;
