@@ -35,13 +35,13 @@ const InvestmentCalculator: React.FC = () => {
             value={investment}
             onChange={handleChange}
             placeholder="Enter amount (e.g. 1000)"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 text-center"
           />
         </div>
         
         <div className="w-full md:w-1/2 text-center mt-6">
           <p className="text-white/60 text-sm mb-1">At $0.40 per share:</p>
-          <p className="text-3xl font-bold text-gradient-metallic">
+          <p className="text-3xl font-bold text-gradient-metallic text-center">
             {numberOfShares.toLocaleString()} shares
           </p>
         </div>

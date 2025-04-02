@@ -15,6 +15,7 @@ const FundingProgress: React.FC = () => {
   // Investment data states
   const [raisedAmount, setRaisedAmount] = useState(55500); // Fixed committed amount ($20,000)
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
+  const [investorCount, setInvestorCount] = useState(0); // Number of interested investors
   const targetAmount = 350000; // $100,000 target
   
   // Calculate percentages
@@ -38,6 +39,9 @@ const FundingProgress: React.FC = () => {
         // Calculate total interested amount
         const total = data?.reduce((sum, item) => sum + Number(item.investment_amount), 0) || 0;
         setInterestedAmount(total);
+        
+        // Set the count of investors
+        setInvestorCount(data?.length || 0);
       } catch (error) {
         console.error('Error in useEffect:', error);
         toast({
@@ -77,19 +81,29 @@ const FundingProgress: React.FC = () => {
               <p className="mt-3 text-white/60">Loading investment data...</p>
             </div>
           ) : (
-            <FundingProgressBar 
-              raisedAmount={raisedAmount}
-              interestedAmount={interestedAmount}
-              targetAmount={targetAmount}
-              committedPercentage={committedPercentage}
-              interestedPercentage={interestedPercentage}
-            />
+            <>
+              <FundingProgressBar 
+                raisedAmount={raisedAmount}
+                interestedAmount={interestedAmount}
+                targetAmount={targetAmount}
+                committedPercentage={committedPercentage}
+                interestedPercentage={interestedPercentage}
+              />
+              
+              <div className="text-center mb-8">
+                <div className="inline-block px-4 py-2 bg-white/10 rounded-full">
+                  <span className="text-white/90 text-sm">
+                    <span className="font-bold text-white">{investorCount}</span> investors have expressed interest
+                  </span>
+                </div>
+              </div>
+            </>
           )}
           
           <FundingUseCards />
           
           {/* Add the investment calculator component here */}
-          {/* <InvestmentCalculator /> */}
+          <InvestmentCalculator />
           
           <div className="text-center mt-8">
             <button 
