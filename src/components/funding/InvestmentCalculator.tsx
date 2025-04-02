@@ -39,7 +39,7 @@ const InvestmentCalculator: React.FC = () => {
           />
         </div>
         
-        <div className="flex-1 bg-white/10 p-4 rounded-lg border border-white/10">
+        <div className="flex-1">
           <p className="text-white/60 text-sm">At $0.40 per share:</p>
           <p className="text-2xl font-bold text-gradient-metallic">
             {numberOfShares.toLocaleString()} shares
