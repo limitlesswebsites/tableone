@@ -89,14 +89,14 @@ const FundingProgress: React.FC = () => {
           <FundingUseCards />
           
           {/* Add the investment calculator component here */}
-          <InvestmentCalculator />
+          {/* <InvestmentCalculator /> */}
           
           <div className="text-center mt-8">
             <button 
               onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
             >
-              Invest Now
+              I'm Interested
             </button>
             <p className="mt-3 text-white/60 text-xs">
               Minimum investment: $1,000
