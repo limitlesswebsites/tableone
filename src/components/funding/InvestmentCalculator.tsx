@@ -24,8 +24,8 @@ const InvestmentCalculator: React.FC = () => {
         How much would my investment get me?
       </h3>
       
-      <div className="flex flex-col md:flex-row gap-6 items-center">
-        <div className="w-full md:w-1/2">
+      <div className="flex flex-col items-center">
+        <div className="w-full md:w-1/2 text-center">
           <Label htmlFor="investment-amount" className="text-white mb-2 block">
             Investment Amount ($)
           </Label>
@@ -39,7 +39,7 @@ const InvestmentCalculator: React.FC = () => {
           />
         </div>
         
-        <div className="w-full md:w-1/2 text-center md:text-left">
+        <div className="w-full md:w-1/2 text-center mt-6">
           <p className="text-white/60 text-sm mb-1">At $0.40 per share:</p>
           <p className="text-3xl font-bold text-gradient-metallic">
             {numberOfShares.toLocaleString()} shares
