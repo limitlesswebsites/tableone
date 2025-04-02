@@ -66,7 +66,7 @@ const FundingProgress: React.FC = () => {
             Invest in our Journey
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            We are selling shares at a $4,000,000 valuation.
+            We are raising this round as a SAFE with a $4,000,000 post-money valuation.
           </p>
         </div>
         
