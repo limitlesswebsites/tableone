@@ -4,6 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
 import FundingUseCards from './funding/FundingUseCards';
 import InvestmentDialog from './funding/InvestmentDialog';
+import InvestmentCalculator from './funding/InvestmentCalculator';
 import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
@@ -87,11 +88,13 @@ const FundingProgress: React.FC = () => {
           
           <FundingUseCards />
           
-          <div className="text-center">
+          {/* Add the investment calculator component here */}
+          <InvestmentCalculator />
+          
+          <div className="text-center mt-8">
             <button 
               onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
-              // disabled={isSubmitting}
             >
               Invest Now
             </button>
