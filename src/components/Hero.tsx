@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
           </div>
 
           <p className="text-base md:text-lg text-[#8E8E93] mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed font-sfpro" style={{ animationDelay: '0.8s' }}>
-            TableOne has revolutionized how diners access premium reservations through a subscription model that delivers exceptional value.
+            At this time, this is simply to gauge investment interest in TableOne. You will have a chance to confirm funds and final amounts in a few weeks.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
