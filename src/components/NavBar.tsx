@@ -67,17 +67,12 @@ const NavBar: React.FC = () => {
 							Admin Dashboard
 						</Link>
 					) : (
-						<>
-							<button
-								onClick={() => setIsInvestmentDialogOpen(true)}
-								className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
-							>
-								I'm Interested
-							</button>
-							<Link to="/login" className="md:flex hidden items-center px-4 py-1.5 text-xs rounded-full font-medium border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 font-sfpro">
-								Admin Login
-							</Link>
-						</>
+						<button
+							onClick={() => setIsInvestmentDialogOpen(true)}
+							className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
+						>
+							I'm Interested
+						</button>
 					)}
 				</div>
 			</div>
