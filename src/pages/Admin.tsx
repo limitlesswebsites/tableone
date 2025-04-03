@@ -1,12 +1,17 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import MetricCard from '@/components/metrics/MetricCard';
 import { useInvestorData } from '@/hooks/admin/useInvestorData';
 import InvestorTable from '@/components/admin/InvestorTable';
 import InvestmentMetricsCard from '@/components/admin/InvestmentMetricsCard';
+import { useAuth } from '@/context/AuthContext';
+import { LogOut } from 'lucide-react';
 
 const Admin = () => {
+  // Authentication
+  const { signOut, user } = useAuth();
+  
   // Investment data states
   const committedAmount = 55500; // Fixed committed amount
   const targetAmount = 400000; // Target amount
@@ -33,9 +38,25 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gradient-metallic">Fundraising Admin Dashboard</h1>
-        <p className="text-white/60">Review all investment interest metrics and data.</p>
+      <div className="mb-8 flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold mb-2 text-gradient-metallic">Fundraising Admin Dashboard</h1>
+          <p className="text-white/60">Review all investment interest metrics and data.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-white/60 text-sm hidden md:inline-block">
+            {user?.email}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={signOut}
+            className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+          >
+            <LogOut size={16} />
+            <span className="hidden md:inline">Sign out</span>
+          </Button>
+        </div>
       </div>
       
       {isLoading ? (
