@@ -74,6 +74,7 @@ export const useInvestorData = () => {
       const currentValue = investorToUpdate.status?.[field] || false;
       const newValue = !currentValue;
       
+      // Immediately update local state for responsive UI
       setCombinedData(prevData => 
         prevData.map(investor => 
           investor.email === email 
@@ -88,6 +89,7 @@ export const useInvestorData = () => {
         )
       );
       
+      // Send update to database
       if (!investorToUpdate.status) {
         const { error } = await supabase
           .from('investor_status')
@@ -122,6 +124,7 @@ export const useInvestorData = () => {
         variant: "destructive"
       });
       
+      // If there was an error, revert the optimistic update by fetching fresh data
       await fetchInvestorData();
     }
   };
