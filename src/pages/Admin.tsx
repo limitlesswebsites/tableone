@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import MetricCard from '@/components/metrics/MetricCard';
 import ChartPanel from '@/components/metrics/ChartPanel';
 import { supabase } from '@/integrations/supabase/client';
@@ -13,10 +14,17 @@ interface InvestorInterest {
   created_at: string;
 }
 
+type SortField = 'email' | 'investment_amount' | 'created_at';
+type SortOrder = 'asc' | 'desc';
+
 const Admin = () => {
   const [investorData, setInvestorData] = useState<InvestorInterest[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  // Sorting states
+  const [sortField, setSortField] = useState<SortField>('created_at');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
   // Investment data states
   const committedAmount = 55500; // Fixed committed amount
@@ -30,6 +38,33 @@ const Admin = () => {
   const totalInvestorCount = investorData.length;
   const averageInvestmentAmount = totalInvestorCount > 0 ? totalInterestedAmount / totalInvestorCount : 0;
   
+  // Handle sorting
+  const handleSort = (field: SortField) => {
+    if (field === sortField) {
+      // Toggle order if clicking on the same field
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      // Set new field and default to descending
+      setSortField(field);
+      setSortOrder('desc');
+    }
+  };
+
+  // Sort investors data
+  const sortedInvestors = [...investorData].sort((a, b) => {
+    let comparison = 0;
+    
+    if (sortField === 'email') {
+      comparison = a.email.localeCompare(b.email);
+    } else if (sortField === 'investment_amount') {
+      comparison = a.investment_amount - b.investment_amount;
+    } else if (sortField === 'created_at') {
+      comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    }
+    
+    return sortOrder === 'asc' ? comparison : -comparison;
+  });
+
   // Fetch investment interest data
   useEffect(() => {
     const fetchInvestmentInterests = async () => {
@@ -94,6 +129,12 @@ const Admin = () => {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         return months.indexOf(monthA) - months.indexOf(monthB);
       });
+  };
+
+  // Render sort icon
+  const renderSortIcon = (field: SortField) => {
+    if (sortField !== field) return null;
+    return sortOrder === 'asc' ? <ChevronUp className="inline h-4 w-4 ml-1" /> : <ChevronDown className="inline h-4 w-4 ml-1" />;
   };
 
   return (
@@ -193,13 +234,28 @@ const Admin = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="border-white/10">
-                    <TableHead className="text-white/70">Email</TableHead>
-                    <TableHead className="text-white/70 text-right">Investment Amount</TableHead>
-                    <TableHead className="text-white/70 text-right">Date</TableHead>
+                    <TableHead 
+                      className="text-white/70 cursor-pointer hover:text-white transition-colors"
+                      onClick={() => handleSort('email')}
+                    >
+                      Email {renderSortIcon('email')}
+                    </TableHead>
+                    <TableHead 
+                      className="text-white/70 text-right cursor-pointer hover:text-white transition-colors"
+                      onClick={() => handleSort('investment_amount')}
+                    >
+                      Investment Amount {renderSortIcon('investment_amount')}
+                    </TableHead>
+                    <TableHead 
+                      className="text-white/70 text-right cursor-pointer hover:text-white transition-colors"
+                      onClick={() => handleSort('created_at')}
+                    >
+                      Date {renderSortIcon('created_at')}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {investorData.map((investor, index) => (
+                  {sortedInvestors.map((investor, index) => (
                     <TableRow key={index} className="border-white/10">
                       <TableCell className="font-medium">{investor.email}</TableCell>
                       <TableCell className="text-right">${investor.investment_amount.toLocaleString()}</TableCell>
