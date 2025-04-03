@@ -1,397 +1,48 @@
 
-import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { CombinedInvestorData, InvestorInterest, InvestorStatus, SortField, SortOrder } from '@/types/admin';
+import { useInvestorDataFetching } from './useInvestorDataFetching';
+import { useInvestorMetrics } from './useInvestorMetrics';
+import { useInvestorSorting } from './useInvestorSorting';
+import { useInvestorEditing } from './useInvestorEditing';
+import { useInvestorRealtime } from './useInvestorRealtime';
 
 export const useInvestorData = () => {
-  const [investorData, setInvestorData] = useState<InvestorInterest[]>([]);
-  const [investorStatusData, setInvestorStatusData] = useState<InvestorStatus[]>([]);
-  const [combinedData, setCombinedData] = useState<CombinedInvestorData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  // Sorting states
-  const [sortField, setSortField] = useState<SortField>('created_at');
-  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  // Data fetching
+  const {
+    investorData,
+    setInvestorData,
+    combinedData,
+    setCombinedData,
+    isLoading,
+    fetchInvestorData
+  } = useInvestorDataFetching();
 
-  // Calculate metrics
-  const totalInterestedAmount = investorData.reduce((sum, investor) => sum + investor.investment_amount, 0);
-  const totalInvestorCount = investorData.length;
-  const averageInvestmentAmount = totalInvestorCount > 0 ? totalInterestedAmount / totalInvestorCount : 0;
-  
-  // Handle sorting
-  const handleSort = (field: SortField) => {
-    if (field === sortField) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortOrder('desc');
-    }
-  };
+  // Metrics calculation
+  const { totalInterestedAmount, totalInvestorCount, averageInvestmentAmount } = useInvestorMetrics(investorData);
 
-  // Toggle edit mode for a specific investor (notes or name)
-  const toggleEditMode = (email: string, field: 'notes' | 'name' = 'notes') => {
-    setCombinedData(prevData => 
-      prevData.map(investor => 
-        investor.email === email 
-          ? { 
-              ...investor, 
-              isEditingNotes: field === 'notes' ? !investor.isEditingNotes : false,
-              isEditingName: field === 'name' ? !investor.isEditingName : false,
-              editedNotes: field === 'notes' ? investor.status?.notes || '' : investor.editedNotes,
-              editedName: field === 'name' ? investor.status?.name || '' : investor.editedName
-            } 
-          : investor
-      )
-    );
-  };
+  // Sorting
+  const { sortField, sortOrder, sortedInvestors, handleSort } = useInvestorSorting(combinedData);
 
-  // Handle checkbox change for reached_out and committed
-  const handleCheckboxChange = async (email: string, field: 'reached_out' | 'committed') => {
-    try {
-      const investorToUpdate = combinedData.find(i => i.email === email);
-      
-      if (!investorToUpdate) return;
-      
-      const currentValue = investorToUpdate.status?.[field] || false;
-      const newValue = !currentValue;
-      
-      setCombinedData(prevData => 
-        prevData.map(investor => 
-          investor.email === email 
-            ? { 
-                ...investor, 
-                status: { 
-                  ...investor.status as InvestorStatus,
-                  [field]: newValue 
-                } 
-              } 
-            : investor
-        )
-      );
-      
-      if (!investorToUpdate.status) {
-        const { error } = await supabase
-          .from('investor_status')
-          .insert({ 
-            investor_email: email, 
-            [field]: newValue,
-            notes: null,
-            name: null,
-            reached_out: field === 'reached_out' ? newValue : false,
-            committed: field === 'committed' ? newValue : false
-          } as any);
-          
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('investor_status')
-          .update({ [field]: newValue } as any)
-          .eq('investor_email', email);
-          
-        if (error) throw error;
-      }
-      
-      toast({
-        title: "Success",
-        description: `Investor ${field.replace('_', ' ')} status updated successfully`,
-      });
-    } catch (error) {
-      console.error(`Error updating ${field}:`, error);
-      toast({
-        title: `Failed to update ${field.replace('_', ' ')} status`,
-        description: "There was an error updating the status.",
-        variant: "destructive"
-      });
-      
-      await fetchInvestorData();
-    }
-  };
-  
-  // Handle saving notes
-  const handleSaveNotes = async (email: string, notes: string) => {
-    try {
-      const investorToUpdate = combinedData.find(i => i.email === email);
-      
-      if (!investorToUpdate) return;
-      
-      setCombinedData(prevData => 
-        prevData.map(investor => 
-          investor.email === email 
-            ? { 
-                ...investor, 
-                isEditingNotes: false,
-                status: { 
-                  ...investor.status as InvestorStatus,
-                  notes 
-                } 
-              } 
-            : investor
-        )
-      );
-      
-      if (!investorToUpdate.status) {
-        const { error } = await supabase
-          .from('investor_status')
-          .insert({ 
-            investor_email: email, 
-            notes,
-            name: null,
-            reached_out: false,
-            committed: false
-          } as any);
-          
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('investor_status')
-          .update({ notes } as any)
-          .eq('investor_email', email);
-          
-        if (error) throw error;
-      }
-      
-      toast({
-        title: "Success",
-        description: "Investor notes updated successfully",
-      });
-    } catch (error) {
-      console.error("Error updating notes:", error);
-      toast({
-        title: "Failed to update notes",
-        description: "There was an error updating the notes.",
-        variant: "destructive"
-      });
-      
-      await fetchInvestorData();
-    }
-  };
+  // Editing functions
+  const {
+    toggleEditMode,
+    handleCheckboxChange,
+    handleNotesChange,
+    handleNameChange,
+    handleSaveNotes,
+    handleSaveName
+  } = useInvestorEditing(combinedData, setCombinedData, fetchInvestorData);
 
-  // Handle saving name
-  const handleSaveName = async (email: string, name: string) => {
-    try {
-      const investorToUpdate = combinedData.find(i => i.email === email);
-      
-      if (!investorToUpdate) return;
-      
-      setCombinedData(prevData => 
-        prevData.map(investor => 
-          investor.email === email 
-            ? { 
-                ...investor, 
-                isEditingName: false,
-                status: { 
-                  ...investor.status as InvestorStatus,
-                  name 
-                } 
-              } 
-            : investor
-        )
-      );
-      
-      if (!investorToUpdate.status) {
-        const { error } = await supabase
-          .from('investor_status')
-          .insert({ 
-            investor_email: email, 
-            name,
-            notes: null,
-            reached_out: false,
-            committed: false
-          } as any);
-          
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('investor_status')
-          .update({ name } as any)
-          .eq('investor_email', email);
-          
-        if (error) throw error;
-      }
-      
-      toast({
-        title: "Success",
-        description: "Investor name updated successfully",
-      });
-    } catch (error) {
-      console.error("Error updating name:", error);
-      toast({
-        title: "Failed to update name",
-        description: "There was an error updating the name.",
-        variant: "destructive"
-      });
-      
-      await fetchInvestorData();
-    }
-  };
-  
-  // Handle notes input change
-  const handleNotesChange = (email: string, notes: string) => {
-    setCombinedData(prevData => 
-      prevData.map(investor => 
-        investor.email === email 
-          ? { ...investor, editedNotes: notes } 
-          : investor
-      )
-    );
-  };
-
-  // Handle name input change
-  const handleNameChange = (email: string, name: string) => {
-    setCombinedData(prevData => 
-      prevData.map(investor => 
-        investor.email === email 
-          ? { ...investor, editedName: name } 
-          : investor
-      )
-    );
-  };
-
-  // Handle a new investment interest coming in via realtime
-  const handleNewInvestmentInterest = async (newInterest: InvestorInterest) => {
-    console.log('Received new investment interest:', newInterest);
-    
-    // Check if this is actually a new interest that's not in our data
-    const exists = investorData.some(investor => investor.id === newInterest.id);
-    if (exists) return;
-    
-    // Add to our investor data
-    setInvestorData(prevData => [...prevData, newInterest]);
-    
-    // Add to combined data with default values
-    setCombinedData(prevData => [
-      ...prevData,
-      {
-        ...newInterest,
-        isEditingNotes: false,
-        isEditingName: false,
-        editedNotes: '',
-        editedName: ''
-      }
-    ]);
-    
-    toast({
-      title: "New Investment Interest",
-      description: `${newInterest.email} has expressed interest in investing $${newInterest.investment_amount.toLocaleString()}`,
-    });
-  };
-
-  // Fetch investment interest data and status data
-  const fetchInvestorData = async () => {
-    try {
-      setIsLoading(true);
-      
-      const { data: interestsData, error: interestsError } = await supabase
-        .from('investment_interests')
-        .select('*')
-        .order('created_at', { ascending: false });
-        
-      if (interestsError) {
-        console.error('Error fetching investment interests:', interestsError);
-        throw interestsError;
-      }
-      
-      setInvestorData(interestsData || []);
-      
-      try {
-        const { data: statusData, error: statusError } = await supabase
-          .from('investor_status')
-          .select('*');
-          
-        if (statusError) {
-          console.error('Error fetching investor status:', statusError);
-          setInvestorStatusData([]);
-        } else {
-          setInvestorStatusData(statusData as unknown as InvestorStatus[]);
-          
-          const combined = (interestsData || []).map(interest => {
-            const status = (statusData || []).find(
-              s => (s as any).investor_email === interest.email
-            ) as unknown as InvestorStatus | undefined;
-            
-            return {
-              ...interest,
-              status,
-              isEditingNotes: false,
-              isEditingName: false,
-              editedNotes: status?.notes || '',
-              editedName: status?.name || ''
-            };
-          });
-          
-          setCombinedData(combined);
-        }
-      } catch (statusError) {
-        console.error('Error handling status data:', statusError);
-        const combined = (interestsData || []).map(interest => ({
-          ...interest,
-          isEditingNotes: false,
-          isEditingName: false,
-          editedNotes: '',
-          editedName: ''
-        }));
-        setCombinedData(combined);
-      }
-      
-    } catch (error) {
-      console.error('Error in fetchInvestorData:', error);
-      toast({
-        title: "Failed to load investment data",
-        description: "There was an issue retrieving the investment interests.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // Realtime updates
+  useInvestorRealtime(investorData, setInvestorData, setCombinedData);
 
   // Initial data fetch
   useEffect(() => {
     fetchInvestorData();
   }, [toast]);
-  
-  // Set up real-time listener for new investment interests
-  useEffect(() => {
-    // Subscribe to changes on the investment_interests table
-    const channel = supabase
-      .channel('investment_interests_changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'investment_interests'
-        },
-        (payload) => {
-          console.log('New investment interest received:', payload);
-          // Handle the new record
-          handleNewInvestmentInterest(payload.new as InvestorInterest);
-        }
-      )
-      .subscribe();
-
-    // Cleanup subscription on unmount
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [investorData, toast]);
-
-  // Sort investors data
-  const sortedInvestors = [...combinedData].sort((a, b) => {
-    let comparison = 0;
-    
-    if (sortField === 'email') {
-      comparison = a.email.localeCompare(b.email);
-    } else if (sortField === 'investment_amount') {
-      comparison = a.investment_amount - b.investment_amount;
-    } else if (sortField === 'created_at') {
-      comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-    }
-    
-    return sortOrder === 'asc' ? comparison : -comparison;
-  });
 
   return {
     investorData,
