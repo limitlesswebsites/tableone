@@ -54,26 +54,14 @@ const NavBar: React.FC = () => {
 						Expansion
 						<span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
 					</HashLink>
-					{user && (
-						<Link to="/admin" className="text-xs font-medium text-white/80 hover:text-white transition-all duration-300 relative group px-1 font-sfpro">
-							Admin
-							<span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-						</Link>
-					)}
 				</div>
 				<div className="flex items-center space-x-2">
-					{user ? (
-						<Link to="/admin" className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro">
-							Admin Dashboard
-						</Link>
-					) : (
-						<button
-							onClick={() => setIsInvestmentDialogOpen(true)}
-							className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
-						>
-							I'm Interested
-						</button>
-					)}
+					<button
+						onClick={() => setIsInvestmentDialogOpen(true)}
+						className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
+					>
+						I'm Interested
+					</button>
 				</div>
 			</div>
 		</nav>
