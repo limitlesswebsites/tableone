@@ -28,44 +28,57 @@ const FundingProgress: React.FC = () => {
       try {
         setIsLoading(true);
         
-        // Fetch investment interests with joined status data
-        const { data, error } = await supabase
+        // Fetch all investment interests
+        const { data: interestsData, error: interestsError } = await supabase
           .from('investment_interests')
-          .select(`
-            *,
-            investor_status:investor_status!investor_email(committed)
-          `)
-          
-        if (error) {
-          console.error('Error fetching investment interests:', error);
-          throw error;
+          .select('*');
+        
+        if (interestsError) {
+          console.error('Error fetching investment interests:', interestsError);
+          throw interestsError;
         }
         
+        // Fetch all investor statuses
+        const { data: statusData, error: statusError } = await supabase
+          .from('investor_status')
+          .select('*');
+        
+        if (statusError) {
+          console.error('Error fetching investor statuses:', statusError);
+          throw statusError;
+        }
+        
+        // Match investment interests with their statuses
+        const combinedData = interestsData.map(interest => ({
+          ...interest,
+          status: statusData.find(status => status.investor_email === interest.email) || null
+        }));
+        
         // Calculate total interested amount (excluding committed investors)
-        const total = data?.reduce((sum, item) => {
+        const total = combinedData.reduce((sum, item) => {
           // Check if the investor is committed
-          const isCommitted = item.investor_status && item.investor_status.committed;
+          const isCommitted = item.status && item.status.committed;
           
           // Only add to interested amount if not committed
           return isCommitted ? sum : sum + Number(item.investment_amount);
-        }, 0) || 0;
+        }, 0);
         
         // Calculate additional committed amount from investors
-        const committedTotal = data?.reduce((sum, item) => {
+        const committedTotal = combinedData.reduce((sum, item) => {
           // Check if the investor is committed
-          const isCommitted = item.investor_status && item.investor_status.committed;
+          const isCommitted = item.status && item.status.committed;
           
           // Only add to committed amount if committed
           return isCommitted ? sum + Number(item.investment_amount) : sum;
-        }, 0) || 0;
+        }, 0);
         
         setInterestedAmount(total);
         setRaisedAmount(prevAmount => 55500 + committedTotal); // Base amount plus committed investors
         
         // Set count of interested investors (excluding committed ones)
-        setInvestorsCount(data?.filter(item => 
-          !(item.investor_status && item.investor_status.committed)
-        ).length || 0);
+        setInvestorsCount(combinedData.filter(item => 
+          !(item.status && item.status.committed)
+        ).length);
         
       } catch (error) {
         console.error('Error in useEffect:', error);
