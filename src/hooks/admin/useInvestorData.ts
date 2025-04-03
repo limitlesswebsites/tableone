@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -15,9 +14,6 @@ export const useInvestorData = () => {
   const [sortField, setSortField] = useState<SortField>('created_at');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
-  // Monthly interest data for chart
-  const [monthlyData, setMonthlyData] = useState<{ month: string, value: number }[]>([]);
-
   // Calculate metrics
   const totalInterestedAmount = investorData.reduce((sum, investor) => sum + investor.investment_amount, 0);
   const totalInvestorCount = investorData.length;
@@ -26,10 +22,8 @@ export const useInvestorData = () => {
   // Handle sorting
   const handleSort = (field: SortField) => {
     if (field === sortField) {
-      // Toggle order if clicking on the same field
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
-      // Set new field and default to descending
       setSortField(field);
       setSortOrder('desc');
     }
@@ -60,7 +54,6 @@ export const useInvestorData = () => {
       const currentValue = investorToUpdate.status?.[field] || false;
       const newValue = !currentValue;
       
-      // Update local state first for responsive UI
       setCombinedData(prevData => 
         prevData.map(investor => 
           investor.email === email 
@@ -75,9 +68,7 @@ export const useInvestorData = () => {
         )
       );
       
-      // Check if we need to create a new record or update existing one
       if (!investorToUpdate.status) {
-        // Create a new record
         const { error } = await supabase
           .from('investor_status')
           .insert({ 
@@ -90,7 +81,6 @@ export const useInvestorData = () => {
           
         if (error) throw error;
       } else {
-        // Update existing record
         const { error } = await supabase
           .from('investor_status')
           .update({ [field]: newValue } as any)
@@ -111,7 +101,6 @@ export const useInvestorData = () => {
         variant: "destructive"
       });
       
-      // Revert local state on error
       await fetchInvestorData();
     }
   };
@@ -123,7 +112,6 @@ export const useInvestorData = () => {
       
       if (!investorToUpdate) return;
       
-      // Update local state first for responsive UI
       setCombinedData(prevData => 
         prevData.map(investor => 
           investor.email === email 
@@ -139,9 +127,7 @@ export const useInvestorData = () => {
         )
       );
       
-      // Check if we need to create a new record or update existing one
       if (!investorToUpdate.status) {
-        // Create a new record
         const { error } = await supabase
           .from('investor_status')
           .insert({ 
@@ -153,7 +139,6 @@ export const useInvestorData = () => {
           
         if (error) throw error;
       } else {
-        // Update existing record
         const { error } = await supabase
           .from('investor_status')
           .update({ notes } as any)
@@ -174,7 +159,6 @@ export const useInvestorData = () => {
         variant: "destructive"
       });
       
-      // Revert local state on error
       await fetchInvestorData();
     }
   };
@@ -195,7 +179,6 @@ export const useInvestorData = () => {
     try {
       setIsLoading(true);
       
-      // Fetch investment interests
       const { data: interestsData, error: interestsError } = await supabase
         .from('investment_interests')
         .select('*')
@@ -206,26 +189,20 @@ export const useInvestorData = () => {
         throw interestsError;
       }
       
-      // Set investor interest data
       setInvestorData(interestsData || []);
       
       try {
-        // Fetch investor status data
         const { data: statusData, error: statusError } = await supabase
           .from('investor_status')
           .select('*');
           
         if (statusError) {
           console.error('Error fetching investor status:', statusError);
-          // Don't throw here, just set empty array to continue
           setInvestorStatusData([]);
         } else {
-          // Set investor status data with proper type assertion
           setInvestorStatusData(statusData as unknown as InvestorStatus[]);
           
-          // Combine the data
           const combined = (interestsData || []).map(interest => {
-            // Find the corresponding status record (if any) using investor_email
             const status = (statusData || []).find(
               s => (s as any).investor_email === interest.email
             ) as unknown as InvestorStatus | undefined;
@@ -242,7 +219,6 @@ export const useInvestorData = () => {
         }
       } catch (statusError) {
         console.error('Error handling status data:', statusError);
-        // Continue with just the investment data
         const combined = (interestsData || []).map(interest => ({
           ...interest,
           isEditing: false,
@@ -250,10 +226,6 @@ export const useInvestorData = () => {
         }));
         setCombinedData(combined);
       }
-      
-      // Process data for monthly chart
-      const monthlyInterest = processMonthlyData(interestsData || []);
-      setMonthlyData(monthlyInterest);
       
     } catch (error) {
       console.error('Error in fetchInvestorData:', error);
@@ -265,34 +237,6 @@ export const useInvestorData = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // Process data to show monthly interest totals
-  const processMonthlyData = (data: InvestorInterest[]): { month: string, value: number }[] => {
-    const monthlyTotals: Record<string, number> = {};
-    
-    data.forEach(item => {
-      const date = new Date(item.created_at);
-      const monthYear = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
-      
-      if (!monthlyTotals[monthYear]) {
-        monthlyTotals[monthYear] = 0;
-      }
-      
-      monthlyTotals[monthYear] += item.investment_amount;
-    });
-    
-    return Object.entries(monthlyTotals)
-      .map(([month, value]) => ({ month, value }))
-      .sort((a, b) => {
-        const [monthA, yearA] = a.month.split(' ');
-        const [monthB, yearB] = b.month.split(' ');
-        
-        if (yearA !== yearB) return Number(yearA) - Number(yearB);
-        
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        return months.indexOf(monthA) - months.indexOf(monthB);
-      });
   };
 
   // Initial data fetch
@@ -321,7 +265,6 @@ export const useInvestorData = () => {
     sortField,
     sortOrder,
     sortedInvestors,
-    monthlyData,
     totalInterestedAmount,
     totalInvestorCount,
     averageInvestmentAmount,

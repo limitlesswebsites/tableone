@@ -2,7 +2,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import MetricCard from '@/components/metrics/MetricCard';
-import ChartPanel from '@/components/metrics/ChartPanel';
 import { useInvestorData } from '@/hooks/admin/useInvestorData';
 import InvestorTable from '@/components/admin/InvestorTable';
 import InvestmentMetricsCard from '@/components/admin/InvestmentMetricsCard';
@@ -17,7 +16,6 @@ const Admin = () => {
     sortField,
     sortOrder,
     sortedInvestors,
-    monthlyData,
     totalInterestedAmount,
     totalInvestorCount,
     averageInvestmentAmount,
@@ -27,6 +25,9 @@ const Admin = () => {
     handleSaveNotes,
     handleNotesChange
   } = useInvestorData();
+
+  // Calculate total amount (committed + interested)
+  const totalAmount = committedAmount + totalInterestedAmount;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -69,13 +70,27 @@ const Admin = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <ChartPanel
-              title="Monthly Interest"
-              description="Investment interest by month"
-              data={monthlyData}
-              valuePrefix="$"
-              animationDelay={400}
-            />
+            {/* Total Amount Box */}
+            <Card className="backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl p-6">
+              <CardHeader>
+                <CardTitle className="text-center text-gradient font-sfpro">Total Amount</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col items-center justify-center">
+                <div className="text-5xl font-bold text-gradient-metallic mb-2">
+                  ${totalAmount.toLocaleString()}
+                </div>
+                <p className="text-white/70">Combined committed and interested capital</p>
+                <div className="w-full mt-4 bg-white/10 h-2 rounded-full">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+                    style={{ width: `${Math.min((totalAmount / targetAmount) * 100, 100)}%` }}
+                  ></div>
+                </div>
+                <div className="mt-2 text-white/60 text-sm">
+                  {((totalAmount / targetAmount) * 100).toFixed(1)}% of ${targetAmount.toLocaleString()} target
+                </div>
+              </CardContent>
+            </Card>
             
             <InvestmentMetricsCard
               averageInvestmentAmount={averageInvestmentAmount}
