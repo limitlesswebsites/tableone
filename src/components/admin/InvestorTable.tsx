@@ -41,12 +41,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
 
   return (
     <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden">
-      <div className="flex justify-between items-center p-6 border-b border-white/10">
-        <h2 className="text-xl font-semibold">Investor Details</h2>
-        <div className="text-white/70 text-sm">
-          {sortedInvestors.length} {sortedInvestors.length === 1 ? 'investor' : 'investors'} • Real-time updates enabled
-        </div>
-      </div>
+      <h2 className="text-xl font-semibold p-6 border-b border-white/10">Investor Details</h2>
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
@@ -85,12 +80,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
           </TableHeader>
           <TableBody>
             {sortedInvestors.map((investor, index) => (
-              <TableRow 
-                key={investor.id}
-                className={`border-white/10 ${index === 0 && investor.created_at && 
-                  (Date.now() - new Date(investor.created_at).getTime() < 60000) ? 
-                  'animate-highlight' : ''}`}
-              >
+              <TableRow key={index} className="border-white/10">
                 <TableCell className="font-medium">{investor.email}</TableCell>
                 <TableCell>
                   {investor.isEditingName ? (
