@@ -23,7 +23,9 @@ const Admin = () => {
     toggleEditMode,
     handleCheckboxChange,
     handleSaveNotes,
-    handleNotesChange
+    handleNotesChange,
+    handleNameChange,
+    handleSaveName
   } = useInvestorData();
 
   // Calculate total amount (committed + interested)
@@ -110,6 +112,8 @@ const Admin = () => {
             handleCheckboxChange={handleCheckboxChange}
             handleSaveNotes={handleSaveNotes}
             handleNotesChange={handleNotesChange}
+            handleNameChange={handleNameChange}
+            handleSaveName={handleSaveName}
           />
         </>
       )}

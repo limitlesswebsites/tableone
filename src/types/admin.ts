@@ -12,14 +12,17 @@ export interface InvestorStatus {
   reached_out: boolean;
   committed: boolean;
   notes: string | null;
+  name: string | null;
   created_at: string;
   updated_at: string;
 }
 
 export type CombinedInvestorData = InvestorInterest & {
   status?: InvestorStatus;
-  isEditing?: boolean;
+  isEditingNotes?: boolean;
+  isEditingName?: boolean;
   editedNotes?: string;
+  editedName?: string;
 };
 
 export type SortField = 'email' | 'investment_amount' | 'created_at';

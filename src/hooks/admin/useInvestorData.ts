@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -29,15 +30,17 @@ export const useInvestorData = () => {
     }
   };
 
-  // Toggle edit mode for a specific investor
-  const toggleEditMode = (email: string) => {
+  // Toggle edit mode for a specific investor (notes or name)
+  const toggleEditMode = (email: string, field: 'notes' | 'name' = 'notes') => {
     setCombinedData(prevData => 
       prevData.map(investor => 
         investor.email === email 
           ? { 
               ...investor, 
-              isEditing: !investor.isEditing,
-              editedNotes: investor.status?.notes || ''
+              isEditingNotes: field === 'notes' ? !investor.isEditingNotes : false,
+              isEditingName: field === 'name' ? !investor.isEditingName : false,
+              editedNotes: field === 'notes' ? investor.status?.notes || '' : investor.editedNotes,
+              editedName: field === 'name' ? investor.status?.name || '' : investor.editedName
             } 
           : investor
       )
@@ -75,6 +78,7 @@ export const useInvestorData = () => {
             investor_email: email, 
             [field]: newValue,
             notes: null,
+            name: null,
             reached_out: field === 'reached_out' ? newValue : false,
             committed: field === 'committed' ? newValue : false
           } as any);
@@ -117,7 +121,7 @@ export const useInvestorData = () => {
           investor.email === email 
             ? { 
                 ...investor, 
-                isEditing: false,
+                isEditingNotes: false,
                 status: { 
                   ...investor.status as InvestorStatus,
                   notes 
@@ -133,6 +137,7 @@ export const useInvestorData = () => {
           .insert({ 
             investor_email: email, 
             notes,
+            name: null,
             reached_out: false,
             committed: false
           } as any);
@@ -162,6 +167,65 @@ export const useInvestorData = () => {
       await fetchInvestorData();
     }
   };
+
+  // Handle saving name
+  const handleSaveName = async (email: string, name: string) => {
+    try {
+      const investorToUpdate = combinedData.find(i => i.email === email);
+      
+      if (!investorToUpdate) return;
+      
+      setCombinedData(prevData => 
+        prevData.map(investor => 
+          investor.email === email 
+            ? { 
+                ...investor, 
+                isEditingName: false,
+                status: { 
+                  ...investor.status as InvestorStatus,
+                  name 
+                } 
+              } 
+            : investor
+        )
+      );
+      
+      if (!investorToUpdate.status) {
+        const { error } = await supabase
+          .from('investor_status')
+          .insert({ 
+            investor_email: email, 
+            name,
+            notes: null,
+            reached_out: false,
+            committed: false
+          } as any);
+          
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('investor_status')
+          .update({ name } as any)
+          .eq('investor_email', email);
+          
+        if (error) throw error;
+      }
+      
+      toast({
+        title: "Success",
+        description: "Investor name updated successfully",
+      });
+    } catch (error) {
+      console.error("Error updating name:", error);
+      toast({
+        title: "Failed to update name",
+        description: "There was an error updating the name.",
+        variant: "destructive"
+      });
+      
+      await fetchInvestorData();
+    }
+  };
   
   // Handle notes input change
   const handleNotesChange = (email: string, notes: string) => {
@@ -169,6 +233,17 @@ export const useInvestorData = () => {
       prevData.map(investor => 
         investor.email === email 
           ? { ...investor, editedNotes: notes } 
+          : investor
+      )
+    );
+  };
+
+  // Handle name input change
+  const handleNameChange = (email: string, name: string) => {
+    setCombinedData(prevData => 
+      prevData.map(investor => 
+        investor.email === email 
+          ? { ...investor, editedName: name } 
           : investor
       )
     );
@@ -210,8 +285,10 @@ export const useInvestorData = () => {
             return {
               ...interest,
               status,
-              isEditing: false,
-              editedNotes: status?.notes || ''
+              isEditingNotes: false,
+              isEditingName: false,
+              editedNotes: status?.notes || '',
+              editedName: status?.name || ''
             };
           });
           
@@ -221,8 +298,10 @@ export const useInvestorData = () => {
         console.error('Error handling status data:', statusError);
         const combined = (interestsData || []).map(interest => ({
           ...interest,
-          isEditing: false,
-          editedNotes: ''
+          isEditingNotes: false,
+          isEditingName: false,
+          editedNotes: '',
+          editedName: ''
         }));
         setCombinedData(combined);
       }
@@ -273,5 +352,7 @@ export const useInvestorData = () => {
     handleCheckboxChange,
     handleSaveNotes,
     handleNotesChange,
+    handleNameChange,
+    handleSaveName
   };
 };

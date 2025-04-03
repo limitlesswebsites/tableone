@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp, Edit, Save } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { SortField, SortOrder, CombinedInvestorData } from '@/types/admin';
 
 interface InvestorTableProps {
@@ -16,6 +17,8 @@ interface InvestorTableProps {
   handleCheckboxChange: (email: string, field: 'reached_out' | 'committed') => Promise<void>;
   handleSaveNotes: (email: string, notes: string) => Promise<void>;
   handleNotesChange: (email: string, notes: string) => void;
+  handleNameChange: (email: string, name: string) => void;
+  handleSaveName: (email: string, name: string) => Promise<void>;
 }
 
 const InvestorTable: React.FC<InvestorTableProps> = ({
@@ -27,6 +30,8 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
   handleCheckboxChange,
   handleSaveNotes,
   handleNotesChange,
+  handleNameChange,
+  handleSaveName,
 }) => {
   // Render sort icon
   const renderSortIcon = (field: SortField) => {
@@ -46,6 +51,9 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                 onClick={() => handleSort('email')}
               >
                 Email {renderSortIcon('email')}
+              </TableHead>
+              <TableHead className="text-white/70">
+                Name
               </TableHead>
               <TableHead 
                 className="text-white/70 text-right cursor-pointer hover:text-white transition-colors"
@@ -74,6 +82,35 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
             {sortedInvestors.map((investor, index) => (
               <TableRow key={index} className="border-white/10">
                 <TableCell className="font-medium">{investor.email}</TableCell>
+                <TableCell>
+                  {investor.isEditingName ? (
+                    <div className="flex gap-2 items-center">
+                      <Input 
+                        value={investor.editedName || ''} 
+                        onChange={(e) => handleNameChange(investor.email, e.target.value)}
+                        className="bg-white/10 border-white/20 text-white"
+                        placeholder="Enter investor name"
+                      />
+                      <Button 
+                        size="sm"
+                        onClick={() => handleSaveName(investor.email, investor.editedName || '')}
+                      >
+                        <Save className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex justify-between items-center">
+                      <span>{investor.status?.name || '—'}</span>
+                      <Button 
+                        size="sm" 
+                        variant="ghost"
+                        onClick={() => toggleEditMode(investor.email, 'name')}
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  )}
+                </TableCell>
                 <TableCell className="text-right">${investor.investment_amount.toLocaleString()}</TableCell>
                 <TableCell className="text-right">
                   {new Date(investor.created_at).toLocaleDateString('en-US', {
@@ -101,7 +138,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                   </div>
                 </TableCell>
                 <TableCell className="max-w-[250px]">
-                  {investor.isEditing ? (
+                  {investor.isEditingNotes ? (
                     <div className="flex flex-col gap-2">
                       <Textarea 
                         value={investor.editedNotes || ''} 
@@ -113,7 +150,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                         <Button 
                           size="sm" 
                           variant="outline"
-                          onClick={() => toggleEditMode(investor.email)}
+                          onClick={() => toggleEditMode(investor.email, 'notes')}
                         >
                           Cancel
                         </Button>
@@ -136,7 +173,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                       <Button 
                         size="sm" 
                         variant="ghost"
-                        onClick={() => toggleEditMode(investor.email)}
+                        onClick={() => toggleEditMode(investor.email, 'notes')}
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
