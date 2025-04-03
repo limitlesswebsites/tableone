@@ -15,10 +15,24 @@ export const useInvestorData = () => {
   const [sortField, setSortField] = useState<SortField>('created_at');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
-  // Calculate metrics
-  const totalInterestedAmount = investorData.reduce((sum, investor) => sum + investor.investment_amount, 0);
+  // Calculate metrics - updated to separate committed from interested
   const totalInvestorCount = investorData.length;
-  const averageInvestmentAmount = totalInvestorCount > 0 ? totalInterestedAmount / totalInvestorCount : 0;
+  
+  // Calculate committed and interested amounts separately
+  const committedAmounts = combinedData
+    .filter(investor => investor.status?.committed)
+    .reduce((sum, investor) => sum + investor.investment_amount, 0);
+    
+  const interestedAmounts = combinedData
+    .filter(investor => !investor.status?.committed)
+    .reduce((sum, investor) => sum + investor.investment_amount, 0);
+  
+  const totalInterestedAmount = interestedAmounts;
+  const totalCommittedAmount = committedAmounts;
+  
+  const averageInvestmentAmount = totalInvestorCount > 0 
+    ? (totalInterestedAmount + totalCommittedAmount) / totalInvestorCount 
+    : 0;
   
   // Handle sorting
   const handleSort = (field: SortField) => {
@@ -345,6 +359,7 @@ export const useInvestorData = () => {
     sortOrder,
     sortedInvestors,
     totalInterestedAmount,
+    totalCommittedAmount,
     totalInvestorCount,
     averageInvestmentAmount,
     handleSort,

@@ -15,6 +15,9 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
   committedAmount,
   totalInterestedAmount,
 }) => {
+  // Calculate the total amount (committed + interested)
+  const totalAmount = committedAmount + totalInterestedAmount;
+  
   return (
     <Card className="backdrop-blur-xl bg-white/5 border border-white/10">
       <CardHeader>
@@ -35,7 +38,7 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
           <div className="flex justify-between items-center pb-2 border-b border-white/10">
             <span className="text-white/70">Total Funding %</span>
             <span className="font-semibold">
-              {((committedAmount + totalInterestedAmount) / targetAmount * 100).toFixed(1)}%
+              {(totalAmount / targetAmount * 100).toFixed(1)}%
             </span>
           </div>
           

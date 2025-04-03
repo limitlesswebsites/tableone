@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,6 @@ const Admin = () => {
   const { signOut, user } = useAuth();
   
   // Investment data states
-  const committedAmount = 55500; // Fixed committed amount
   const targetAmount = 400000; // Target amount
   
   const {
@@ -22,6 +22,7 @@ const Admin = () => {
     sortOrder,
     sortedInvestors,
     totalInterestedAmount,
+    totalCommittedAmount,
     totalInvestorCount,
     averageInvestmentAmount,
     handleSort,
@@ -34,7 +35,7 @@ const Admin = () => {
   } = useInvestorData();
 
   // Calculate total amount (committed + interested)
-  const totalAmount = committedAmount + totalInterestedAmount;
+  const totalAmount = totalCommittedAmount + totalInterestedAmount;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -77,7 +78,7 @@ const Admin = () => {
             
             <MetricCard
               title="Committed Amount"
-              value={committedAmount}
+              value={totalCommittedAmount}
               prefix="$"
               description="Total committed investment"
               delay={200}
@@ -118,7 +119,7 @@ const Admin = () => {
             <InvestmentMetricsCard
               averageInvestmentAmount={averageInvestmentAmount}
               targetAmount={targetAmount}
-              committedAmount={committedAmount}
+              committedAmount={totalCommittedAmount}
               totalInterestedAmount={totalInterestedAmount}
             />
           </div>
