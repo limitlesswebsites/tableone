@@ -249,6 +249,60 @@ export const useInvestorData = () => {
     );
   };
 
+  // Process a new investment interest
+  const processNewInvestmentInterest = (newInterest: InvestorInterest) => {
+    // Check if this is truly a new record or an update to an existing one
+    const existingIndex = investorData.findIndex(i => i.id === newInterest.id);
+    
+    if (existingIndex >= 0) {
+      // Update existing record
+      setInvestorData(prev => {
+        const updated = [...prev];
+        updated[existingIndex] = newInterest;
+        return updated;
+      });
+      
+      // Update combined data
+      setCombinedData(prev => {
+        return prev.map(item => 
+          item.id === newInterest.id 
+            ? {
+                ...item,
+                ...newInterest,
+                // Preserve the status and other combined data properties
+                status: item.status,
+                isEditingNotes: false,
+                isEditingName: false,
+                editedNotes: item.editedNotes,
+                editedName: item.editedName
+              }
+            : item
+        );
+      });
+    } else {
+      // Add new record
+      setInvestorData(prev => [...prev, newInterest]);
+      
+      // Add to combined data
+      setCombinedData(prev => [
+        ...prev,
+        {
+          ...newInterest,
+          isEditingNotes: false,
+          isEditingName: false,
+          editedNotes: '',
+          editedName: ''
+        }
+      ]);
+      
+      // Show toast notification for new investment interest
+      toast({
+        title: "New Investment Interest",
+        description: `New investment of $${newInterest.investment_amount.toLocaleString()} received from ${newInterest.email}`,
+      });
+    }
+  };
+
   // Fetch investment interest data and status data
   const fetchInvestorData = async () => {
     try {
@@ -318,9 +372,34 @@ export const useInvestorData = () => {
     }
   };
 
-  // Initial data fetch
+  // Setup real-time subscription for new investment interests
   useEffect(() => {
+    // Initial data fetch
     fetchInvestorData();
+
+    // Set up real-time listener
+    const channel = supabase
+      .channel('investment-interests-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'investment_interests'
+        },
+        (payload) => {
+          console.log('New investment interest received:', payload);
+          // Process the new investment interest
+          const newInterest = payload.new as InvestorInterest;
+          processNewInvestmentInterest(newInterest);
+        }
+      )
+      .subscribe();
+      
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [toast]);
 
   // Sort investors data
