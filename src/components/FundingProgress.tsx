@@ -15,6 +15,7 @@ const FundingProgress: React.FC = () => {
   // Investment data states
   const [raisedAmount, setRaisedAmount] = useState(55500); // Fixed committed amount ($20,000)
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
+  const [investorsCount, setInvestorsCount] = useState(0); // Count of interested investors
   const targetAmount = 400000; // $100,000 target
   
   // Calculate percentages
@@ -38,6 +39,9 @@ const FundingProgress: React.FC = () => {
         // Calculate total interested amount
         const total = data?.reduce((sum, item) => sum + Number(item.investment_amount), 0) || 0;
         setInterestedAmount(total);
+        
+        // Set count of interested investors
+        setInvestorsCount(data?.length || 0);
       } catch (error) {
         console.error('Error in useEffect:', error);
         toast({
@@ -77,13 +81,21 @@ const FundingProgress: React.FC = () => {
               <p className="mt-3 text-white/60">Loading investment data...</p>
             </div>
           ) : (
-            <FundingProgressBar 
-              raisedAmount={raisedAmount}
-              interestedAmount={interestedAmount}
-              targetAmount={targetAmount}
-              committedPercentage={committedPercentage}
-              interestedPercentage={interestedPercentage}
-            />
+            <>
+              <FundingProgressBar 
+                raisedAmount={raisedAmount}
+                interestedAmount={interestedAmount}
+                targetAmount={targetAmount}
+                committedPercentage={committedPercentage}
+                interestedPercentage={interestedPercentage}
+              />
+              
+              <div className="text-center mt-1 mb-8">
+                <p className="text-white/70 text-sm">
+                  <span className="font-semibold">{investorsCount}</span> {investorsCount === 1 ? 'investor has' : 'investors have'} expressed interest
+                </p>
+              </div>
+            </>
           )}
           
           <FundingUseCards />
