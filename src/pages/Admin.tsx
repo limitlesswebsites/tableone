@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Check, X, Edit, Save } from 'lucide-react';
 import MetricCard from '@/components/metrics/MetricCard';
 import ChartPanel from '@/components/metrics/ChartPanel';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
 interface InvestorInterest {
   email: string;
@@ -14,11 +17,26 @@ interface InvestorInterest {
   created_at: string;
 }
 
+interface InvestorStatus {
+  investor_email: string;
+  reached_out: boolean;
+  committed: boolean;
+  notes: string | null;
+}
+
+type CombinedInvestorData = InvestorInterest & {
+  status?: InvestorStatus;
+  isEditing?: boolean;
+  editedNotes?: string;
+};
+
 type SortField = 'email' | 'investment_amount' | 'created_at';
 type SortOrder = 'asc' | 'desc';
 
 const Admin = () => {
   const [investorData, setInvestorData] = useState<InvestorInterest[]>([]);
+  const [investorStatusData, setInvestorStatusData] = useState<InvestorStatus[]>([]);
+  const [combinedData, setCombinedData] = useState<CombinedInvestorData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
@@ -50,8 +68,161 @@ const Admin = () => {
     }
   };
 
+  // Toggle edit mode for a specific investor
+  const toggleEditMode = (email: string) => {
+    setCombinedData(prevData => 
+      prevData.map(investor => 
+        investor.email === email 
+          ? { 
+              ...investor, 
+              isEditing: !investor.isEditing,
+              editedNotes: investor.status?.notes || ''
+            } 
+          : investor
+      )
+    );
+  };
+
+  // Handle checkbox change for reached_out and committed
+  const handleCheckboxChange = async (email: string, field: 'reached_out' | 'committed') => {
+    try {
+      const investorToUpdate = combinedData.find(i => i.email === email);
+      
+      if (!investorToUpdate) return;
+      
+      const currentValue = investorToUpdate.status?.[field] || false;
+      const newValue = !currentValue;
+      
+      // Update local state first for responsive UI
+      setCombinedData(prevData => 
+        prevData.map(investor => 
+          investor.email === email 
+            ? { 
+                ...investor, 
+                status: { 
+                  ...investor.status,
+                  [field]: newValue 
+                } as InvestorStatus
+              } 
+            : investor
+        )
+      );
+      
+      // Check if we need to create a new record or update existing one
+      if (!investorToUpdate.status) {
+        // Create a new record
+        const { error } = await supabase
+          .from('investor_status')
+          .insert({ 
+            investor_email: email, 
+            [field]: newValue,
+            notes: null
+          });
+          
+        if (error) throw error;
+      } else {
+        // Update existing record
+        const { error } = await supabase
+          .from('investor_status')
+          .update({ [field]: newValue })
+          .eq('investor_email', email);
+          
+        if (error) throw error;
+      }
+      
+      toast({
+        title: "Success",
+        description: `Investor ${field.replace('_', ' ')} status updated successfully`,
+      });
+    } catch (error) {
+      console.error(`Error updating ${field}:`, error);
+      toast({
+        title: `Failed to update ${field.replace('_', ' ')} status`,
+        description: "There was an error updating the status.",
+        variant: "destructive"
+      });
+      
+      // Revert local state on error
+      await fetchInvestorData();
+    }
+  };
+  
+  // Handle saving notes
+  const handleSaveNotes = async (email: string, notes: string) => {
+    try {
+      const investorToUpdate = combinedData.find(i => i.email === email);
+      
+      if (!investorToUpdate) return;
+      
+      // Update local state first for responsive UI
+      setCombinedData(prevData => 
+        prevData.map(investor => 
+          investor.email === email 
+            ? { 
+                ...investor, 
+                isEditing: false,
+                status: { 
+                  ...investor.status,
+                  notes 
+                } as InvestorStatus
+              } 
+            : investor
+        )
+      );
+      
+      // Check if we need to create a new record or update existing one
+      if (!investorToUpdate.status) {
+        // Create a new record
+        const { error } = await supabase
+          .from('investor_status')
+          .insert({ 
+            investor_email: email, 
+            notes,
+            reached_out: false,
+            committed: false
+          });
+          
+        if (error) throw error;
+      } else {
+        // Update existing record
+        const { error } = await supabase
+          .from('investor_status')
+          .update({ notes })
+          .eq('investor_email', email);
+          
+        if (error) throw error;
+      }
+      
+      toast({
+        title: "Success",
+        description: "Investor notes updated successfully",
+      });
+    } catch (error) {
+      console.error("Error updating notes:", error);
+      toast({
+        title: "Failed to update notes",
+        description: "There was an error updating the notes.",
+        variant: "destructive"
+      });
+      
+      // Revert local state on error
+      await fetchInvestorData();
+    }
+  };
+  
+  // Handle notes input change
+  const handleNotesChange = (email: string, notes: string) => {
+    setCombinedData(prevData => 
+      prevData.map(investor => 
+        investor.email === email 
+          ? { ...investor, editedNotes: notes } 
+          : investor
+      )
+    );
+  };
+
   // Sort investors data
-  const sortedInvestors = [...investorData].sort((a, b) => {
+  const sortedInvestors = [...combinedData].sort((a, b) => {
     let comparison = 0;
     
     if (sortField === 'email') {
@@ -65,40 +236,68 @@ const Admin = () => {
     return sortOrder === 'asc' ? comparison : -comparison;
   });
 
-  // Fetch investment interest data
-  useEffect(() => {
-    const fetchInvestmentInterests = async () => {
-      try {
-        setIsLoading(true);
-        const { data, error } = await supabase
-          .from('investment_interests')
-          .select('*')
-          .order('created_at', { ascending: false });
-          
-        if (error) {
-          console.error('Error fetching investment interests:', error);
-          throw error;
-        }
+  // Fetch investment interest data and status data
+  const fetchInvestorData = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Fetch investment interests
+      const { data: interestsData, error: interestsError } = await supabase
+        .from('investment_interests')
+        .select('*')
+        .order('created_at', { ascending: false });
         
-        setInvestorData(data || []);
-        
-        // Process data for monthly chart
-        const monthlyInterest = processMonthlyData(data || []);
-        setMonthlyData(monthlyInterest);
-        
-      } catch (error) {
-        console.error('Error in useEffect:', error);
-        toast({
-          title: "Failed to load investment data",
-          description: "There was an issue retrieving the investment interests.",
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
+      if (interestsError) {
+        console.error('Error fetching investment interests:', interestsError);
+        throw interestsError;
       }
-    };
+      
+      setInvestorData(interestsData || []);
+      
+      // Fetch investor status data
+      const { data: statusData, error: statusError } = await supabase
+        .from('investor_status')
+        .select('*');
+        
+      if (statusError) {
+        console.error('Error fetching investor status:', statusError);
+        throw statusError;
+      }
+      
+      setInvestorStatusData(statusData || []);
+      
+      // Combine the data
+      const combined = (interestsData || []).map(interest => {
+        const status = (statusData || []).find(s => s.investor_email === interest.email);
+        return {
+          ...interest,
+          status,
+          isEditing: false,
+          editedNotes: status?.notes || ''
+        };
+      });
+      
+      setCombinedData(combined);
+      
+      // Process data for monthly chart
+      const monthlyInterest = processMonthlyData(interestsData || []);
+      setMonthlyData(monthlyInterest);
+      
+    } catch (error) {
+      console.error('Error in fetchInvestorData:', error);
+      toast({
+        title: "Failed to load investment data",
+        description: "There was an issue retrieving the investment interests.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchInvestmentInterests();
+  // Initial data fetch
+  useEffect(() => {
+    fetchInvestorData();
   }, [toast]);
   
   // Process data to show monthly interest totals
@@ -252,6 +451,15 @@ const Admin = () => {
                     >
                       Date {renderSortIcon('created_at')}
                     </TableHead>
+                    <TableHead className="text-white/70 text-center">
+                      Reached Out
+                    </TableHead>
+                    <TableHead className="text-white/70 text-center">
+                      Committed
+                    </TableHead>
+                    <TableHead className="text-white/70">
+                      Notes
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -265,6 +473,67 @@ const Admin = () => {
                           month: 'short',
                           day: 'numeric'
                         })}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex justify-center">
+                          <Checkbox 
+                            checked={investor.status?.reached_out || false}
+                            onCheckedChange={() => handleCheckboxChange(investor.email, 'reached_out')}
+                            className="data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                          />
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex justify-center">
+                          <Checkbox 
+                            checked={investor.status?.committed || false}
+                            onCheckedChange={() => handleCheckboxChange(investor.email, 'committed')}
+                            className="data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
+                          />
+                        </div>
+                      </TableCell>
+                      <TableCell className="max-w-[250px]">
+                        {investor.isEditing ? (
+                          <div className="flex flex-col gap-2">
+                            <Textarea 
+                              value={investor.editedNotes || ''} 
+                              onChange={(e) => handleNotesChange(investor.email, e.target.value)}
+                              className="min-h-[80px] bg-white/10 border-white/20 text-white"
+                              placeholder="Add notes about this investor..."
+                            />
+                            <div className="flex gap-2 justify-end">
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                onClick={() => toggleEditMode(investor.email)}
+                              >
+                                Cancel
+                              </Button>
+                              <Button 
+                                size="sm"
+                                onClick={() => handleSaveNotes(investor.email, investor.editedNotes || '')}
+                              >
+                                <Save className="mr-1 h-4 w-4" />
+                                Save
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex justify-between items-start gap-2">
+                            <div className="text-sm text-white/80 line-clamp-2">
+                              {investor.status?.notes || 
+                                <span className="text-white/40 italic">No notes</span>
+                              }
+                            </div>
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              onClick={() => toggleEditMode(investor.email)}
+                            >
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}
