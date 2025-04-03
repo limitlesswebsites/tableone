@@ -30,6 +30,36 @@ export type Database = {
         }
         Relationships: []
       }
+      investor_status: {
+        Row: {
+          committed: boolean
+          created_at: string
+          id: string
+          investor_email: string
+          notes: string | null
+          reached_out: boolean
+          updated_at: string
+        }
+        Insert: {
+          committed?: boolean
+          created_at?: string
+          id?: string
+          investor_email: string
+          notes?: string | null
+          reached_out?: boolean
+          updated_at?: string
+        }
+        Update: {
+          committed?: boolean
+          created_at?: string
+          id?: string
+          investor_email?: string
+          notes?: string | null
+          reached_out?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
