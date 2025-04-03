@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { InvestorStatusRow } from '@/integrations/supabase/types-extension';
 
 interface InvestorInterest {
   email: string;
@@ -104,9 +105,9 @@ const Admin = () => {
             ? { 
                 ...investor, 
                 status: { 
-                  ...investor.status,
+                  ...investor.status as InvestorStatus,
                   [field]: newValue 
-                } as InvestorStatus
+                } 
               } 
             : investor
         )
@@ -168,9 +169,9 @@ const Admin = () => {
                 ...investor, 
                 isEditing: false,
                 status: { 
-                  ...investor.status,
+                  ...investor.status as InvestorStatus,
                   notes 
-                } as InvestorStatus
+                } 
               } 
             : investor
         )
@@ -261,31 +262,43 @@ const Admin = () => {
       // Set investor interest data
       setInvestorData(interestsData || []);
       
-      // Fetch investor status data
-      const { data: statusData, error: statusError } = await supabase
-        .from('investor_status')
-        .select('*');
-        
-      if (statusError) {
-        console.error('Error fetching investor status:', statusError);
-        throw statusError;
-      }
-      
-      // Set investor status data
-      setInvestorStatusData(statusData || []);
-      
-      // Combine the data
-      const combined = (interestsData || []).map(interest => {
-        const status = (statusData || []).find(s => s.investor_email === interest.email);
-        return {
+      try {
+        // Fetch investor status data
+        const { data: statusData, error: statusError } = await supabase
+          .from('investor_status')
+          .select('*');
+          
+        if (statusError) {
+          console.error('Error fetching investor status:', statusError);
+          // Don't throw here, just set empty array to continue
+          setInvestorStatusData([]);
+        } else {
+          // Set investor status data
+          setInvestorStatusData(statusData as InvestorStatus[] || []);
+          
+          // Combine the data
+          const combined = (interestsData || []).map(interest => {
+            const status = (statusData || []).find(s => s.investor_email === interest.email);
+            return {
+              ...interest,
+              status: status as InvestorStatus | undefined,
+              isEditing: false,
+              editedNotes: status?.notes || ''
+            };
+          });
+          
+          setCombinedData(combined);
+        }
+      } catch (statusError) {
+        console.error('Error handling status data:', statusError);
+        // Continue with just the investment data
+        const combined = (interestsData || []).map(interest => ({
           ...interest,
-          status,
           isEditing: false,
-          editedNotes: status?.notes || ''
-        };
-      });
-      
-      setCombinedData(combined);
+          editedNotes: ''
+        }));
+        setCombinedData(combined);
+      }
       
       // Process data for monthly chart
       const monthlyInterest = processMonthlyData(interestsData || []);
