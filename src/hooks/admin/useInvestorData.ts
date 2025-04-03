@@ -18,6 +18,9 @@ export const useInvestorData = () => {
   // Calculate metrics - updated to separate committed from interested
   const totalInvestorCount = investorData.length;
   
+  // Base committed amount
+  const baseCommittedAmount = 55500;
+  
   // Calculate committed and interested amounts separately
   const committedAmounts = combinedData
     .filter(investor => investor.status?.committed)
@@ -28,10 +31,10 @@ export const useInvestorData = () => {
     .reduce((sum, investor) => sum + investor.investment_amount, 0);
   
   const totalInterestedAmount = interestedAmounts;
-  const totalCommittedAmount = committedAmounts;
+  const totalCommittedAmount = baseCommittedAmount + committedAmounts;
   
   const averageInvestmentAmount = totalInvestorCount > 0 
-    ? (totalInterestedAmount + totalCommittedAmount) / totalInvestorCount 
+    ? (totalInterestedAmount + committedAmounts) / totalInvestorCount 
     : 0;
   
   // Handle sorting
