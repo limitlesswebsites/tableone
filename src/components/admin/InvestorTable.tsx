@@ -13,7 +13,7 @@ interface InvestorTableProps {
   sortField: SortField;
   sortOrder: SortOrder;
   handleSort: (field: SortField) => void;
-  toggleEditMode: (email: string) => void;
+  toggleEditMode: (email: string, field?: 'notes' | 'name') => void;
   handleCheckboxChange: (email: string, field: 'reached_out' | 'committed') => Promise<void>;
   handleSaveNotes: (email: string, notes: string) => Promise<void>;
   handleNotesChange: (email: string, notes: string) => void;
@@ -150,7 +150,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                         <Button 
                           size="sm" 
                           variant="outline"
-                          onClick={() => toggleEditMode(investor.email, 'notes')}
+                          onClick={() => toggleEditMode(investor.email)}
                         >
                           Cancel
                         </Button>
