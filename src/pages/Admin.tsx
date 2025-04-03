@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp, Check, X, Edit, Save } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Save } from 'lucide-react';
 import MetricCard from '@/components/metrics/MetricCard';
 import ChartPanel from '@/components/metrics/ChartPanel';
 import { supabase } from '@/integrations/supabase/client';
@@ -15,13 +15,17 @@ interface InvestorInterest {
   email: string;
   investment_amount: number;
   created_at: string;
+  id: string;
 }
 
 interface InvestorStatus {
+  id: string;
   investor_email: string;
   reached_out: boolean;
   committed: boolean;
   notes: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 type CombinedInvestorData = InvestorInterest & {
@@ -116,7 +120,9 @@ const Admin = () => {
           .insert({ 
             investor_email: email, 
             [field]: newValue,
-            notes: null
+            notes: null,
+            reached_out: field === 'reached_out' ? newValue : false,
+            committed: field === 'committed' ? newValue : false
           });
           
         if (error) throw error;
@@ -252,6 +258,7 @@ const Admin = () => {
         throw interestsError;
       }
       
+      // Set investor interest data
       setInvestorData(interestsData || []);
       
       // Fetch investor status data
@@ -264,6 +271,7 @@ const Admin = () => {
         throw statusError;
       }
       
+      // Set investor status data
       setInvestorStatusData(statusData || []);
       
       // Combine the data
