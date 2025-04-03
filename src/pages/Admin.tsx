@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import MetricCard from '@/components/metrics/MetricCard';
-import { useInvestorData } from '@/hooks/admin/useInvestorData';
+import { useInvestorData } from '@/hooks/admin';
 import InvestorTable from '@/components/admin/InvestorTable';
 import InvestmentMetricsCard from '@/components/admin/InvestmentMetricsCard';
 import { useAuth } from '@/context/AuthContext';
