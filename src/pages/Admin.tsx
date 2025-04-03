@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -124,14 +123,14 @@ const Admin = () => {
             notes: null,
             reached_out: field === 'reached_out' ? newValue : false,
             committed: field === 'committed' ? newValue : false
-          });
+          } as unknown as Record<string, unknown>);
           
         if (error) throw error;
       } else {
         // Update existing record
         const { error } = await supabase
           .from('investor_status')
-          .update({ [field]: newValue })
+          .update({ [field]: newValue } as unknown as Record<string, unknown>)
           .eq('investor_email', email);
           
         if (error) throw error;
@@ -187,14 +186,14 @@ const Admin = () => {
             notes,
             reached_out: false,
             committed: false
-          });
+          } as unknown as Record<string, unknown>);
           
         if (error) throw error;
       } else {
         // Update existing record
         const { error } = await supabase
           .from('investor_status')
-          .update({ notes })
+          .update({ notes } as unknown as Record<string, unknown>)
           .eq('investor_email', email);
           
         if (error) throw error;
@@ -263,7 +262,7 @@ const Admin = () => {
       setInvestorData(interestsData || []);
       
       try {
-        // Fetch investor status data
+        // Fetch investor status data using a type assertion
         const { data: statusData, error: statusError } = await supabase
           .from('investor_status')
           .select('*');
@@ -273,15 +272,19 @@ const Admin = () => {
           // Don't throw here, just set empty array to continue
           setInvestorStatusData([]);
         } else {
-          // Set investor status data
-          setInvestorStatusData(statusData as InvestorStatus[] || []);
+          // Set investor status data with proper type assertion
+          setInvestorStatusData((statusData || []) as unknown as InvestorStatus[]);
           
           // Combine the data
           const combined = (interestsData || []).map(interest => {
-            const status = (statusData || []).find(s => s.investor_email === interest.email);
+            // Find the corresponding status record (if any) using investor_email
+            const status = (statusData || []).find(
+              s => (s as unknown as InvestorStatus).investor_email === interest.email
+            ) as unknown as InvestorStatus | undefined;
+            
             return {
               ...interest,
-              status: status as InvestorStatus | undefined,
+              status,
               isEditing: false,
               editedNotes: status?.notes || ''
             };
@@ -336,11 +339,9 @@ const Admin = () => {
       monthlyTotals[monthYear] += item.investment_amount;
     });
     
-    // Convert to array format for chart
     return Object.entries(monthlyTotals)
       .map(([month, value]) => ({ month, value }))
       .sort((a, b) => {
-        // Sort by date (assuming format is "MMM YYYY")
         const [monthA, yearA] = a.month.split(' ');
         const [monthB, yearB] = b.month.split(' ');
         
