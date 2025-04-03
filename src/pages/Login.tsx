@@ -67,35 +67,6 @@ const Login = () => {
     }
   };
 
-  const handleSignUp = async () => {
-    setIsLoading(true);
-    
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: window.location.origin + '/admin'
-        }
-      });
-      
-      if (error) throw error;
-      
-      toast({
-        title: "Registration initiated",
-        description: "Check your email for confirmation link to complete sign up."
-      });
-    } catch (error: any) {
-      toast({
-        title: "Registration failed",
-        description: error.message || "An error occurred during registration.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-900 to-black">
       <Card className="w-full max-w-md backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl">
@@ -136,7 +107,7 @@ const Login = () => {
               />
             </div>
 
-            <div className="pt-2 space-y-3">
+            <div className="pt-2">
               <Button 
                 type="submit" 
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500"
@@ -144,16 +115,12 @@ const Login = () => {
               >
                 {isLoading ? 'Logging in...' : 'Login'}
               </Button>
-              
-              <Button 
-                type="button" 
-                onClick={handleSignUp}
-                variant="outline"
-                className="w-full border border-white/20 text-white hover:bg-white/10"
-                disabled={isLoading}
-              >
-                Create Account
-              </Button>
+            </div>
+            
+            <div className="text-center mt-4">
+              <p className="text-sm text-white/60">
+                Contact the administrator to create an account
+              </p>
             </div>
           </form>
         </CardContent>
