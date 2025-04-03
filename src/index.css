@@ -1,14 +1,14 @@
 
-
+/* Main Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import the base styles */
+/* After Tailwind has been processed, we can include our custom styles */
+@import './App.css';
 @import './styles/base.css';
 @import './styles/utilities.css';
 @import './styles/animations.css';
-@import './App.css';
  
 @layer base {
   :root {
@@ -97,4 +97,3 @@
 .animate-highlight {
   animation: highlight-row 2s ease-out;
 }
-
