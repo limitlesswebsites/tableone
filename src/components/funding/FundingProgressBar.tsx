@@ -17,48 +17,40 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
   committedPercentage,
   interestedPercentage
 }) => {
-  // Calculate what percentage to visually display (capped at 100% total)
-  const displayCommittedPercentage = committedPercentage;
-  const displayInterestedPercentage = Math.min(interestedPercentage, 100 - committedPercentage);
-  
-  // Calculate actual percentages for display text (can exceed 100%)
-  const actualInterestedPercentage = (interestedAmount / targetAmount) * 100;
+  // Calculate total amount and percentage
+  const totalAmount = raisedAmount + interestedAmount;
+  const totalPercentage = Math.min((totalAmount / targetAmount) * 100, 100);
   
   return (
     <div className="text-center mb-10">
       <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Funding Progress</div>
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-white font-bold text-lg">
-          $<CountUp end={raisedAmount} />
-        </span>
-        <span className="text-white/60 text-lg">
-          $<CountUp end={targetAmount} />
-        </span>
-      </div>
       
-      <div className="w-full h-4 bg-white/10 rounded-full overflow-hidden mb-2">
-        <div className="h-full flex">
-          {/* Committed amount (green) */}
+      <div className="flex flex-col items-center justify-center">
+        <div className="text-4xl font-bold text-gradient-metallic mb-2">
+          $<CountUp end={totalAmount} />
+        </div>
+        <p className="text-white/70">Combined committed and interested capital</p>
+        
+        <div className="w-full mt-4 bg-white/10 h-2 rounded-full">
           <div 
-            className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${displayCommittedPercentage}%`, backgroundColor: '#05d9a7' }}
+            className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+            style={{ width: `${totalPercentage}%` }}
           ></div>
-          {/* Interested amount (purple) - capped to ensure bar doesn't exceed 100% */}
-          <div 
-            className="h-full transition-all duration-1000 ease-out shimmer"
-            style={{ width: `${displayInterestedPercentage}%`, backgroundColor: '#6633ff' }}
-          ></div>
+        </div>
+        
+        <div className="mt-2 text-white/60 text-sm">
+          <CountUp end={totalPercentage} decimals={1} suffix="%" /> of ${targetAmount.toLocaleString()} target
         </div>
       </div>
       
-      <div className="mt-2 flex justify-between items-center text-xs text-white/60">
+      <div className="mt-4 flex justify-between items-center text-xs text-white/60">
         <div className="flex items-center">
           <span className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></span>
           <span className="text-xs">Committed: <br/>$<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
         </div>
         <div className="flex items-center">
           <span className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></span>
-          <span className="text-xs">Interested: <br/>$<CountUp end={interestedAmount} /> (<CountUp end={actualInterestedPercentage} decimals={1} suffix="%" />)</span>
+          <span className="text-xs">Interested: <br/>$<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
         </div>
       </div>
     </div>
