@@ -8,6 +8,7 @@ interface InvestmentMetricsCardProps {
   committedAmount: number;
   totalInterestedAmount: number;
   userCount: number;
+  totalInvestorCount: number;
 }
 
 const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
@@ -16,9 +17,15 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
   committedAmount,
   totalInterestedAmount,
   userCount,
+  totalInvestorCount,
 }) => {
   // Calculate the total amount (committed + interested)
   const totalAmount = committedAmount + totalInterestedAmount;
+  
+  // Calculate the percentage of investors that are users
+  const userPercentage = totalInvestorCount > 0 
+    ? (userCount / totalInvestorCount) * 100 
+    : 0;
   
   return (
     <Card className="backdrop-blur-xl bg-white/5 border border-white/10">
@@ -45,9 +52,9 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
           </div>
           
           <div className="flex justify-between items-center">
-            <span className="text-white/70">Total Users</span>
+            <span className="text-white/70">Total Users Funding %</span>
             <span className="font-semibold">
-              {userCount}
+              {userPercentage.toFixed(1)}%
             </span>
           </div>
         </div>

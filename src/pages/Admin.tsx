@@ -114,6 +114,7 @@ const Admin = () => {
               committedAmount={totalCommittedAmount}
               totalInterestedAmount={totalInterestedAmount}
               userCount={userCount}
+              totalInvestorCount={totalInvestorCount}
             />
           </div>
           
