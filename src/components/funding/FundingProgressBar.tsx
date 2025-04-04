@@ -32,7 +32,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
         <div className="text-4xl font-bold text-gradient-metallic mb-2">
           $<CountUp end={totalAmount} />
         </div>
-        <p className="text-white/70">Combined committed and interested capital</p>
+        <p className="text-white/70">Committed and interested capital</p>
         
         <div className="w-3/5 mx-auto mt-4 bg-white/10 h-2 rounded-full">
           <div 
