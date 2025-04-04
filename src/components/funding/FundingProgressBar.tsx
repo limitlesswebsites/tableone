@@ -34,7 +34,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
         </div>
         <p className="text-white/70">Combined committed and interested capital</p>
         
-        <div className="w-full mt-4 bg-white/10 h-2 rounded-full">
+        <div className="w-3/5 mx-auto mt-4 bg-white/10 h-2 rounded-full">
           <div 
             className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
             style={{ width: `${barWidthPercentage}%` }}
