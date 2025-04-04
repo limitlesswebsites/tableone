@@ -72,10 +72,7 @@ const FundingProgress: React.FC = () => {
         setInterestedAmount(total);
         setRaisedAmount(prevAmount => 55500 + committedTotal); // Base amount plus committed investors
         
-        // Set count of interested investors (excluding committed ones)
-        setInvestorsCount(combinedData.filter(item => 
-          !(item.status && item.status.committed)
-        ).length);
+        // We're no longer tracking the count of investors, so this line is removed
         
       } catch (error) {
         console.error('Error in useEffect:', error);
