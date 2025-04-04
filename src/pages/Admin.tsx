@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -80,7 +79,7 @@ const Admin = () => {
             <MetricCard
               title="Total Users"
               value={userCount}
-              description="Number of committed investors"
+              description="Number of investors that are users"
               delay={200}
             />
           </div>
