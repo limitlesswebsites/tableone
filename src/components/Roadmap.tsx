@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const RoadmapItem: React.FC<{
@@ -11,7 +12,7 @@ const RoadmapItem: React.FC<{
 }> = ({ quarter, title, description, isActive = false, delay, logoImg, isGreen = false }) => {
   return (
     <div className={`relative animate-fade-in animate-delay-${delay}`}>
-      <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 w-4 h-4 rounded-full ${
+      <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full ${
         isGreen ? 'bg-[#05d9a7] shadow-lg shadow-[#05d9a7]/30' : 
         isActive ? 'bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg shadow-blue-500/30' : 'bg-white/30'
       } z-10`}></div>
