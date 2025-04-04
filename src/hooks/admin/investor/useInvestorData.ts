@@ -30,7 +30,8 @@ export const useInvestorData = () => {
     totalInterestedAmount,
     totalCommittedAmount,
     averageInvestmentAmount,
-    userCount
+    userCount,
+    totalUserAmount
   } = calculateInvestorMetrics(combinedData);
   
   // Handle sorting
@@ -141,6 +142,7 @@ export const useInvestorData = () => {
     totalInterestedAmount,
     totalCommittedAmount,
     totalInvestorCount,
+    totalUserAmount,
     averageInvestmentAmount,
     userCount,
     handleSort,
