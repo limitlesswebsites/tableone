@@ -68,8 +68,8 @@ const Admin = () => {
         </div>
       ) : (
         <>
-          {/* Key metrics overview */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {/* Key metrics overview - updated to show just Total Investors and Total Users */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <MetricCard
               title="Total Investors"
               value={totalInvestorCount}
@@ -78,19 +78,10 @@ const Admin = () => {
             />
             
             <MetricCard
-              title="Committed Amount"
-              value={totalCommittedAmount}
-              prefix="$"
-              description="Total committed investment"
+              title="Total Users"
+              value={userCount}
+              description="Number of committed investors"
               delay={200}
-            />
-            
-            <MetricCard
-              title="Interest Amount"
-              value={totalInterestedAmount}
-              prefix="$"
-              description="Total interested investment"
-              delay={300}
             />
           </div>
           
