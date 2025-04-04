@@ -38,19 +38,8 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
           ></div>
         </div>
         
-        <div className="mt-2 text-white/60 text-sm">
+        <div className="mt-2 mb-8 text-white/60 text-sm">
           <CountUp end={totalPercentage} decimals={1} suffix="%" /> of ${targetAmount.toLocaleString()} target
-        </div>
-      </div>
-      
-      <div className="mt-4 flex justify-between items-center text-xs text-white/60">
-        <div className="flex items-center">
-          <span className="w-3 h-3 rounded-full bg-[#05d9a7] mr-2"></span>
-          <span className="text-xs">Committed: <br/>$<CountUp end={raisedAmount} /> (<CountUp end={committedPercentage} decimals={1} suffix="%" />)</span>
-        </div>
-        <div className="flex items-center">
-          <span className="w-3 h-3 rounded-full bg-[#6633ff] mr-2"></span>
-          <span className="text-xs">Interested: <br/>$<CountUp end={interestedAmount} /> (<CountUp end={interestedPercentage} decimals={1} suffix="%" />)</span>
         </div>
       </div>
     </div>
