@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
 import FundingUseCards from './funding/FundingUseCards';
 import InvestmentDialog from './funding/InvestmentDialog';
-import InvestmentCalculator from './funding/InvestmentCalculator';
 import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
@@ -15,7 +13,6 @@ const FundingProgress: React.FC = () => {
   // Investment data states
   const [raisedAmount, setRaisedAmount] = useState(55500); // Fixed base committed amount
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
-  const [investorsCount, setInvestorsCount] = useState(0); // Count of interested investors
   const targetAmount = 400000; // Target amount
   
   // Calculate percentages
@@ -127,19 +124,10 @@ const FundingProgress: React.FC = () => {
                 committedPercentage={committedPercentage}
                 interestedPercentage={interestedPercentage}
               />
-              
-              <div className="text-center mt-1 mb-8">
-                <p className="text-white/70 text-sm">
-                  <span className="font-semibold">{investorsCount}</span> {investorsCount === 1 ? 'investor has' : 'investors have'} expressed interest
-                </p>
-              </div>
             </>
           )}
           
           <FundingUseCards />
-          
-          {/* Add the investment calculator component here */}
-          {/* <InvestmentCalculator /> */}
           
           <div className="text-center mt-8">
             <button 
