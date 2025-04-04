@@ -17,9 +17,12 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
   committedPercentage,
   interestedPercentage
 }) => {
-  // Calculate total amount and percentage
+  // Calculate total amount and percentage (without capping at 100%)
   const totalAmount = raisedAmount + interestedAmount;
-  const totalPercentage = Math.min((totalAmount / targetAmount) * 100, 100);
+  const totalPercentage = (totalAmount / targetAmount) * 100;
+  
+  // For the progress bar width, we still cap at 100% for visual purposes
+  const barWidthPercentage = Math.min(totalPercentage, 100);
   
   return (
     <div className="text-center mb-10">
@@ -34,7 +37,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
         <div className="w-full mt-4 bg-white/10 h-2 rounded-full">
           <div 
             className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
-            style={{ width: `${totalPercentage}%` }}
+            style={{ width: `${barWidthPercentage}%` }}
           ></div>
         </div>
         
