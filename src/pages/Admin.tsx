@@ -23,6 +23,7 @@ const Admin = () => {
     totalInterestedAmount,
     totalCommittedAmount,
     totalInvestorCount,
+    totalUserAmount,
     averageInvestmentAmount,
     userCount,
     handleSort,
@@ -114,6 +115,7 @@ const Admin = () => {
               totalInterestedAmount={totalInterestedAmount}
               userCount={userCount}
               totalInvestorCount={totalInvestorCount}
+              totalUserAmount={totalUserAmount}
             />
           </div>
           

@@ -9,6 +9,7 @@ interface InvestmentMetricsCardProps {
   totalInterestedAmount: number;
   userCount: number;
   totalInvestorCount: number;
+  totalUserAmount: number;
 }
 
 const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
@@ -18,6 +19,7 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
   totalInterestedAmount,
   userCount,
   totalInvestorCount,
+  totalUserAmount
 }) => {
   // Calculate the total amount (committed + interested)
   const totalAmount = committedAmount + totalInterestedAmount;
@@ -51,10 +53,17 @@ const InvestmentMetricsCard: React.FC<InvestmentMetricsCardProps> = ({
             </span>
           </div>
           
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center pb-2 border-b border-white/10">
             <span className="text-white/70">Total Users Funding %</span>
             <span className="font-semibold">
               {userPercentage.toFixed(1)}%
+            </span>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <span className="text-white/70">Total Users Funding</span>
+            <span className="font-semibold">
+              ${totalUserAmount.toLocaleString()}
             </span>
           </div>
         </div>

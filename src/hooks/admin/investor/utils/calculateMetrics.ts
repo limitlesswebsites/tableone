@@ -17,6 +17,7 @@ export const calculateInvestorMetrics = (combinedData: CombinedInvestorData[]) =
     .reduce((sum, investor) => sum + investor.investment_amount, 0);
   
   const totalInterestedAmount = interestedAmounts;
+  const totalUserAmount = committedAmounts;
   const totalCommittedAmount = baseCommittedAmount + committedAmounts;
   
   const averageInvestmentAmount = totalInvestorCount > 0 
@@ -31,6 +32,7 @@ export const calculateInvestorMetrics = (combinedData: CombinedInvestorData[]) =
     totalInterestedAmount,
     totalCommittedAmount,
     averageInvestmentAmount,
-    userCount
+    userCount,
+    totalUserAmount
   };
 };
