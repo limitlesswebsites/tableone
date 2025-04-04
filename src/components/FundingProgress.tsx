@@ -19,6 +19,10 @@ const FundingProgress: React.FC = () => {
   const committedPercentage = (raisedAmount / targetAmount) * 100;
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
+  async function investNow() {
+		window.open("https://wefunder.com/tableoneapp", '_blank');
+  }
+
   // Fetch investment interest data from Supabase
   useEffect(() => {
     const fetchInvestmentInterests = async () => {
@@ -102,7 +106,7 @@ const FundingProgress: React.FC = () => {
             Invest in our Journey
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            We are raising this round as a SAFE with a $4,000,000 post-money valuation.
+            We are raising this round via SAFE with a $4,000,000 post-money valuation.
           </p>
         </div>
         
@@ -128,7 +132,7 @@ const FundingProgress: React.FC = () => {
           
           <div className="text-center mt-8">
             <button 
-              onClick={() => setIsInvestmentDialogOpen(true)}
+              onClick={() => investNow()}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
             >
               I'm Interested

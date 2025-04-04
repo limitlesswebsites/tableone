@@ -9,6 +9,10 @@ import appAndCards from '../assets/app-and-cards.png'
 
 const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
+  
+  async function investNow() {
+		window.open("https://wefunder.com/tableoneapp", '_blank');
+  }
 
   return (
     <section className="min-h-screen w-full flex flex-col justify-center items-center relative pt-16 pb-20">
@@ -58,7 +62,7 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
             <button
-              onClick={() => setIsInvestmentDialogOpen(true)}
+              onClick={() => investNow()}
               className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-sfpro"
             >
               I'm Interested
