@@ -23,10 +23,14 @@ export const calculateInvestorMetrics = (combinedData: CombinedInvestorData[]) =
     ? (totalInterestedAmount + committedAmounts) / totalInvestorCount 
     : 0;
 
+  // Count users (investors marked as committed)
+  const userCount = combinedData.filter(investor => investor.status?.committed).length;
+
   return {
     totalInvestorCount,
     totalInterestedAmount,
     totalCommittedAmount,
-    averageInvestmentAmount
+    averageInvestmentAmount,
+    userCount
   };
 };

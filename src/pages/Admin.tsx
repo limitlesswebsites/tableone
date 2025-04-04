@@ -25,6 +25,7 @@ const Admin = () => {
     totalCommittedAmount,
     totalInvestorCount,
     averageInvestmentAmount,
+    userCount,
     handleSort,
     toggleEditMode,
     handleCheckboxChange,
@@ -121,6 +122,7 @@ const Admin = () => {
               targetAmount={targetAmount}
               committedAmount={totalCommittedAmount}
               totalInterestedAmount={totalInterestedAmount}
+              userCount={userCount}
             />
           </div>
           
