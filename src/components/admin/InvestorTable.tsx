@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp, Edit, Save, User, UserX } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -130,11 +130,18 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                 </TableCell>
                 <TableCell className="text-center">
                   <div className="flex justify-center">
-                    {investor.status?.committed ? (
-                      <User className="h-5 w-5 text-green-500" />
-                    ) : (
-                      <UserX className="h-5 w-5 text-white/40" />
-                    )}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => handleCheckboxChange(investor.email, 'committed')}
+                      className="h-auto p-0"
+                    >
+                      {investor.status?.committed ? (
+                        <UserCheck className="h-5 w-5 text-green-500" />
+                      ) : (
+                        <UserX className="h-5 w-5 text-white/40" />
+                      )}
+                    </Button>
                   </div>
                 </TableCell>
                 <TableCell className="max-w-[250px]">
