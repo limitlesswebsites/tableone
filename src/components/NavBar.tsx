@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import InvestmentDialog from './funding/InvestmentDialog';
 import { useAuth } from '@/context/AuthContext';
+import { useLocation } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
 	const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
@@ -27,6 +27,25 @@ const NavBar: React.FC = () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [scrolled]);
+
+	useEffect(() => {
+		function smoothScroll(targetId) {
+			const targetElement = document.getElementById(targetId);
+			if (targetElement) {
+			  targetElement.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+
+		async function handle() {
+			const path = window.location.href;
+
+			if (path.includes("videoStory")) {
+				smoothScroll('videoStory')
+			}
+		}
+
+		handle()
+	},[])
 
 	return (<>
 		<InvestmentDialog
