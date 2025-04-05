@@ -26,7 +26,7 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
   
   return (
     <div className="text-center mb-10">
-      <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Wefunder Funding Committed</div>
+      <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Wefunder Funding</div>
       
       <div className="flex flex-col items-center justify-center">
         <div className="text-4xl font-bold text-gradient-metallic mb-2">
