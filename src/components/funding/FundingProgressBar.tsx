@@ -26,13 +26,13 @@ const FundingProgressBar: React.FC<FundingProgressBarProps> = ({
   
   return (
     <div className="text-center mb-10">
-      <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Funding Progress</div>
+      <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Wefunder Funding Committed</div>
       
       <div className="flex flex-col items-center justify-center">
         <div className="text-4xl font-bold text-gradient-metallic mb-2">
           $<CountUp end={totalAmount} />
         </div>
-        <p className="text-white/70">Committed and interested capital</p>
+        <p className="text-white/70">from users, friends, and family.</p>
         
         <div className="w-11/12 mx-auto mt-4 bg-white/10 h-2 rounded-full">
           <div 
