@@ -111,7 +111,7 @@ const FundingProgress: React.FC = () => {
         </div>
         
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-3xl mx-auto animate-fade-in animate-delay-200 shadow-xl">
-          {isLoading ? (
+          {/* {isLoading ? (
             <div className="text-center py-8">
               <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
               <p className="mt-3 text-white/60">Loading investment data...</p>
@@ -126,7 +126,7 @@ const FundingProgress: React.FC = () => {
                 interestedPercentage={interestedPercentage}
               />
             </>
-          )}
+          )} */}
           
           <FundingUseCards />
           
