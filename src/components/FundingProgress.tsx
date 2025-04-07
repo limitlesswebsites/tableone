@@ -20,7 +20,7 @@ const FundingProgress: React.FC = () => {
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
   async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
   }
 
   // Fetch investment interest data from Supabase

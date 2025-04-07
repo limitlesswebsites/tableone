@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
 	const { user } = useAuth();
 
 	async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
 	}
 
 	useEffect(() => {

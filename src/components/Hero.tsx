@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
   
   async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
   }
 
   return (
