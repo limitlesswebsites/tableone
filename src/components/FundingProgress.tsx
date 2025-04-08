@@ -106,12 +106,13 @@ const FundingProgress: React.FC = () => {
             Invest in our Journey
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            We are raising this round on Wefunder via SAFEs with a $4,000,000 post-money valuation.
+            We are raising this round on Wefunder via SAFEs <br/>
+            $4mm post-money valuation for early-bird investors and $5mm for public launch.
           </p>
         </div>
         
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-3xl mx-auto animate-fade-in animate-delay-200 shadow-xl">
-          {/* {isLoading ? (
+          {isLoading ? (
             <div className="text-center py-8">
               <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
               <p className="mt-3 text-white/60">Loading investment data...</p>
@@ -119,14 +120,14 @@ const FundingProgress: React.FC = () => {
           ) : (
             <>
               <FundingProgressBar 
-                raisedAmount={19000}
+                raisedAmount={484501}
                 interestedAmount={0}
                 targetAmount={100000}
                 committedPercentage={committedPercentage}
                 interestedPercentage={interestedPercentage}
               />
             </>
-          )} */}
+          )}
           
           <FundingUseCards />
           
@@ -138,7 +139,7 @@ const FundingProgress: React.FC = () => {
               Invest Now
             </button>
             <p className="mt-3 text-white/60 text-xs">
-              Minimum investment: $1,000
+              Minimum investment: $500
             </p>
           </div>
         </div>
