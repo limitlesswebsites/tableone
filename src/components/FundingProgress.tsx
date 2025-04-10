@@ -120,7 +120,7 @@ const FundingProgress: React.FC = () => {
           ) : (
             <>
               <FundingProgressBar 
-                raisedAmount={484501}
+                raisedAmount={raisedAmount + interestedAmount}
                 interestedAmount={0}
                 targetAmount={100000}
                 committedPercentage={committedPercentage}
