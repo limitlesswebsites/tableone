@@ -29,7 +29,7 @@ const InvestmentSuccess: React.FC = () => {
             onClick={handleWefunderRedirect}
             className="px-8 py-6 text-base rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1"
           >
-            Register on Wefunder
+            Reserve on Wefunder
           </Button>
         </div>
       </div>
@@ -38,3 +38,4 @@ const InvestmentSuccess: React.FC = () => {
 };
 
 export default InvestmentSuccess;
+
