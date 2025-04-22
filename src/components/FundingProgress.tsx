@@ -20,7 +20,7 @@ const FundingProgress: React.FC = () => {
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
   async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
   }
 
   // Fetch investment interest data from Supabase
@@ -106,7 +106,8 @@ const FundingProgress: React.FC = () => {
             Invest in our Journey
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            We are raising this round via SAFE with a $4,000,000 post-money valuation.
+            We are raising this round on Wefunder via SAFEs <br/>
+            $4mm post-money valuation for early-bird investors and $5mm for public launch.
           </p>
         </div>
         
@@ -119,9 +120,9 @@ const FundingProgress: React.FC = () => {
           ) : (
             <>
               <FundingProgressBar 
-                raisedAmount={raisedAmount}
-                interestedAmount={interestedAmount}
-                targetAmount={targetAmount}
+                raisedAmount={raisedAmount + interestedAmount}
+                interestedAmount={0}
+                targetAmount={100000}
                 committedPercentage={committedPercentage}
                 interestedPercentage={interestedPercentage}
               />
@@ -132,13 +133,13 @@ const FundingProgress: React.FC = () => {
           
           <div className="text-center mt-8">
             <button 
-              onClick={() => investNow()}
+              onClick={() => setIsInvestmentDialogOpen(true)}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
             >
-              I'm Interested
+              Reserve Now
             </button>
             <p className="mt-3 text-white/60 text-xs">
-              Minimum investment: $1,000
+              Minimum investment: $500
             </p>
           </div>
         </div>

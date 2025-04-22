@@ -36,10 +36,10 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
     e.preventDefault();
     const amount = Number(investmentAmount);
     
-    if (amount < 1000) {
+    if (amount < 500) {
       toast({
         title: "Minimum investment required",
-        description: "Please enter a minimum investment of $1,000",
+        description: "Please enter a minimum investment of $500",
         variant: "destructive"
       });
       return;
@@ -65,7 +65,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
 
       toast({
         title: "Interest registered",
-        description: `Thank you for your interest in investing $${amount.toLocaleString()}!`,
+        description: `Thank you. We'll be in touch shortly!`,
         variant: "default"
       });
       
@@ -102,9 +102,9 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
             <Input
               id="investment-amount"
               type="number"
-              min="1000"
+              min="500"
               // step="1000"
-              placeholder="Minimum $1,000"
+              placeholder="Minimum $500"
               className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
               value={investmentAmount}
               onChange={(e) => setInvestmentAmount(e.target.value)}

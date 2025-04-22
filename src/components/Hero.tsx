@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
   
   async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
   }
 
   return (
@@ -56,16 +56,16 @@ const Hero: React.FC = () => {
             />
           </div>
 
-          <p className="text-base md:text-lg text-[#8E8E93] mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed font-sfpro" style={{ animationDelay: '0.8s' }}>
+          {/* <p className="text-base md:text-lg text-[#8E8E93] mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed font-sfpro" style={{ animationDelay: '0.8s' }}>
             At this time, this is simply to gauge investment interest in TableOne. You will have a chance to confirm funds and final amounts in a few weeks.
-          </p>
+          </p> */}
 
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
             <button
-              onClick={() => investNow()}
+              onClick={() => setIsInvestmentDialogOpen(true)}
               className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-sfpro"
             >
-              I'm Interested
+              Reserve Now
             </button>
             <HashLink
               to="#metrics"

@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import InvestmentDialog from './funding/InvestmentDialog';
 import { useAuth } from '@/context/AuthContext';
+import { useLocation } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
 	const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
 	const { user } = useAuth();
 
 	async function investNow() {
-		window.open("https://wefunder.com/tableoneapp", '_blank');
+		window.open("https://wefunder.com/tableone", '_blank');
 	}
 
 	useEffect(() => {
@@ -27,6 +27,25 @@ const NavBar: React.FC = () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [scrolled]);
+
+	useEffect(() => {
+		function smoothScroll(targetId) {
+			const targetElement = document.getElementById(targetId);
+			if (targetElement) {
+			  targetElement.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+
+		async function handle() {
+			const path = window.location.href;
+
+			if (path.includes("videoStory")) {
+				smoothScroll('videoStory')
+			}
+		}
+
+		handle()
+	},[])
 
 	return (<>
 		<InvestmentDialog
@@ -61,10 +80,10 @@ const NavBar: React.FC = () => {
 				</div>
 				<div className="flex items-center space-x-2">
 					<button
-						onClick={() => investNow()}
+						onClick={() => setIsInvestmentDialogOpen(true)}
 						className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
 					>
-						I'm Interested
+						Reserve Now
 					</button>
 				</div>
 			</div>
