@@ -1,6 +1,6 @@
-
 import React, {useState} from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { 
   Dialog, 
   DialogContent, 
@@ -28,6 +28,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Investment data states
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
@@ -62,16 +63,13 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
 
       // Update the local state to include the new investment amount
       setInterestedAmount(prevAmount => prevAmount + amount);
-
-      toast({
-        title: "Interest registered",
-        description: `Thank you. We'll be in touch shortly!`,
-        variant: "default"
-      });
       
       setIsOpen(false);
       setInvestmentAmount('');
       setEmail('');
+      
+      // Navigate to success page instead of showing toast
+      navigate('/investment-success');
     } catch (error) {
       toast({
         title: "Something went wrong",

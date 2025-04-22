@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import InvestmentSuccess from "./pages/InvestmentSuccess";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/investment-success" element={<InvestmentSuccess />} />
             <Route path="/admin" element={
               <ProtectedRoute>
                 <Admin />
