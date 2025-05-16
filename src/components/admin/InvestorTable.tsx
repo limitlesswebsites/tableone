@@ -1,37 +1,46 @@
 
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX, Check, X, Trash2, AlertCircle } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Textarea } from '@/components/ui/textarea';
+import React from 'react';
+import { 
+  Table, 
+  TableHeader, 
+  TableBody, 
+  TableHead, 
+  TableRow, 
+  TableCell 
+} from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { SortField, SortOrder, CombinedInvestorData } from '@/types/admin';
-import {
+import { 
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { CombinedInvestorData, SortField, SortOrder } from '@/types/admin';
+import { Edit, Save, Trash2, ChevronUp, ChevronDown, Check, X } from 'lucide-react';
+
+import { formatDate } from '@/lib/utils';
 
 interface InvestorTableProps {
   sortedInvestors: CombinedInvestorData[];
   sortField: SortField;
   sortOrder: SortOrder;
   handleSort: (field: SortField) => void;
-  toggleEditMode: (email: string, field?: 'notes' | 'name') => void;
-  handleCheckboxChange: (email: string, field: 'reached_out' | 'committed') => Promise<void>;
-  handleSaveNotes: (email: string, notes: string) => Promise<void>;
+  toggleEditMode: (email: string, field: 'notes' | 'name') => void;
+  handleCheckboxChange: (email: string, field: 'reached_out' | 'committed') => void;
+  handleSaveNotes: (email: string) => void;
   handleNotesChange: (email: string, notes: string) => void;
   handleNameChange: (email: string, name: string) => void;
-  handleSaveName: (email: string, name: string) => Promise<void>;
-  handleValidToggle: (email: string, valid: boolean) => Promise<void>;
-  handleDeleteInvestor: (email: string) => Promise<void>;
+  handleSaveName: (email: string) => void;
+  handleValidToggle: (email: string, valid: boolean) => void;
+  handleDeleteInvestor: (email: string) => void;
 }
 
 const InvestorTable: React.FC<InvestorTableProps> = ({
@@ -46,225 +55,196 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
   handleNameChange,
   handleSaveName,
   handleValidToggle,
-  handleDeleteInvestor,
+  handleDeleteInvestor
 }) => {
   // Render sort icon
   const renderSortIcon = (field: SortField) => {
-    if (sortField !== field) return null;
-    return sortOrder === 'asc' ? <ChevronUp className="inline h-4 w-4 ml-1" /> : <ChevronDown className="inline h-4 w-4 ml-1" />;
+    if (field === sortField) {
+      return sortOrder === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
+    }
+    return null;
   };
 
-  // State for tracking which investor is being deleted (for confirmation)
-  const [investorToDelete, setInvestorToDelete] = useState<string | null>(null);
-
   return (
-    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden">
-      <h2 className="text-xl font-semibold p-6 border-b border-white/10">Investor Details</h2>
+    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl shadow-xl overflow-hidden mb-8">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="border-white/10">
+            <TableRow className="border-white/10 bg-white/5">
               <TableHead 
-                className="text-white/70 cursor-pointer hover:text-white transition-colors"
+                className="text-white font-medium cursor-pointer"
                 onClick={() => handleSort('email')}
               >
-                Email {renderSortIcon('email')}
+                <div className="flex items-center gap-1">
+                  Email {renderSortIcon('email')}
+                </div>
               </TableHead>
-              <TableHead className="text-white/70">
-                Name
-              </TableHead>
+              <TableHead className="text-white font-medium">Name</TableHead>
               <TableHead 
-                className="text-white/70 text-right cursor-pointer hover:text-white transition-colors"
+                className="text-white font-medium cursor-pointer"
                 onClick={() => handleSort('investment_amount')}
               >
-                Investment Amount {renderSortIcon('investment_amount')}
+                <div className="flex items-center gap-1">
+                  Amount {renderSortIcon('investment_amount')}
+                </div>
               </TableHead>
               <TableHead 
-                className="text-white/70 text-right cursor-pointer hover:text-white transition-colors"
+                className="text-white font-medium cursor-pointer"
                 onClick={() => handleSort('created_at')}
               >
-                Date {renderSortIcon('created_at')}
+                <div className="flex items-center gap-1">
+                  Date {renderSortIcon('created_at')}
+                </div>
               </TableHead>
-              <TableHead className="text-white/70 text-center">
-                Valid
-              </TableHead>
-              <TableHead className="text-white/70 text-center">
-                Reached Out
-              </TableHead>
-              <TableHead className="text-white/70 text-center">
-                User
-              </TableHead>
-              <TableHead className="text-white/70">
-                Notes
-              </TableHead>
-              <TableHead className="text-white/70 text-center">
-                Actions
-              </TableHead>
+              <TableHead className="text-white font-medium">IP Address</TableHead>
+              <TableHead className="text-white font-medium">Valid</TableHead>
+              <TableHead className="text-white font-medium">Reached Out</TableHead>
+              <TableHead className="text-white font-medium">Committed</TableHead>
+              <TableHead className="text-white font-medium">Notes</TableHead>
+              <TableHead className="text-white font-medium">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sortedInvestors.map((investor, index) => (
-              <TableRow key={index} className="border-white/10">
-                <TableCell className="font-medium">{investor.email}</TableCell>
-                <TableCell>
-                  {investor.isEditingName ? (
-                    <div className="flex gap-2 items-center">
-                      <Input 
-                        value={investor.editedName || ''} 
-                        onChange={(e) => handleNameChange(investor.email, e.target.value)}
-                        className="bg-white/10 border-white/20 text-white"
-                        placeholder="Enter investor name"
-                      />
-                      <Button 
-                        size="sm"
-                        onClick={() => handleSaveName(investor.email, investor.editedName || '')}
-                      >
-                        <Save className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="flex justify-between items-center">
-                      <span>{investor.status?.name || '—'}</span>
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={() => toggleEditMode(investor.email, 'name')}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  )}
-                </TableCell>
-                <TableCell className="text-right">${investor.investment_amount.toLocaleString()}</TableCell>
-                <TableCell className="text-right">
-                  {new Date(investor.created_at).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                  })}
-                </TableCell>
-                <TableCell className="text-center">
-                  <div className="flex justify-center">
-                    <Checkbox 
-                      checked={investor.valid}
-                      onCheckedChange={(checked) => handleValidToggle(investor.email, !!checked)}
-                      className="data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
-                    />
-                  </div>
-                </TableCell>
-                <TableCell className="text-center">
-                  <div className="flex justify-center">
-                    <Checkbox 
-                      checked={investor.status?.reached_out || false}
-                      onCheckedChange={() => handleCheckboxChange(investor.email, 'reached_out')}
-                      className="data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
-                    />
-                  </div>
-                </TableCell>
-                <TableCell className="text-center">
-                  <div className="flex justify-center">
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => handleCheckboxChange(investor.email, 'committed')}
-                      className="h-auto p-0"
-                    >
-                      {investor.status?.committed ? (
-                        <UserCheck className="h-5 w-5 text-green-500" />
-                      ) : (
-                        <UserX className="h-5 w-5 text-white/40" />
-                      )}
-                    </Button>
-                  </div>
-                </TableCell>
-                <TableCell className="max-w-[250px]">
-                  {investor.isEditingNotes ? (
-                    <div className="flex flex-col gap-2">
-                      <Textarea 
-                        value={investor.editedNotes || ''} 
-                        onChange={(e) => handleNotesChange(investor.email, e.target.value)}
-                        className="min-h-[80px] bg-white/10 border-white/20 text-white"
-                        placeholder="Add notes about this investor..."
-                      />
-                      <div className="flex gap-2 justify-end">
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => toggleEditMode(investor.email)}
-                        >
-                          Cancel
-                        </Button>
-                        <Button 
-                          size="sm"
-                          onClick={() => handleSaveNotes(investor.email, investor.editedNotes || '')}
-                        >
-                          <Save className="mr-1 h-4 w-4" />
-                          Save
-                        </Button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex justify-between items-start gap-2">
-                      <div className="text-sm text-white/80 line-clamp-2">
-                        {investor.status?.notes || 
-                          <span className="text-white/40 italic">No notes</span>
-                        }
-                      </div>
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={() => toggleEditMode(investor.email, 'notes')}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  )}
-                </TableCell>
-                <TableCell>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
-                      >
-                        <Trash2 size={16} />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="bg-gray-900 border border-white/10 text-white">
-                      <AlertDialogHeader>
-                        <AlertDialogTitle className="flex items-center gap-2">
-                          <AlertCircle className="h-5 w-5 text-red-500" />
-                          Delete Investor Record
-                        </AlertDialogTitle>
-                        <AlertDialogDescription className="text-white/70">
-                          Are you sure you want to delete the investor record for <span className="font-semibold text-white">{investor.email}</span>? This action cannot be undone.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel className="bg-transparent border border-white/20 text-white hover:bg-white/10">
-                          Cancel
-                        </AlertDialogCancel>
-                        <AlertDialogAction 
-                          className="bg-red-500 text-white hover:bg-red-600"
-                          onClick={() => handleDeleteInvestor(investor.email)}
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+            {sortedInvestors.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={10} className="text-center text-white/60 py-10">
+                  No investors found
                 </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              sortedInvestors.map(investor => (
+                <TableRow key={investor.id} className="border-white/10 hover:bg-white/5">
+                  <TableCell className="text-white/90">{investor.email}</TableCell>
+                  <TableCell>
+                    {investor.isEditingName ? (
+                      <div className="flex items-center gap-2">
+                        <Input 
+                          value={investor.editedName || ''} 
+                          onChange={(e) => handleNameChange(investor.email, e.target.value)}
+                          className="h-8 text-sm bg-white/5 border-white/20 text-white"
+                        />
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0 text-green-400 hover:text-green-300 hover:bg-green-950/30"
+                          onClick={() => handleSaveName(investor.email)}
+                        >
+                          <Save size={16} />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/90">
+                          {investor.status?.name || '—'}
+                        </span>
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="h-6 w-6 p-0 text-white/50 hover:text-white hover:bg-white/10"
+                          onClick={() => toggleEditMode(investor.email, 'name')}
+                        >
+                          <Edit size={14} />
+                        </Button>
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-white/90">${investor.investment_amount.toLocaleString()}</TableCell>
+                  <TableCell className="text-white/70 whitespace-nowrap">
+                    {formatDate(investor.created_at)}
+                  </TableCell>
+                  <TableCell className="text-white/70">
+                    {investor.ip_address || '—'}
+                  </TableCell>
+                  <TableCell>
+                    <Checkbox
+                      checked={investor.valid}
+                      onCheckedChange={() => handleValidToggle(investor.email, !investor.valid)}
+                      className="bg-white/5 text-indigo-500 border-white/30 data-[state=checked]:bg-indigo-500"
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Checkbox
+                      checked={investor.status?.reached_out || false}
+                      onCheckedChange={() => handleCheckboxChange(investor.email, 'reached_out')}
+                      className="bg-white/5 text-indigo-500 border-white/30 data-[state=checked]:bg-indigo-500"
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Checkbox
+                      checked={investor.status?.committed || false}
+                      onCheckedChange={() => handleCheckboxChange(investor.email, 'committed')}
+                      className="bg-white/5 text-indigo-500 border-white/30 data-[state=checked]:bg-indigo-500"
+                    />
+                  </TableCell>
+                  <TableCell className="max-w-[200px]">
+                    {investor.isEditingNotes ? (
+                      <div className="flex items-start gap-2">
+                        <Textarea 
+                          value={investor.editedNotes || ''} 
+                          onChange={(e) => handleNotesChange(investor.email, e.target.value)} 
+                          className="h-20 text-sm bg-white/5 border-white/20 text-white"
+                        />
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0 text-green-400 hover:text-green-300 hover:bg-green-950/30"
+                          onClick={() => handleSaveNotes(investor.email)}
+                        >
+                          <Save size={16} />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-start gap-2">
+                        <div className="text-white/80 text-sm line-clamp-2">
+                          {investor.status?.notes || '—'}
+                        </div>
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="h-6 w-6 p-0 text-white/50 hover:text-white hover:bg-white/10"
+                          onClick={() => toggleEditMode(investor.email, 'notes')}
+                        >
+                          <Edit size={14} />
+                        </Button>
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0 text-red-400 hover:text-red-300 hover:bg-red-950/30"
+                        >
+                          <Trash2 size={16} />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="backdrop-blur-xl bg-black/90 border border-white/10 text-white">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete this investor?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This will permanently remove {investor.email} from the database.
+                            This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel className="border-white/10 text-white">Cancel</AlertDialogCancel>
+                          <AlertDialogAction 
+                            className="bg-red-600 hover:bg-red-700 text-white"
+                            onClick={() => handleDeleteInvestor(investor.email)}
+                          >
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
-        
-        {sortedInvestors.length === 0 && (
-          <div className="text-center py-10 text-white/60">
-            No investor data available
-          </div>
-        )}
       </div>
     </div>
   );

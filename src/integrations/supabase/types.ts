@@ -15,6 +15,7 @@ export type Database = {
           email: string
           id: string
           investment_amount: number
+          ip_address: string | null
           valid: boolean
         }
         Insert: {
@@ -22,6 +23,7 @@ export type Database = {
           email: string
           id?: string
           investment_amount: number
+          ip_address?: string | null
           valid?: boolean
         }
         Update: {
@@ -29,6 +31,7 @@ export type Database = {
           email?: string
           id?: string
           investment_amount?: number
+          ip_address?: string | null
           valid?: boolean
         }
         Relationships: []

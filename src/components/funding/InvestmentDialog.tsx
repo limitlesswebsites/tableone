@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+
+import React, {useState, useEffect} from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -27,11 +28,28 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   const [investmentAmount, setInvestmentAmount] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [ipAddress, setIpAddress] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
   // Investment data states
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
+  
+  // Fetch the IP address when the component mounts
+  useEffect(() => {
+    const fetchIpAddress = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        setIpAddress(data.ip);
+      } catch (error) {
+        console.error('Error fetching IP address:', error);
+        // Continue without IP if we can't get it
+      }
+    };
+    
+    fetchIpAddress();
+  }, []);
   
   const handleSubmitInterest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +71,8 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
         .from('investment_interests')
         .insert({
           email: email,
-          investment_amount: amount
+          investment_amount: amount,
+          ip_address: ipAddress  // Add the IP address to the database entry
         });
 
       if (error) {
