@@ -98,14 +98,8 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
         .split('; ')
         .some(row => row.startsWith(`${INVESTMENT_COOKIE_NAME}=`));
         
-      if (hasSubmittedBefore) {
-        console.log("Investment cookie found, user has previously submitted interest");
-        setIsSubmitting(false);
-        setAlertOpen(true);
-        return;
-      }
-
-      // Then check if this IP address has already submitted an interest
+      // Check if this IP address has already submitted an interest
+      let ipHasSubmitted = false;
       if (ipAddress) {
         const { data: existingInterests, error: lookupError } = await supabase
           .from('investment_interests')
@@ -117,14 +111,29 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
           throw lookupError;
         }
         
-        if (existingInterests && existingInterests.length > 0) {
-          // This IP has already submitted interest
-          setIsSubmitting(false);
-          setAlertOpen(true);
-          return;
-        }
+        ipHasSubmitted = existingInterests && existingInterests.length > 0;
+      }
+      
+      // If user has already submitted (via cookie or IP), pretend to submit but don't actually store in DB
+      if (hasSubmittedBefore || ipHasSubmitted) {
+        console.log("User already submitted interest previously, simulating submission");
+        
+        // Wait a moment to simulate the submission process
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Proceed as if the submission was successful
+        setIsOpen(false);
+        setInvestmentAmount('');
+        setEmail('');
+        
+        // Navigate to success page just like a normal submission
+        navigate('/investment-success');
+        
+        setIsSubmitting(false);
+        return;
       }
 
+      // This is a new submission, proceed with storing in the database
       const { error } = await supabase
         .from('investment_interests')
         .insert({
@@ -243,7 +252,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
             </AlertDialogAction>
           </div>
         </AlertDialogContent>
-      </AlertDialog>
+      </Dialog>
     </>
   );
 };
