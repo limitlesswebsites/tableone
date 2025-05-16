@@ -44,6 +44,43 @@ export const useInvestorData = () => {
     }
   };
 
+  // Handle toggling the valid status
+  const handleValidToggle = async (email: string, valid: boolean) => {
+    try {
+      // Update the investor valid status in the database
+      const { error } = await supabase
+        .from('investment_interests')
+        .update({ valid })
+        .eq('email', email);
+      
+      if (error) {
+        throw error;
+      }
+      
+      // Update the local state to reflect the change
+      setCombinedData(prev => 
+        prev.map(investor => 
+          investor.email === email 
+            ? { ...investor, valid } 
+            : investor
+        )
+      );
+      
+      toast({
+        title: "Status updated",
+        description: `Investor "${email}" is now ${valid ? 'valid' : 'invalid'}.`,
+      });
+      
+    } catch (error) {
+      console.error('Error updating valid status:', error);
+      toast({
+        title: "Update failed",
+        description: "Could not update investor validation status.",
+        variant: "destructive"
+      });
+    }
+  };
+
   // Fetch investment interest data and status data
   async function fetchInvestorData() {
     try {
@@ -153,6 +190,7 @@ export const useInvestorData = () => {
     handleSaveNotes,
     handleNotesChange,
     handleNameChange,
-    handleSaveName
+    handleSaveName,
+    handleValidToggle
   };
 };

@@ -1,12 +1,13 @@
 
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX, Check, X } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SortField, SortOrder, CombinedInvestorData } from '@/types/admin';
+import { Switch } from '@/components/ui/switch';
 
 interface InvestorTableProps {
   sortedInvestors: CombinedInvestorData[];
@@ -19,6 +20,7 @@ interface InvestorTableProps {
   handleNotesChange: (email: string, notes: string) => void;
   handleNameChange: (email: string, name: string) => void;
   handleSaveName: (email: string, name: string) => Promise<void>;
+  handleValidToggle: (email: string, valid: boolean) => Promise<void>;
 }
 
 const InvestorTable: React.FC<InvestorTableProps> = ({
@@ -32,6 +34,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
   handleNotesChange,
   handleNameChange,
   handleSaveName,
+  handleValidToggle,
 }) => {
   // Render sort icon
   const renderSortIcon = (field: SortField) => {
@@ -66,6 +69,9 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                 onClick={() => handleSort('created_at')}
               >
                 Date {renderSortIcon('created_at')}
+              </TableHead>
+              <TableHead className="text-white/70 text-center">
+                Valid
               </TableHead>
               <TableHead className="text-white/70 text-center">
                 Reached Out
@@ -118,6 +124,21 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                     month: 'short',
                     day: 'numeric'
                   })}
+                </TableCell>
+                <TableCell className="text-center">
+                  <div className="flex justify-center items-center">
+                    <Switch 
+                      checked={investor.valid}
+                      onCheckedChange={(checked) => handleValidToggle(investor.email, checked)}
+                      className="data-[state=checked]:bg-green-500"
+                    />
+                    <span className="ml-2">
+                      {investor.valid ? 
+                        <Check className="h-4 w-4 text-green-500" /> : 
+                        <X className="h-4 w-4 text-red-500" />
+                      }
+                    </span>
+                  </div>
                 </TableCell>
                 <TableCell className="text-center">
                   <div className="flex justify-center">

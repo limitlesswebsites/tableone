@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,8 @@ const Admin = () => {
     handleSaveNotes,
     handleNotesChange,
     handleNameChange,
-    handleSaveName
+    handleSaveName,
+    handleValidToggle
   } = useInvestorData();
 
   // Calculate total amount (committed + interested)
@@ -131,6 +133,7 @@ const Admin = () => {
             handleNotesChange={handleNotesChange}
             handleNameChange={handleNameChange}
             handleSaveName={handleSaveName}
+            handleValidToggle={handleValidToggle}
           />
         </>
       )}
