@@ -11,6 +11,7 @@ import {
 } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogAction } from '../ui/alert-dialog';
 
 import { supabase } from '@/integrations/supabase/client';
 
@@ -29,6 +30,7 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [ipAddress, setIpAddress] = useState<string | null>(null);
+  const [alertOpen, setAlertOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -67,6 +69,26 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
     setIsSubmitting(true);
 
     try {
+      // First check if this IP address has already submitted an interest
+      if (ipAddress) {
+        const { data: existingInterests, error: lookupError } = await supabase
+          .from('investment_interests')
+          .select('id')
+          .eq('ip_address', ipAddress);
+          
+        if (lookupError) {
+          console.error('Error checking existing submissions:', lookupError);
+          throw lookupError;
+        }
+        
+        if (existingInterests && existingInterests.length > 0) {
+          // This IP has already submitted interest
+          setIsSubmitting(false);
+          setAlertOpen(true);
+          return;
+        }
+      }
+
       const { error } = await supabase
         .from('investment_interests')
         .insert({
@@ -102,63 +124,88 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
-        <DialogHeader>
-          <DialogTitle className="text-xl text-center mb-2 text-gradient-metallic">Express Your Interest</DialogTitle>
-          <DialogDescription className="text-white/70 text-center">
-            Let us know how much you're interested in investing in TableOne's future.
-          </DialogDescription>
-        </DialogHeader>
-        
-        <form onSubmit={handleSubmitInterest} className="space-y-4 py-4">
-          <div className="space-y-2">
-            <label htmlFor="investment-amount" className="text-sm font-medium text-white/80">
-              Investment Amount ($)
-            </label>
-            <Input
-              id="investment-amount"
-              type="number"
-              min="500"
-              // step="1000"
-              placeholder="Minimum $500"
-              className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
-              value={investmentAmount}
-              onChange={(e) => setInvestmentAmount(e.target.value)}
-              required
-            />
-          </div>
+    <>
+      <Dialog open={isOpen} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-md backdrop-blur-xl bg-black/80 border border-white/10 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-center mb-2 text-gradient-metallic">Express Your Interest</DialogTitle>
+            <DialogDescription className="text-white/70 text-center">
+              Let us know how much you're interested in investing in TableOne's future.
+            </DialogDescription>
+          </DialogHeader>
           
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium text-white/80">
-              Email Address
-            </label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="your@email.com"
-              className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          
-          <div className="pt-4 flex justify-center">
-            <Button 
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
+          <form onSubmit={handleSubmitInterest} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <label htmlFor="investment-amount" className="text-sm font-medium text-white/80">
+                Investment Amount ($)
+              </label>
+              <Input
+                id="investment-amount"
+                type="number"
+                min="500"
+                // step="1000"
+                placeholder="Minimum $500"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                value={investmentAmount}
+                onChange={(e) => setInvestmentAmount(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium text-white/80">
+                Email Address
+              </label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="pt-4 flex justify-center">
+              <Button 
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Processing...' : 'Register Interest'}
+              </Button>
+            </div>
+            
+            <p className="text-xs text-white/50 text-center">
+              This is a non-binding expression of interest. We'll contact you with more details.
+            </p>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
+        <AlertDialogContent className="backdrop-blur-xl bg-black/80 border border-white/10 text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-xl text-center mb-2 text-gradient-metallic">We've Got You!</AlertDialogTitle>
+            <AlertDialogDescription className="text-white/70 text-center">
+              We've already received your interest, and we'll reach out shortly.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex justify-center mt-6">
+            <AlertDialogAction 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg"
+              onClick={() => {
+                setAlertOpen(false);
+                setIsOpen(false);
+              }}
             >
-              Register Interest
-            </Button>
+              Got it
+            </AlertDialogAction>
           </div>
-          
-          <p className="text-xs text-white/50 text-center">
-            This is a non-binding expression of interest. We'll contact you with more details.
-          </p>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };
 
