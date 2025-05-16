@@ -21,6 +21,8 @@ interface InvestmentDialogProps {
   setIsOpen: (open: boolean) => void;
 }
 
+const INVESTMENT_COOKIE_NAME = "tableone_investment_submitted";
+
 const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
   isOpen,
   onOpenChange,
@@ -36,6 +38,18 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
 
   // Investment data states
   const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
+  
+  // Check for existing cookie when component mounts
+  useEffect(() => {
+    const hasSubmittedBefore = document.cookie
+      .split('; ')
+      .some(row => row.startsWith(`${INVESTMENT_COOKIE_NAME}=`));
+      
+    if (hasSubmittedBefore) {
+      // If cookie exists, user has already submitted interest
+      console.log("Investment cookie found, user has previously submitted interest");
+    }
+  }, []);
   
   // Fetch the IP address when the component mounts
   useEffect(() => {
@@ -53,6 +67,16 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
     fetchIpAddress();
   }, []);
   
+  // Helper function to set the investment cookie
+  const setInvestmentCookie = () => {
+    // Set cookie to expire in 1 year
+    const expiryDate = new Date();
+    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+    
+    // Set secure cookie with 1 year expiry
+    document.cookie = `${INVESTMENT_COOKIE_NAME}=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
+  };
+  
   const handleSubmitInterest = async (e: React.FormEvent) => {
     e.preventDefault();
     const amount = Number(investmentAmount);
@@ -69,7 +93,19 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
     setIsSubmitting(true);
 
     try {
-      // First check if this IP address has already submitted an interest
+      // Check if this user has already submitted interest via cookie
+      const hasSubmittedBefore = document.cookie
+        .split('; ')
+        .some(row => row.startsWith(`${INVESTMENT_COOKIE_NAME}=`));
+        
+      if (hasSubmittedBefore) {
+        console.log("Investment cookie found, user has previously submitted interest");
+        setIsSubmitting(false);
+        setAlertOpen(true);
+        return;
+      }
+
+      // Then check if this IP address has already submitted an interest
       if (ipAddress) {
         const { data: existingInterests, error: lookupError } = await supabase
           .from('investment_interests')
@@ -101,6 +137,9 @@ const InvestmentDialog: React.FC<InvestmentDialogProps> = ({
         console.error('Error saving investment interest:', error);
         throw error;
       }
+
+      // Set the cookie after successful submission
+      setInvestmentCookie();
 
       // Update the local state to include the new investment amount
       setInterestedAmount(prevAmount => prevAmount + amount);
