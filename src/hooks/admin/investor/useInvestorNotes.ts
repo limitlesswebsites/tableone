@@ -28,7 +28,7 @@ export const useInvestorNotes = (
   };
 
   // Handle saving notes
-  const handleSaveNotes = async (email: string, notes: string) => {
+  const handleSaveNotes = async (email: string, notes: string): Promise<void> => {
     try {
       const investorToUpdate = combinedData.find(i => i.email === email);
       

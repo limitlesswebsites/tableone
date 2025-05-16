@@ -24,7 +24,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { CombinedInvestorData, SortField, SortOrder } from '@/types/admin';
-import { Edit, Save, Trash2, ChevronUp, ChevronDown, Check, X } from 'lucide-react';
+import { Edit, Save, Trash2, ChevronUp, ChevronDown } from 'lucide-react';
 
 import { cn, formatDate } from '@/lib/utils';
 
@@ -35,10 +35,10 @@ interface InvestorTableProps {
   handleSort: (field: SortField) => void;
   toggleEditMode: (email: string, field: 'notes' | 'name') => void;
   handleCheckboxChange: (email: string, field: 'reached_out' | 'committed') => void;
-  handleSaveNotes: (email: string) => void;
+  handleSaveNotes: (email: string, notes: string) => Promise<void>;
   handleNotesChange: (email: string, notes: string) => void;
   handleNameChange: (email: string, name: string) => void;
-  handleSaveName: (email: string) => void;
+  handleSaveName: (email: string, name: string) => Promise<void>;
   handleValidToggle: (email: string, valid: boolean) => void;
   handleDeleteInvestor: (email: string) => void;
 }

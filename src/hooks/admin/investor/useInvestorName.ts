@@ -11,7 +11,7 @@ export const useInvestorName = (
   const { toast } = useToast();
 
   // Handle saving name
-  const handleSaveName = async (email: string, name: string) => {
+  const handleSaveName = async (email: string, name: string): Promise<void> => {
     try {
       const investorToUpdate = combinedData.find(i => i.email === email);
       
