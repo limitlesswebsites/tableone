@@ -2,17 +2,20 @@
 import { CombinedInvestorData } from '@/types/admin';
 
 export const calculateInvestorMetrics = (combinedData: CombinedInvestorData[]) => {
-  const totalInvestorCount = combinedData.length;
+  // Only count valid entries in metrics
+  const validData = combinedData.filter(investor => investor.valid);
+  
+  const totalInvestorCount = combinedData.length; // Show all investors in count, including invalid ones
   
   // Base committed amount
   const baseCommittedAmount = 55500;
   
-  // Calculate committed and interested amounts separately
-  const committedAmounts = combinedData
+  // Calculate committed and interested amounts separately - only from valid entries
+  const committedAmounts = validData
     .filter(investor => investor.status?.committed)
     .reduce((sum, investor) => sum + investor.investment_amount, 0);
     
-  const interestedAmounts = combinedData
+  const interestedAmounts = validData
     .filter(investor => !investor.status?.committed)
     .reduce((sum, investor) => sum + investor.investment_amount, 0);
   
@@ -20,12 +23,14 @@ export const calculateInvestorMetrics = (combinedData: CombinedInvestorData[]) =
   const totalUserAmount = committedAmounts;
   const totalCommittedAmount = baseCommittedAmount + committedAmounts;
   
-  const averageInvestmentAmount = totalInvestorCount > 0 
-    ? (totalInterestedAmount + committedAmounts) / totalInvestorCount 
+  // Calculate average based on valid entries only
+  const validInvestorCount = validData.length;
+  const averageInvestmentAmount = validInvestorCount > 0 
+    ? (totalInterestedAmount + committedAmounts) / validInvestorCount 
     : 0;
 
-  // Count users (investors marked as committed)
-  const userCount = combinedData.filter(investor => investor.status?.committed).length;
+  // Count users (valid investors marked as committed)
+  const userCount = validData.filter(investor => investor.status?.committed).length;
 
   return {
     totalInvestorCount,

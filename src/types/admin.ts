@@ -4,6 +4,7 @@ export interface InvestorInterest {
   investment_amount: number;
   created_at: string;
   id: string;
+  valid: boolean;
 }
 
 export interface InvestorStatus {

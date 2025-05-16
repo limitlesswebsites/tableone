@@ -49,6 +49,8 @@ export const useInvestorData = () => {
     try {
       setIsLoading(true);
       
+      // Fetch all investment interests - including both valid and invalid entries
+      // for admin review purposes
       const { data: interestsData, error: interestsError } = await supabase
         .from('investment_interests')
         .select('*')

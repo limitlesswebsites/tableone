@@ -15,18 +15,21 @@ export type Database = {
           email: string
           id: string
           investment_amount: number
+          valid: boolean
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
           investment_amount: number
+          valid?: boolean
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
           investment_amount?: number
+          valid?: boolean
         }
         Relationships: []
       }

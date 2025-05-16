@@ -29,10 +29,11 @@ const FundingProgress: React.FC = () => {
       try {
         setIsLoading(true);
         
-        // Fetch all investment interests
+        // Fetch all investment interests - only include valid ones
         const { data: interestsData, error: interestsError } = await supabase
           .from('investment_interests')
-          .select('*');
+          .select('*')
+          .eq('valid', true); // Only include validated interests
         
         if (interestsError) {
           console.error('Error fetching investment interests:', interestsError);
@@ -75,9 +76,6 @@ const FundingProgress: React.FC = () => {
         
         setInterestedAmount(total);
         setRaisedAmount(prevAmount => 55500 + committedTotal); // Base amount plus committed investors
-        
-        // We're no longer tracking the count of investors, so this line is removed
-        
       } catch (error) {
         console.error('Error in useEffect:', error);
         toast({
