@@ -18,7 +18,6 @@ const IPBlocker: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         
         // Check if IP is blocked
         if (isIPBlocked(ip)) {
-          console.log('IP is blocked:', ip);
           setBlocked(true);
           // We never set loading to false for blocked IPs
         } else {
