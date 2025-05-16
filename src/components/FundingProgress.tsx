@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
@@ -123,15 +122,14 @@ const FundingProgress: React.FC = () => {
               <p className="mt-3 text-white/60">Loading investment data...</p>
             </div>
           ) : (
-            <>
-              <FundingProgressBar 
-                raisedAmount={raisedAmount + interestedAmount}
-                interestedAmount={0}
-                targetAmount={100000}
-                committedPercentage={committedPercentage}
-                interestedPercentage={interestedPercentage}
-              />
-            </>
+            // FundingProgressBar is kept but it's empty now
+            <FundingProgressBar 
+              raisedAmount={raisedAmount + interestedAmount}
+              interestedAmount={0}
+              targetAmount={100000}
+              committedPercentage={committedPercentage}
+              interestedPercentage={interestedPercentage}
+            />
           )}
           
           <FundingUseCards />
