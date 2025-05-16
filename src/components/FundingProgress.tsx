@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
@@ -110,8 +111,7 @@ const FundingProgress: React.FC = () => {
             Invest in our Journey
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            We are raising this round on Wefunder via SAFEs <br/>
-            $4mm post-money valuation for early-bird investors and $5mm for public launch.
+            We are raising this round on Wefunder via SAFEs with a $4mm post-money valuation cap.
           </p>
         </div>
         
