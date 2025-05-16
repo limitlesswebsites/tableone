@@ -1,26 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
-import FundingProgressBar from './funding/FundingProgressBar';
+import React, { useState } from 'react';
 import FundingUseCards from './funding/FundingUseCards';
-import InvestmentDialog from './funding/InvestmentDialog';
 import RedirectDialog from './funding/RedirectDialog';
-import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
-  const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const { toast } = useToast();
-
-  // Investment data states
-  const [raisedAmount, setRaisedAmount] = useState(55500); // Fixed base committed amount
-  const [interestedAmount, setInterestedAmount] = useState(0); // Will be loaded from DB
-  const targetAmount = 400000; // Target amount
-  
-  // Calculate percentages
-  const committedPercentage = (raisedAmount / targetAmount) * 100;
-  const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
   const handleInvestClick = () => {
     setIsRedirecting(true);
@@ -29,74 +13,6 @@ const FundingProgress: React.FC = () => {
       setIsRedirecting(false);
     }, 1500);
   };
-
-  // Fetch investment interest data from Supabase
-  useEffect(() => {
-    const fetchInvestmentInterests = async () => {
-      try {
-        setIsLoading(true);
-        
-        // Fetch all investment interests - only include valid ones
-        const { data: interestsData, error: interestsError } = await supabase
-          .from('investment_interests')
-          .select('*')
-          .eq('valid', true); // Only include validated interests
-        
-        if (interestsError) {
-          console.error('Error fetching investment interests:', interestsError);
-          throw interestsError;
-        }
-        
-        // Fetch all investor statuses
-        const { data: statusData, error: statusError } = await supabase
-          .from('investor_status')
-          .select('*');
-        
-        if (statusError) {
-          console.error('Error fetching investor statuses:', statusError);
-          throw statusError;
-        }
-        
-        // Match investment interests with their statuses
-        const combinedData = interestsData.map(interest => ({
-          ...interest,
-          status: statusData.find(status => status.investor_email === interest.email) || null
-        }));
-        
-        // Calculate total interested amount (excluding committed investors)
-        const total = combinedData.reduce((sum, item) => {
-          // Check if the investor is committed
-          const isCommitted = item.status && item.status.committed;
-          
-          // Only add to interested amount if not committed
-          return isCommitted ? sum : sum + Number(item.investment_amount);
-        }, 0);
-        
-        // Calculate additional committed amount from investors
-        const committedTotal = combinedData.reduce((sum, item) => {
-          // Check if the investor is committed
-          const isCommitted = item.status && item.status.committed;
-          
-          // Only add to committed amount if committed
-          return isCommitted ? sum + Number(item.investment_amount) : sum;
-        }, 0);
-        
-        setInterestedAmount(total);
-        setRaisedAmount(prevAmount => 55500 + committedTotal); // Base amount plus committed investors
-      } catch (error) {
-        console.error('Error in useEffect:', error);
-        toast({
-          title: "Failed to load investment data",
-          description: "There was an issue retrieving the current investment interests.",
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchInvestmentInterests();
-  }, [toast]);
   
   return (
     <section id="invest" className="py-8 relative">
@@ -115,44 +31,18 @@ const FundingProgress: React.FC = () => {
           </p>
         </div>
         
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 max-w-3xl mx-auto animate-fade-in animate-delay-200 shadow-xl">
-          {isLoading ? (
-            <div className="text-center py-8">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-              <p className="mt-3 text-white/60">Loading investment data...</p>
-            </div>
-          ) : (
-            // FundingProgressBar is kept but it's empty now
-            <FundingProgressBar 
-              raisedAmount={raisedAmount + interestedAmount}
-              interestedAmount={0}
-              targetAmount={100000}
-              committedPercentage={committedPercentage}
-              interestedPercentage={interestedPercentage}
-            />
-          )}
-          
-          <FundingUseCards />
-          
-          <div className="text-center mt-8">
-            <button 
-              onClick={handleInvestClick}
-              className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
-            >
-              Invest via Wefunder
-            </button>
-            <p className="mt-3 text-white/60 text-xs">
-              Minimum investment: $500
-            </p>
-          </div>
+        <div className="text-center mt-8">
+          <button 
+            onClick={handleInvestClick}
+            className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
+          >
+            Invest via Wefunder
+          </button>
+          <p className="mt-3 text-white/60 text-xs">
+            Minimum investment: $500
+          </p>
         </div>
       </div>
-
-      <InvestmentDialog 
-        isOpen={isInvestmentDialogOpen}
-        onOpenChange={setIsInvestmentDialogOpen}
-        setIsOpen={setIsInvestmentDialogOpen}
-      />
       
       <RedirectDialog isOpen={isRedirecting} />
     </section>
