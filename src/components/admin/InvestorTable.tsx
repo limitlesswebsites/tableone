@@ -26,7 +26,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { CombinedInvestorData, SortField, SortOrder } from '@/types/admin';
 import { Edit, Save, Trash2, ChevronUp, ChevronDown, Check, X } from 'lucide-react';
 
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 
 interface InvestorTableProps {
   sortedInvestors: CombinedInvestorData[];

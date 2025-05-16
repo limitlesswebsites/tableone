@@ -5,6 +5,7 @@ export interface InvestorInterest {
   created_at: string;
   id: string;
   valid: boolean;
+  ip_address?: string | null;
 }
 
 export interface InvestorStatus {
