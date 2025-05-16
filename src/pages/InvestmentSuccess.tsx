@@ -1,10 +1,17 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import RedirectDialog from '@/components/funding/RedirectDialog';
 
 const InvestmentSuccess: React.FC = () => {
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  
   const handleWefunderRedirect = () => {
-    window.open("https://wefunder.com/tableone", '_blank');
+    setIsRedirecting(true);
+    setTimeout(() => {
+      window.open("https://wefunder.com/tableone", '_blank');
+      setIsRedirecting(false);
+    }, 1500);
   };
 
   return (
@@ -33,6 +40,8 @@ const InvestmentSuccess: React.FC = () => {
           </Button>
         </div>
       </div>
+      
+      <RedirectDialog isOpen={isRedirecting} />
     </div>
   );
 };

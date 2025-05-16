@@ -1,18 +1,24 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import InvestmentDialog from './funding/InvestmentDialog';
+import RedirectDialog from './funding/RedirectDialog';
 
 import appAndCards from '../assets/app-and-cards.png'
 
 const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   
-  async function investNow() {
-		window.open("https://wefunder.com/tableone", '_blank');
-  }
+  const handleInvestClick = () => {
+    setIsRedirecting(true);
+    setTimeout(() => {
+      window.open("https://wefunder.com/tableone", '_blank');
+      setIsRedirecting(false);
+    }, 1500);
+  };
 
   return (
     <section className="min-h-screen w-full flex flex-col justify-center items-center relative pt-16 pb-20">
@@ -21,6 +27,8 @@ const Hero: React.FC = () => {
         onOpenChange={setIsInvestmentDialogOpen}
         setIsOpen={setIsInvestmentDialogOpen}
       />
+      
+      <RedirectDialog isOpen={isRedirecting} />
 
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
@@ -40,7 +48,6 @@ const Hero: React.FC = () => {
                 className="permanent-marker-regular" 
                 style={{ 
                   fontWeight: '400', 
-                  // color: '#F2C498' 
                 }}
               >
                 Without</span>&nbsp; The Card
@@ -56,16 +63,12 @@ const Hero: React.FC = () => {
             />
           </div>
 
-          {/* <p className="text-base md:text-lg text-[#8E8E93] mb-12 max-w-3xl opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-relaxed font-sfpro" style={{ animationDelay: '0.8s' }}>
-            At this time, this is simply to gauge investment interest in TableOne. You will have a chance to confirm funds and final amounts in a few weeks.
-          </p> */}
-
           <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
             <button
-              onClick={() => setIsInvestmentDialogOpen(true)}
+              onClick={handleInvestClick}
               className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-sfpro"
             >
-              Invest
+              Invest via Wefunder
             </button>
             <HashLink
               to="#metrics"

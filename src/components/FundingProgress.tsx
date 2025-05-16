@@ -4,10 +4,12 @@ import { useToast } from '@/hooks/use-toast';
 import FundingProgressBar from './funding/FundingProgressBar';
 import FundingUseCards from './funding/FundingUseCards';
 import InvestmentDialog from './funding/InvestmentDialog';
+import RedirectDialog from './funding/RedirectDialog';
 import { supabase } from '@/integrations/supabase/client';
 
 const FundingProgress: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
@@ -20,9 +22,13 @@ const FundingProgress: React.FC = () => {
   const committedPercentage = (raisedAmount / targetAmount) * 100;
   const interestedPercentage = (interestedAmount / targetAmount) * 100;
   
-  async function investNow() {
-		window.open("https://wefunder.com/tableone", '_blank');
-  }
+  const handleInvestClick = () => {
+    setIsRedirecting(true);
+    setTimeout(() => {
+      window.open("https://wefunder.com/tableone", '_blank');
+      setIsRedirecting(false);
+    }, 1500);
+  };
 
   // Fetch investment interest data from Supabase
   useEffect(() => {
@@ -132,10 +138,10 @@ const FundingProgress: React.FC = () => {
           
           <div className="text-center mt-8">
             <button 
-              onClick={() => setIsInvestmentDialogOpen(true)}
+              onClick={handleInvestClick}
               className="inline-block px-6 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:translate-y-[-2px] text-sm"
             >
-              Invest
+              Invest via Wefunder
             </button>
             <p className="mt-3 text-white/60 text-xs">
               Minimum investment: $500
@@ -149,6 +155,8 @@ const FundingProgress: React.FC = () => {
         onOpenChange={setIsInvestmentDialogOpen}
         setIsOpen={setIsInvestmentDialogOpen}
       />
+      
+      <RedirectDialog isOpen={isRedirecting} />
     </section>
   );
 };
