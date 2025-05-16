@@ -81,6 +81,43 @@ export const useInvestorData = () => {
     }
   };
 
+  // Handle deleting an investor
+  const handleDeleteInvestor = async (email: string) => {
+    try {
+      // First delete the investor status entry if it exists
+      await supabase
+        .from('investor_status')
+        .delete()
+        .eq('investor_email', email);
+      
+      // Then delete the investment interest
+      const { error } = await supabase
+        .from('investment_interests')
+        .delete()
+        .eq('email', email);
+      
+      if (error) {
+        throw error;
+      }
+      
+      // Update the local state to remove the deleted investor
+      setCombinedData(prev => prev.filter(investor => investor.email !== email));
+      
+      toast({
+        title: "Investor deleted",
+        description: `Investor "${email}" has been removed successfully.`,
+      });
+      
+    } catch (error) {
+      console.error('Error deleting investor:', error);
+      toast({
+        title: "Delete failed",
+        description: "Could not delete investor record.",
+        variant: "destructive"
+      });
+    }
+  };
+
   // Fetch investment interest data and status data
   async function fetchInvestorData() {
     try {
@@ -191,6 +228,7 @@ export const useInvestorData = () => {
     handleNotesChange,
     handleNameChange,
     handleSaveName,
-    handleValidToggle
+    handleValidToggle,
+    handleDeleteInvestor
   };
 };

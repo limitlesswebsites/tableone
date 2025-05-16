@@ -1,12 +1,23 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX, Check, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Save, User, UserCheck, UserX, Check, X, Trash2, AlertCircle } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SortField, SortOrder, CombinedInvestorData } from '@/types/admin';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 interface InvestorTableProps {
   sortedInvestors: CombinedInvestorData[];
@@ -20,6 +31,7 @@ interface InvestorTableProps {
   handleNameChange: (email: string, name: string) => void;
   handleSaveName: (email: string, name: string) => Promise<void>;
   handleValidToggle: (email: string, valid: boolean) => Promise<void>;
+  handleDeleteInvestor: (email: string) => Promise<void>;
 }
 
 const InvestorTable: React.FC<InvestorTableProps> = ({
@@ -34,12 +46,16 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
   handleNameChange,
   handleSaveName,
   handleValidToggle,
+  handleDeleteInvestor,
 }) => {
   // Render sort icon
   const renderSortIcon = (field: SortField) => {
     if (sortField !== field) return null;
     return sortOrder === 'asc' ? <ChevronUp className="inline h-4 w-4 ml-1" /> : <ChevronDown className="inline h-4 w-4 ml-1" />;
   };
+
+  // State for tracking which investor is being deleted (for confirmation)
+  const [investorToDelete, setInvestorToDelete] = useState<string | null>(null);
 
   return (
     <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden">
@@ -80,6 +96,9 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
               </TableHead>
               <TableHead className="text-white/70">
                 Notes
+              </TableHead>
+              <TableHead className="text-white/70 text-center">
+                Actions
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -200,6 +219,41 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                       </Button>
                     </div>
                   )}
+                </TableCell>
+                <TableCell>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                      >
+                        <Trash2 size={16} />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-gray-900 border border-white/10 text-white">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle className="flex items-center gap-2">
+                          <AlertCircle className="h-5 w-5 text-red-500" />
+                          Delete Investor Record
+                        </AlertDialogTitle>
+                        <AlertDialogDescription className="text-white/70">
+                          Are you sure you want to delete the investor record for <span className="font-semibold text-white">{investor.email}</span>? This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel className="bg-transparent border border-white/20 text-white hover:bg-white/10">
+                          Cancel
+                        </AlertDialogCancel>
+                        <AlertDialogAction 
+                          className="bg-red-500 text-white hover:bg-red-600"
+                          onClick={() => handleDeleteInvestor(investor.email)}
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </TableCell>
               </TableRow>
             ))}

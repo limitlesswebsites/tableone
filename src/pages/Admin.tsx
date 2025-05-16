@@ -34,7 +34,8 @@ const Admin = () => {
     handleNotesChange,
     handleNameChange,
     handleSaveName,
-    handleValidToggle
+    handleValidToggle,
+    handleDeleteInvestor
   } = useInvestorData();
 
   // Calculate total amount (committed + interested)
@@ -134,6 +135,7 @@ const Admin = () => {
             handleNameChange={handleNameChange}
             handleSaveName={handleSaveName}
             handleValidToggle={handleValidToggle}
+            handleDeleteInvestor={handleDeleteInvestor}
           />
         </>
       )}
