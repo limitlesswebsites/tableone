@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SortField, SortOrder, CombinedInvestorData } from '@/types/admin';
-import { Switch } from '@/components/ui/switch';
 
 interface InvestorTableProps {
   sortedInvestors: CombinedInvestorData[];
@@ -126,18 +125,12 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                   })}
                 </TableCell>
                 <TableCell className="text-center">
-                  <div className="flex justify-center items-center">
-                    <Switch 
+                  <div className="flex justify-center">
+                    <Checkbox 
                       checked={investor.valid}
-                      onCheckedChange={(checked) => handleValidToggle(investor.email, checked)}
-                      className="data-[state=checked]:bg-green-500"
+                      onCheckedChange={(checked) => handleValidToggle(investor.email, !!checked)}
+                      className="data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
                     />
-                    <span className="ml-2">
-                      {investor.valid ? 
-                        <Check className="h-4 w-4 text-green-500" /> : 
-                        <X className="h-4 w-4 text-red-500" />
-                      }
-                    </span>
                   </div>
                 </TableCell>
                 <TableCell className="text-center">
