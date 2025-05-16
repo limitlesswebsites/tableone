@@ -127,7 +127,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                           size="icon" 
                           variant="ghost"
                           className="h-8 w-8 p-0 text-green-400 hover:text-green-300 hover:bg-green-950/30"
-                          onClick={() => handleSaveName(investor.email)}
+                          onClick={() => handleSaveName(investor.email, investor.editedName || '')}
                         >
                           <Save size={16} />
                         </Button>
@@ -188,7 +188,7 @@ const InvestorTable: React.FC<InvestorTableProps> = ({
                           size="icon" 
                           variant="ghost"
                           className="h-8 w-8 p-0 text-green-400 hover:text-green-300 hover:bg-green-950/30"
-                          onClick={() => handleSaveNotes(investor.email)}
+                          onClick={() => handleSaveNotes(investor.email, investor.editedNotes || '')}
                         >
                           <Save size={16} />
                         </Button>

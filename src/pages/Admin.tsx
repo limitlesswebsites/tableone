@@ -41,23 +41,6 @@ const Admin = () => {
   // Calculate total amount (committed + interested)
   const totalAmount = totalCommittedAmount + totalInterestedAmount;
 
-  // Helper functions to properly handle the save operations
-  const handleSaveNotesWrapper = (email: string) => {
-    const investor = sortedInvestors.find(i => i.email === email);
-    if (investor && investor.editedNotes !== undefined) {
-      return handleSaveNotes(email, investor.editedNotes);
-    }
-    return Promise.resolve();
-  };
-
-  const handleSaveNameWrapper = (email: string) => {
-    const investor = sortedInvestors.find(i => i.email === email);
-    if (investor && investor.editedName !== undefined) {
-      return handleSaveName(email, investor.editedName);
-    }
-    return Promise.resolve();
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-between items-center">
