@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -54,7 +53,7 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
-            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black via-black/95 to-transparent z-10"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png"
               alt="TableOne New York Cityscape"
