@@ -10,12 +10,8 @@ const Hero: React.FC = () => {
   const [isInvestmentDialogOpen, setIsInvestmentDialogOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
   
-  const handleInvestClick = () => {
-    setIsRedirecting(true);
-    setTimeout(() => {
-      window.open("https://wefunder.com/tableone", '_blank');
-      setIsRedirecting(false);
-    }, 1500);
+  const handleDownloadClick = () => {
+    window.open("https://apps.apple.com/us/app/tableone-reservations/id6448799631", '_blank');
   };
 
   return (
@@ -45,18 +41,11 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.7s' }}>
             <button
-              onClick={handleInvestClick}
+              onClick={handleDownloadClick}
               className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-sfpro"
             >
-              Invest via Wefunder
+              Download now
             </button>
-            <HashLink
-              to="#metrics"
-              smooth
-              className="px-7 py-3 rounded-full font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm font-sfpro"
-            >
-              See Our Metrics
-            </HashLink>
           </div>
 
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
