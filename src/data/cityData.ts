@@ -11,7 +11,6 @@ export const cities: CityInfo[] = [
   { name: "Chicago", status: "Coming Soon" },
   { name: "Boston", status: "Coming Soon" },
   { name: "Washington DC", status: "Coming Soon" },
-  { name: "Dallas", status: "Planned" },
   { name: "Los Angeles", status: "Planned" },
   { name: "San Francisco", status: "Planned" },
   { name: "Philadelphia", status: "Planned" },
