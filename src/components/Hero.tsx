@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-white/90 font-sfpro tracking-wide">Raising from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
 
-          <h1 className="text-2xl md:text-5xl lg:text-7xl font-medium mb-4 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
+          <h1 className="text-2xl md:text-4xl font-medium mb-4 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
             The most powerful reservation experience, ever.
           </h1>
 
