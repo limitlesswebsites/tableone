@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
             The most powerful reservation experience, ever.
           </h1>
 
-          <p className="text-lg md:text-xl text-white/80 mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] font-sfpro" style={{ animationDelay: '0.65s' }}>
+          <p className="text-base text-white/60 mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] font-sfpro" style={{ animationDelay: '0.65s' }}>
             TableOne is the fastest, most intelligent way to book hard-to-get reservations across every major platform.
           </p>
 
