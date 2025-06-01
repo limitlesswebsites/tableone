@@ -22,6 +22,16 @@ const FeaturedIn: React.FC = () => {
           <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium" style={{ letterSpacing: '-0.5px', marginBottom: '2rem' }}>
             Featured In
           </h2>
+          
+          {/* Quote Section */}
+          <div className="mb-8 max-w-4xl mx-auto">
+            <blockquote className="text-lg md:text-xl lg:text-2xl text-white/80 font-sfpro italic leading-relaxed">
+              "Having an American Express Platinum Card may help...<br />
+              walk-ins for bar seats can yield results.<br /><br />
+              But the best way to get these reservations is to download the TableOne app"
+            </blockquote>
+          </div>
+          
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {/* Forbes-style logo */}
             <div className="group flex flex-col items-center transition-all" style={{ maxWidth: '9rem' }} onClick={() => (toArticle("https://gothamist.com/arts-entertainment/dinner-reservations-at-tatiana-are-impossible-to-get-so-i-spent-a-month-trying"))}>
