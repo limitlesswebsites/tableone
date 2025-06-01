@@ -25,8 +25,9 @@ const Hero: React.FC = () => {
       <RedirectDialog isOpen={isRedirecting} />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-amber-600/15 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-500/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-yellow-600/8 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -53,7 +54,7 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
-            <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
+            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black via-black/95 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png"
               alt="TableOne New York Cityscape"
