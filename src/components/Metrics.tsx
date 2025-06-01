@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import {
   Carousel,
@@ -77,7 +78,7 @@ const Metrics: React.FC = () => {
         
         {/* iPhone Carousel */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-80 mx-auto"> {/* Made much larger */}
+          <div className="relative w-160 mx-auto"> {/* Made 2x larger - was w-80, now w-160 */}
             {/* iPhone Frame using uploaded image */}
             <img 
               src="/lovable-uploads/faa78dfb-82ef-45c6-9e1f-008b19e57d84.png" 
