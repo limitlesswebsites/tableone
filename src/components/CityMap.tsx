@@ -67,7 +67,7 @@ const CityMap: React.FC = () => {
             Where to Next?
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
-            Our expansion strategy targets high-density urban areas with established dining scenes and affluent customer bases who value premium dining experiences.
+            We service high-density urban areas with established dining scenes and premium culinary experiences.
           </p>
         </div>
         
