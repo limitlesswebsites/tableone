@@ -1,8 +1,10 @@
+
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Hero from '../components/Hero';
 import VideoStory from '../components/VideoStory';
 import FeaturedIn from '../components/FeaturedIn';
+import Metrics from '../components/Metrics';
 import CityMap from '../components/CityMap';
 import FundingProgress from '../components/FundingProgress';
 
@@ -13,6 +15,7 @@ const Index: React.FC = () => {
       <Hero />
       <VideoStory />
       <FeaturedIn />
+      <Metrics />
       <CityMap />
       <FundingProgress />
       
