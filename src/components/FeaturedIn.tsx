@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Newspaper, Tv, Video } from 'lucide-react';
 import forbes from '../assets/forbes.png'
@@ -24,8 +25,8 @@ const FeaturedIn: React.FC = () => {
           
           {/* Quote Section */}
           <div className="mb-8 max-w-4xl mx-auto">
-            <blockquote className="text-lg md:text-xl lg:text-2xl text-white/80 font-sfpro italic leading-relaxed">
-              "Having an American Express Platinum Card may help... but the best way to get these reservations is to download the <span style={{ color: '#F2C498' }}>TableOne</span> app"
+            <blockquote className="text-base md:text-lg lg:text-xl text-white/80 font-sfpro italic leading-relaxed">
+              "Having an American Express Platinum Card may help... but the best way to get these reservations is to download the <span style={{ color: '#F2C498' }}>TableOne</span> app."
             </blockquote>
           </div>
           
