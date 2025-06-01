@@ -35,9 +35,13 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-white/90 font-sfpro tracking-wide">Raising from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
+          <h1 className="text-2xl md:text-5xl lg:text-7xl font-medium mb-4 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
             The most powerful reservation experience, ever.
           </h1>
+
+          <p className="text-base md:text-lg text-[#8E8E93] max-w-3xl mx-auto mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] font-sfpro" style={{ animationDelay: '0.65s' }}>
+            TableOne is the fastest, most intelligent way to book hard-to-get reservations across every major platform.
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-6 mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.7s' }}>
             <button
@@ -48,7 +52,7 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
+          <div className="w-full max-w-4xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
             <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/b922923f-988c-4019-9357-6f43d0aba47d.png"
