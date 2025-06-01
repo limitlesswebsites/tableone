@@ -41,7 +41,7 @@ const Roadmap: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in text-gradient-metallic font-sfpro font-medium" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in text-gradient-metallic font-sfpro font-medium" style={{ letterSpacing: '-0.5px' }}>
             Our Path to $1M in Revenue
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
