@@ -76,9 +76,9 @@ const Metrics: React.FC = () => {
           </p>
         </div>
         
-        {/* Screenshots Carousel - made smaller */}
+        {/* Screenshots Carousel - responsive sizing: smaller on mobile, 2x bigger on desktop */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-[160px] mx-auto"> {/* Made much smaller - was 320px, now 160px */}
+          <div className="relative w-[160px] md:w-[320px] mx-auto"> {/* 160px on mobile, 320px on desktop */}
             <Carousel className="w-full h-full" opts={{ loop: true }}>
               <CarouselContent className="h-full">
                 {appScreenshots.map((screenshot, index) => (
