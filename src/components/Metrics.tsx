@@ -98,13 +98,6 @@ const Metrics: React.FC = () => {
             </Carousel>
           </div>
         </div>
-        
-        <div className="text-center mt-8 mb-6">
-          <h3 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-3 animate-fade-in text-gradient-metallic font-sfpro" style={{ letterSpacing: '-0.5px' }}>Defying Industry Benchmarks</h3>
-          <p className="text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
-            TableOne dramatically outperforms metrics for exceptional paid consumer apps.
-          </p>
-        </div>
       </div>
     </section>
   );
