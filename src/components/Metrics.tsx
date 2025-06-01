@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Carousel,
@@ -77,41 +75,26 @@ const Metrics: React.FC = () => {
           </p>
         </div>
         
-        {/* iPhone Carousel */}
+        {/* Screenshots Carousel - removed iPhone frame */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-[640px] mx-auto"> {/* 2x larger - was w-80 (320px), now 640px */}
-            {/* iPhone Frame using uploaded image */}
-            <img 
-              src="/lovable-uploads/faa78dfb-82ef-45c6-9e1f-008b19e57d84.png" 
-              alt="iPhone Frame"
-              className="w-full h-auto relative z-20 pointer-events-none"
-            />
-            
-            {/* Carousel positioned inside the iPhone frame */}
-            <div className="absolute z-10" style={{ 
-              top: '8%', 
-              left: '15%', 
-              right: '15%', 
-              bottom: '20%' 
-            }}>
-              <Carousel className="w-full h-full" opts={{ loop: true }}>
-                <CarouselContent className="h-full">
-                  {appScreenshots.map((screenshot, index) => (
-                    <CarouselItem key={index} className="h-full">
-                      <div className="w-full h-full">
-                        <img
-                          src={screenshot.src}
-                          alt={screenshot.alt}
-                          className="w-full h-full object-cover rounded-[1.5rem]"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
-                <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
-              </Carousel>
-            </div>
+          <div className="relative w-[320px] mx-auto"> {/* Made 2x smaller - was 640px, now 320px */}
+            <Carousel className="w-full h-full" opts={{ loop: true }}>
+              <CarouselContent className="h-full">
+                {appScreenshots.map((screenshot, index) => (
+                  <CarouselItem key={index} className="h-full">
+                    <div className="w-full h-full">
+                      <img
+                        src={screenshot.src}
+                        alt={screenshot.alt}
+                        className="w-full h-auto object-cover rounded-[1.5rem] shadow-2xl"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
+              <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
+            </Carousel>
           </div>
         </div>
         
@@ -127,4 +110,3 @@ const Metrics: React.FC = () => {
 };
 
 export default Metrics;
-
