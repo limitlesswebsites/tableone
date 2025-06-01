@@ -40,19 +40,10 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
-            The most powerful booking experience, ever.
+            The most powerful reservation experience, ever.
           </h1>
 
-          <div className="w-full max-w-md mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.7s' }}>
-            <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
-            <img
-              src="/lovable-uploads/b922923f-988c-4019-9357-6f43d0aba47d.png"
-              alt="TableOne Restaurant Cityscape"
-              className="w-full h-auto drop-shadow-2xl relative z-0"
-            />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1s' }}>
+          <div className="flex flex-col sm:flex-row gap-6 mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '0.7s' }}>
             <button
               onClick={handleInvestClick}
               className="px-7 py-3 rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 text-sm font-sfpro"
@@ -66,6 +57,15 @@ const Hero: React.FC = () => {
             >
               See Our Metrics
             </HashLink>
+          </div>
+
+          <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
+            <div className="absolute inset-x-0 bottom-0 h-3/4 from-background via-background/90 to-transparent z-10"></div>
+            <img
+              src="/lovable-uploads/b922923f-988c-4019-9357-6f43d0aba47d.png"
+              alt="TableOne Restaurant Cityscape"
+              className="w-full h-auto drop-shadow-2xl relative z-0"
+            />
           </div>
 
           <div className="mt-12 opacity-0 animate-[fadeIn_0.8s_ease_forwards]" style={{ animationDelay: '1.2s' }}>
