@@ -1,3 +1,4 @@
+
 /* Animation utilities */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -8,6 +9,18 @@
   0% { background-position: -200% 0; }
   50% { background-position: 0% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  33% { 
+    transform: translateY(-10px) rotate(1deg); 
+  }
+  66% { 
+    transform: translateY(-5px) rotate(-1deg); 
+  }
 }
 
 /* Animation delay utilities */
@@ -29,6 +42,10 @@
 
 .animate-delay-500 {
   animation-delay: 500ms;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 @keyframes bounceSubtle {

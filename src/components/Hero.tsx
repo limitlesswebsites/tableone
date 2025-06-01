@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
+          <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative animate-float" style={{ animationDelay: '0.8s' }}>
             {/* Top gradient to blend with background */}
             <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black via-black/80 to-transparent z-10"></div>
             {/* Side gradients to blend edges */}
