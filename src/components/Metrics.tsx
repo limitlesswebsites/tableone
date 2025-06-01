@@ -1,6 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import MetricCard from './metrics/MetricCard';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const Metrics: React.FC = () => {
   // Log confirmation to check if component is rendering
@@ -21,6 +27,26 @@ const Metrics: React.FC = () => {
       console.error("Error loading background image:", e);
     };
   }, []);
+
+  // Sample app screenshots - you can replace these with actual app screenshots
+  const appScreenshots = [
+    {
+      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
+      alt: "TableOne Search View"
+    },
+    {
+      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
+      alt: "TableOne Filters View"
+    },
+    {
+      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
+      alt: "TableOne Reservations View"
+    },
+    {
+      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
+      alt: "TableOne Profile View"
+    }
+  ];
   
   return (
     <section id="metrics" className="py-8 relative">
@@ -33,57 +59,53 @@ const Metrics: React.FC = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            opacity: 0.4, // Increased opacity for better visibility
+            opacity: 0.4,
           }}
         />
-        <div className="absolute inset-0 bg-black/60 z-0" /> {/* Reduced overlay opacity for better image visibility */}
+        <div className="absolute inset-0 bg-black/60 z-0" />
         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-4xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium" style={{ letterSpacing: '-0.5px' }}>
-            We've Exceeded Expectations...Even Our Own
+            Platinum Card Dining Without The Card
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
-            TableOne is not a traditional restaurant tech startup, boasting high margins, organic growth, and paid user adoption.
+            Never before seen filters and features to make finding your perfect table easier than its ever been.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <MetricCard 
-            title="Annual Recurring Revenue"
-            value={151286.88}
-            description="Growing steadily month over month"
-            prefix="$"
-            decimals={2}
-            delay={200}
-          />
-          
-          <MetricCard 
-            title="Operating Expenses"
-            value={514}
-            description="Lean operations with high margin"
-            prefix="$"
-            suffix="/mo"
-            delay={300}
-          />
-          
-          <MetricCard 
-            title="App Downloads"
-            value={35000}
-            description="In just 18 months"
-            suffix="+"
-            delay={400}
-          />
-          
-          <MetricCard 
-            title="Paid Members"
-            value={2000}
-            description="Active paying subscribers"
-            suffix="+"
-            delay={500}
-          />
+        {/* iPhone Carousel */}
+        <div className="flex justify-center mb-8">
+          <div className="relative max-w-xs mx-auto">
+            {/* iPhone Frame */}
+            <div className="relative bg-black rounded-[2.5rem] p-2 shadow-2xl">
+              <div className="bg-black rounded-[2.25rem] overflow-hidden">
+                {/* iPhone notch */}
+                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+                
+                {/* Carousel */}
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {appScreenshots.map((screenshot, index) => (
+                      <CarouselItem key={index}>
+                        <div className="aspect-[9/19.5] relative">
+                          <img
+                            src={screenshot.src}
+                            alt={screenshot.alt}
+                            className="w-full h-full object-cover rounded-[1.75rem]"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
+                  <CarouselNext className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
+                </Carousel>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="text-center mt-8 mb-6">
