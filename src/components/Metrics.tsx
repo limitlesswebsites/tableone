@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   Carousel,
@@ -78,7 +77,7 @@ const Metrics: React.FC = () => {
         
         {/* iPhone Carousel */}
         <div className="flex justify-center mb-8">
-          <div className="relative max-w-xs mx-auto">
+          <div className="relative w-80 mx-auto"> {/* Made much larger */}
             {/* iPhone Frame using uploaded image */}
             <img 
               src="/lovable-uploads/faa78dfb-82ef-45c6-9e1f-008b19e57d84.png" 
@@ -88,10 +87,10 @@ const Metrics: React.FC = () => {
             
             {/* Carousel positioned inside the iPhone frame */}
             <div className="absolute z-10" style={{ 
-              top: '6.5%', 
-              left: '12%', 
-              right: '12%', 
-              bottom: '16%' 
+              top: '8%', 
+              left: '15%', 
+              right: '15%', 
+              bottom: '20%' 
             }}>
               <Carousel className="w-full h-full" opts={{ loop: true }}>
                 <CarouselContent className="h-full">
@@ -101,14 +100,14 @@ const Metrics: React.FC = () => {
                         <img
                           src={screenshot.src}
                           alt={screenshot.alt}
-                          className="w-full h-full object-cover rounded-[2.5rem]"
+                          className="w-full h-full object-cover rounded-[1.5rem]"
                         />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-6 h-6 z-30" />
-                <CarouselNext className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-6 h-6 z-30" />
+                <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
+                <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-white/20 border-white/20 text-white w-8 h-8 z-30" />
               </Carousel>
             </div>
           </div>
