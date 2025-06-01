@@ -28,7 +28,7 @@ const FeaturedIn: React.FC = () => {
             <blockquote className="text-lg md:text-xl lg:text-2xl text-white/80 font-sfpro italic leading-relaxed">
               "Having an American Express Platinum Card may help...<br />
               walk-ins for bar seats can yield results.<br /><br />
-              But the best way to get these reservations is to download the TableOne app"
+              But the best way to get these reservations is to download the <span style={{ color: '#F2C498' }}>TableOne</span> app"
             </blockquote>
           </div>
           
