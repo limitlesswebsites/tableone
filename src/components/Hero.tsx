@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -24,9 +25,9 @@ const Hero: React.FC = () => {
       <RedirectDialog isOpen={isRedirecting} />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-amber-600/15 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-500/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-yellow-600/8 rounded-full blur-[100px]" />
+        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-amber-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-500/8 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-yellow-600/5 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -53,6 +54,12 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
+            {/* Top gradient to blend with background */}
+            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black via-black/80 to-transparent z-10"></div>
+            {/* Side gradients to blend edges */}
+            <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black via-black/60 to-transparent z-10"></div>
+            <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black via-black/60 to-transparent z-10"></div>
+            {/* Bottom gradient (existing) */}
             <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png"
