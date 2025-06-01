@@ -57,7 +57,7 @@
 
   body {
     @apply text-foreground antialiased;
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a1411 25%, #2d1f0f 50%, #1a1411 75%, #0a0a0a 100%);
+    background: linear-gradient(180deg, #1a1611 0%, #2d241a 20%, #3d2e1f 40%, #4a3626 60%, #2d241a 80%, #1a1611 100%);
     background-attachment: fixed;
     min-height: 100vh;
   }
