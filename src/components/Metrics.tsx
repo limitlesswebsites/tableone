@@ -28,23 +28,23 @@ const Metrics: React.FC = () => {
     };
   }, []);
 
-  // Sample app screenshots - you can replace these with actual app screenshots
+  // TableOne app screenshots
   const appScreenshots = [
     {
-      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
-      alt: "TableOne Search View"
+      src: "/lovable-uploads/e15d989b-e49f-4864-a162-0eb8e54ba4b3.png",
+      alt: "TableOne Explore View - Restaurant listings with availability"
     },
     {
-      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
-      alt: "TableOne Filters View"
+      src: "/lovable-uploads/776f3066-2714-4e4f-a009-641260e6a99f.png",
+      alt: "TableOne Filters View - Advanced search options"
     },
     {
-      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
-      alt: "TableOne Reservations View"
+      src: "/lovable-uploads/8676d12c-e287-45cd-a438-297ae17cec24.png",
+      alt: "TableOne Recording View"
     },
     {
-      src: "/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png",
-      alt: "TableOne Profile View"
+      src: "/lovable-uploads/ab4e67b6-1665-4c5e-b634-b7aad9a95d22.png",
+      alt: "TableOne Cards Collection - Where I've Been"
     }
   ];
   
