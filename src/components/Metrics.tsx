@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import {
   Carousel,
@@ -75,9 +76,9 @@ const Metrics: React.FC = () => {
           </p>
         </div>
         
-        {/* Screenshots Carousel - removed iPhone frame */}
+        {/* Screenshots Carousel - made smaller */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-[320px] mx-auto"> {/* Made 2x smaller - was 640px, now 320px */}
+          <div className="relative w-[160px] mx-auto"> {/* Made much smaller - was 320px, now 160px */}
             <Carousel className="w-full h-full" opts={{ loop: true }}>
               <CarouselContent className="h-full">
                 {appScreenshots.map((screenshot, index) => (
