@@ -12,12 +12,8 @@ const NavBar: React.FC = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const { user } = useAuth();
 
-	const handleInvestClick = () => {
-		setIsRedirecting(true);
-		setTimeout(() => {
-			window.open("https://wefunder.com/tableone", '_blank');
-			setIsRedirecting(false);
-		}, 1500);
+	const handleDownloadClick = () => {
+		window.open("https://apps.apple.com/us/app/tableone-reservations/id6448799631", '_blank');
 	};
 
 	useEffect(() => {
@@ -88,10 +84,10 @@ const NavBar: React.FC = () => {
 				</div>
 				<div className="flex items-center space-x-2">
 					<button
-						onClick={handleInvestClick}
+						onClick={handleDownloadClick}
 						className="px-4 py-1.5 text-xs rounded-full font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 font-sfpro"
 					>
-						Invest via Wefunder
+						Download now
 					</button>
 				</div>
 			</div>
