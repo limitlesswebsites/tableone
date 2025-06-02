@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   Carousel,
@@ -43,12 +42,12 @@ const Metrics: React.FC = () => {
       alt: "TableOne Recording View"
     },
     {
-      src: "/lovable-uploads/ab4e67b6-1665-4c5e-b634-b7aad9a95d22.png",
-      alt: "TableOne Cards Collection - Where I've Been"
+      src: "/lovable-uploads/4570c812-2c9b-4224-8fd2-dda759912c9d.png",
+      alt: "TableOne App Screen"
     },
     {
-      src: "/lovable-uploads/9ea2d6e8-3a1e-4ee8-9d04-cc836ba79155.png",
-      alt: "TableOne App Loading Screen"
+      src: "/lovable-uploads/ab4e67b6-1665-4c5e-b634-b7aad9a95d22.png",
+      alt: "TableOne Cards Collection - Where I've Been"
     }
   ];
   
