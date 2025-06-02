@@ -36,7 +36,7 @@ const FundingProgress: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight leading-relaxed pb-2" style={{ letterSpacing: '-0.5px' }}>
-            Access, without the big expense
+            The future of fine dining is flexible and affordable
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
             Choose the plan that fits your dining lifestyle and unlock access to NYC's most coveted reservations.
