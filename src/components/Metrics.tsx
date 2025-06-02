@@ -85,13 +85,13 @@ const Metrics: React.FC = () => {
             <img
               src="/lovable-uploads/c8e94176-f8e9-4eb7-aadb-15f6eb2733bb.png"
               alt="Restaurant logos collection"
-              className="w-full h-auto object-contain rounded-lg opacity-80"
+              className="w-full h-auto object-contain rounded-lg"
             />
           </div>
         </div>
         
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium leading-tight" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium leading-[1.1] pb-4" style={{ letterSpacing: '-0.5px' }}>
             Built for diners,<br />not dining rooms
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
