@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,6 +11,10 @@ const Hero: React.FC = () => {
   
   const handleDownloadClick = () => {
     window.open("https://apps.apple.com/us/app/tableone-reservations/id6448799631", '_blank');
+  };
+
+  const handleBubbleClick = () => {
+    window.open("https://wefunder.com/tableone", '_blank');
   };
 
   return (
@@ -32,8 +35,12 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <div className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
-            <span className="text-xs font-medium text-white/90 font-sfpro tracking-wide">Raising from Our Community to Continue Redefining Restaurant Reservations</span>
+          <div 
+            onClick={handleBubbleClick}
+            className="rounded-full glass backdrop-blur-md bg-white/5 border border-white/10 px-5 py-2 mb-10 opacity-0 animate-[fadeIn_0.8s_ease_forwards] shadow-lg hover:bg-white/10 transition-all duration-300 cursor-pointer" 
+            style={{ animationDelay: '0.4s' }}
+          >
+            <span className="text-xs font-medium text-white/90 font-sfpro tracking-wide">Accepting Investment from Our Community to Continue Redefining Restaurant Reservations</span>
           </div>
 
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-6 opacity-0 animate-[fadeIn_0.8s_ease_forwards] leading-[1.1] font-sfpro text-gradient-metallic" style={{ animationDelay: '0.6s', letterSpacing: '-0.5px' }}>
