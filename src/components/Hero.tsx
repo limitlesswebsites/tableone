@@ -62,8 +62,8 @@ const Hero: React.FC = () => {
             {/* Bottom gradient (existing) */}
             <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
             <img
-              src="/lovable-uploads/4b4e919a-a49e-4995-9055-233bf7dc9c1f.png"
-              alt="TableOne New York Cityscape"
+              src="/lovable-uploads/ec42b777-6399-401b-9c0d-fb195ba7d0a9.png"
+              alt="TableOne New York Cityscape with Restaurant Locations"
               className="w-full h-auto drop-shadow-2xl relative z-0"
             />
           </div>
