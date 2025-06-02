@@ -45,6 +45,10 @@ const Metrics: React.FC = () => {
     {
       src: "/lovable-uploads/ab4e67b6-1665-4c5e-b634-b7aad9a95d22.png",
       alt: "TableOne Cards Collection - Where I've Been"
+    },
+    {
+      src: "/lovable-uploads/9ea2d6e8-3a1e-4ee8-9d04-cc836ba79155.png",
+      alt: "TableOne App Loading Screen"
     }
   ];
   
