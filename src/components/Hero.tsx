@@ -53,6 +53,15 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
+          {/* Small hovering image */}
+          <div className="w-32 h-auto mb-4 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative z-20" style={{ animationDelay: '0.75s' }}>
+            <img
+              src="/lovable-uploads/67949c4b-6a63-4992-89f8-592289198aef.png"
+              alt="TableOne hovering element"
+              className="w-full h-auto drop-shadow-lg"
+            />
+          </div>
+
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
             <img
               src="/lovable-uploads/ec42b777-6399-401b-9c0d-fb195ba7d0a9.png"
