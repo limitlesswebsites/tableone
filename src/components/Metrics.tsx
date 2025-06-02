@@ -71,9 +71,28 @@ const Metrics: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
+        {/* New section with restaurant logos */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-6 animate-fade-in font-sfpro text-gradient-metallic font-medium leading-tight" style={{ letterSpacing: '-0.5px' }}>
+            Platinum Card dining,<br />without the card
+          </h2>
+          <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro mb-8">
+            All the best restaurants. All in one place.
+          </p>
+          
+          {/* Restaurant logos grid */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <img
+              src="/lovable-uploads/41856547-e597-4368-94d5-2a1564ea2d33.png"
+              alt="Restaurant logos collection"
+              className="w-full h-auto object-contain rounded-lg opacity-80"
+            />
+          </div>
+        </div>
+        
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium leading-tight" style={{ letterSpacing: '-0.5px' }}>
-            Platinum Card dining,<br />without the card
+            Built for diners,<br />not dining rooms
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             Never before seen filters and features to make finding your perfect table easier than its ever been.
