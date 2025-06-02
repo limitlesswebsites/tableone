@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="w-full max-w-2xl mb-4 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
+          <div className="w-full max-w-2xl mb-12 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
             <img
               src="/lovable-uploads/ec42b777-6399-401b-9c0d-fb195ba7d0a9.png"
               alt="TableOne New York Cityscape with Restaurant Locations"
@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
             />
           </div>
 
-          {/* Small hovering image positioned below the city image */}
+          {/* Small hovering image positioned below the city image with more spacing */}
           <div className="w-32 h-auto mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative z-20" style={{ animationDelay: '0.85s' }}>
             <img
               src="/lovable-uploads/67949c4b-6a63-4992-89f8-592289198aef.png"
