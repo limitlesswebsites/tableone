@@ -54,13 +54,6 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="w-full max-w-2xl mb-8 opacity-0 animate-[fadeIn_0.8s_ease_forwards] relative" style={{ animationDelay: '0.8s' }}>
-            {/* Top gradient to blend with background */}
-            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black via-black/80 to-transparent z-10"></div>
-            {/* Side gradients to blend edges */}
-            <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black via-black/60 to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black via-black/60 to-transparent z-10"></div>
-            {/* Bottom gradient (existing) */}
-            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
             <img
               src="/lovable-uploads/ec42b777-6399-401b-9c0d-fb195ba7d0a9.png"
               alt="TableOne New York Cityscape with Restaurant Locations"
