@@ -38,7 +38,7 @@ const Metrics: React.FC = () => {
       alt: "TableOne Filters View - Advanced search options"
     },
     {
-      src: "/lovable-uploads/8676d12c-e287-45cd-a438-297ae17cec24.png",
+      src: "/lovable-uploads/4550b63f-982b-4ee1-a71b-31e0bda680a5.png",
       alt: "TableOne Recording View"
     },
     {
