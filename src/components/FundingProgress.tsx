@@ -69,7 +69,7 @@ const FundingProgress: React.FC = () => {
                   className={`w-full rounded-full ${plan.title === 'For Business' 
                     ? 'bg-white text-black hover:bg-white/90'
                     : plan.popular 
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white' 
                       : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
                   }`}
                   onClick={() => window.open('https://app.formbricks.com/s/cm37i33lv000dgvqxfu4fddan', '_blank')}
