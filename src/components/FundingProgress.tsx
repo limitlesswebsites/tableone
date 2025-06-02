@@ -80,12 +80,6 @@ const FundingProgress: React.FC = () => {
             </Card>
           ))}
         </div>
-        
-        <div className="text-center mt-8">
-          <p className="text-white/60 text-sm">
-            All plans include access to our exclusive reservation network
-          </p>
-        </div>
       </div>
     </section>
   );
