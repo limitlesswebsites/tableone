@@ -20,7 +20,7 @@ const FeaturedIn: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium" style={{ letterSpacing: '-0.5px', marginBottom: '2rem' }}>
-            Featured In
+            Featured in
           </h2>
           
           {/* Quote Section */}

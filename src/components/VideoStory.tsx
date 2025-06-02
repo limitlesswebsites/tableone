@@ -32,7 +32,7 @@ const VideoStory: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in text-gradient-metallic font-sfpro font-medium" style={{ letterSpacing: '-0.5px' }}>
-            Our Story in 2 min
+            Our story in 2 min
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             Featured as one of Rho's favorite startups, here's a quick video of our journey so far.

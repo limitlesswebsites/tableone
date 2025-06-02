@@ -64,7 +64,7 @@ const CityMap: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-3 animate-fade-in text-gradient-metallic" style={{ letterSpacing: '-0.5px' }}>
-            Where to Next?
+            Where to next?
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             We service high-density urban areas with established dining scenes and premium culinary experiences.
