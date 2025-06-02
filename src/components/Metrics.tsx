@@ -83,7 +83,7 @@ const Metrics: React.FC = () => {
           {/* Restaurant logos grid */}
           <div className="max-w-4xl mx-auto mb-16">
             <img
-              src="/lovable-uploads/41856547-e597-4368-94d5-2a1564ea2d33.png"
+              src="/lovable-uploads/c8e94176-f8e9-4eb7-aadb-15f6eb2733bb.png"
               alt="Restaurant logos collection"
               className="w-full h-auto object-contain rounded-lg opacity-80"
             />
