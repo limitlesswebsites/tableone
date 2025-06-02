@@ -35,7 +35,7 @@ const FundingProgress: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight leading-tight" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight leading-relaxed pb-2" style={{ letterSpacing: '-0.5px' }}>
             Access, without the big expense
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
@@ -66,9 +66,11 @@ const FundingProgress: React.FC = () => {
               </CardHeader>
               <CardContent className="pt-0">
                 <Button 
-                  className={`w-full ${plan.popular 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500' 
-                    : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                  className={`w-full rounded-full ${plan.title === 'For Business' 
+                    ? 'bg-white text-black hover:bg-white/90'
+                    : plan.popular 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500' 
+                      : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
                   }`}
                   onClick={() => window.open('https://app.formbricks.com/s/cm37i33lv000dgvqxfu4fddan', '_blank')}
                 >
