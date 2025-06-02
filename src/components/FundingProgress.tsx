@@ -2,30 +2,42 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { Input } from './ui/input';
 
 const FundingProgress: React.FC = () => {
+  const [teamMembers, setTeamMembers] = useState(10);
+  
+  const calculateBusinessPrice = (members: number) => {
+    const pricePerPerson = 6.03;
+    const monthlyTotal = members * pricePerPerson;
+    return {
+      monthly: monthlyTotal.toFixed(0),
+      annual: (monthlyTotal * 12).toFixed(0)
+    };
+  };
+
+  const businessPrice = calculateBusinessPrice(teamMembers);
+
   const pricingPlans = [
     {
       title: "Monthly",
       price: "$9",
       period: "/month",
-      description: "Designed for travelers or those seeking a reservation for a special occasion.",
-      features: ["Access to premium reservations", "Priority booking", "Exclusive restaurant access"]
+      description: "Designed for travelers or those seeking a reservation for a special occasion."
     },
     {
       title: "Annual",
       price: "$59",
       period: "/year",
       description: "Designed for foodies or those who love to frequent NYC's fine dining scene.",
-      features: ["All Monthly features", "Best value - save 45%", "Year-round access", "Priority customer support"],
       popular: true
     },
     {
       title: "For Business",
-      price: "Custom",
-      period: "",
-      description: "Get a discounted rate when you equip your whole team with TableOne. Perfect for client dinners or as a perk. Minimum of 10 team members.",
-      features: ["Team management dashboard", "Bulk discounted pricing", "Dedicated account manager", "Custom billing"]
+      price: `$${businessPrice.monthly}`,
+      period: "/month",
+      description: "Get a discounted rate when you equip your whole team with TableOne. Perfect for client dinners or as a perk.",
+      isCustom: true
     }
   ];
   
@@ -59,23 +71,30 @@ const FundingProgress: React.FC = () => {
                   </span>
                 </div>
               )}
-              <CardHeader className="text-center">
+              <CardHeader className="text-center pb-4">
                 <CardTitle className="text-white text-xl mb-2">{plan.title}</CardTitle>
-                <div className="mb-4">
+                <div className="mb-3">
                   <span className="text-3xl font-bold text-white">{plan.price}</span>
                   <span className="text-white/60">{plan.period}</span>
                 </div>
-                <p className="text-[#8E8E93] text-sm">{plan.description}</p>
+                <p className="text-[#8E8E93] text-sm leading-relaxed">{plan.description}</p>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-white/80 text-sm flex items-center">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+              <CardContent className="pt-0">
+                {plan.isCustom && (
+                  <div className="mb-4">
+                    <label className="block text-white/80 text-sm mb-2">Team members (minimum 10)</label>
+                    <Input
+                      type="number"
+                      min="10"
+                      value={teamMembers}
+                      onChange={(e) => setTeamMembers(Math.max(10, parseInt(e.target.value) || 10))}
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-purple-500/50"
+                    />
+                    <p className="text-white/60 text-xs mt-1">
+                      $6.03 per person/month • Annual: ${businessPrice.annual}
+                    </p>
+                  </div>
+                )}
                 <Button 
                   className={`w-full ${plan.popular 
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500' 
