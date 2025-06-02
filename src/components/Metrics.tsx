@@ -53,7 +53,7 @@ const Metrics: React.FC = () => {
   ];
   
   return (
-    <section id="metrics" className="py-8 relative">
+    <section id="metrics" className="py-8 relative overflow-hidden">
       {/* Background image - using inline styles with important to override any conflicting styles */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -72,8 +72,8 @@ const Metrics: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium" style={{ letterSpacing: '-0.5px' }}>
-            Platinum card dining,<br />without the card
+          <h2 className="text-3xl md:text-5xl lg:text-7xl mb-4 animate-fade-in font-sfpro text-gradient-metallic font-medium leading-tight" style={{ letterSpacing: '-0.5px' }}>
+            Platinum Card dining,<br />without the card
           </h2>
           <p className="text-base max-w-2xl mx-auto animate-fade-in animate-delay-100 text-[#8E8E93] font-sfpro">
             Never before seen filters and features to make finding your perfect table easier than its ever been.

@@ -30,7 +30,7 @@ const FundingProgress: React.FC = () => {
   ];
   
   return (
-    <section id="pricing" className="py-8 relative">
+    <section id="pricing" className="py-8 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/30"></div>
         <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
@@ -38,7 +38,7 @@ const FundingProgress: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium mb-4 animate-fade-in text-gradient-metallic tracking-tight leading-tight" style={{ letterSpacing: '-0.5px' }}>
             Access, without the big expense
           </h2>
           <p className="text-base md:text-lg text-[#8E8E93] max-w-2xl mx-auto animate-fade-in animate-delay-100 font-sfpro">
